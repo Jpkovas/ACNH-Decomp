@@ -33,9 +33,19 @@ O runtime SDL3/Vulkan passou nos onze testes upstream. O teste adicional `vulkan
 
 As execuções x64 de 45 e 90 segundos terminaram sem falha fatal. Elas submeteram frames e milhares de draws, mas as capturas apresentadas ficaram completamente pretas. Botões Plus/A foram injetados no teste de 90 segundos sem estabelecer gameplay. O contador de frames sozinho não valida boot visual. Criação do personagem, ilha, áudio, input funcional e save/reload continuam pendentes. Nenhuma build jogável foi declarada.
 
-O patch do runtime em `patches/scarletnx-data-root.patch` permite selecionar os dados privados por `SNX_DATA_DIR` e contém traces condicionais de apresentação/readback. Os traces ajudam a distinguir targets intermediários do buffer exibido. O loader x64 já funciona; o problema de imagem preta continua em investigação.
+O patch do runtime em `patches/scarletnx-data-root.patch` permite selecionar os dados privados por `SNX_DATA_DIR`, contém traces opcionais e corrige limpezas e draws condicionais do Maxwell. A falha que apagava a composição inicial foi localizada e corrigida; isso ainda não valida gameplay.
 
-No teste com captura de targets, 8 de 24 imagens tinham pixels diferentes de preto. A inspeção visual confirmou uma miniatura de terreno com grama e penhascos e um ícone de carregamento com palmeira. Outros targets eram cores uniformes, sem provar conteúdo útil. O trace do framebuffer aos 600 presents encontrou um único target correspondente ao endereço de memória, 1920×1080, escrito naquele frame. A hipótese de escolher um alias antigo apenas pela dimensão não foi confirmada nesse ponto. A investigação deve seguir o shader de composição, os recursos vinculados e a sincronização do frame final.
+No teste anterior com captura de targets, 8 de 24 imagens tinham pixels diferentes de preto. A inspeção visual confirmou uma miniatura de terreno com grama e penhascos e um ícone de carregamento com palmeira. Outros targets eram cores uniformes, sem provar conteúdo útil. O trace do framebuffer aos 600 presents encontrou um único target correspondente ao endereço de memória, 1920×1080, escrito naquele frame. A hipótese de escolher um alias antigo apenas pela dimensão não foi confirmada nesse ponto.
+
+## Correção da composição inicial
+
+A captura privada RenderDoc mostrou o ícone de carregamento no target de composição após o draw 1342, seguido de quatro `vkCmdClearAttachments` que zeravam esse mesmo target antes do draw de cópia 1381. Os vértices transformados e as texturas tinham conteúdo válido. O rastreamento dos métodos revelou `SET_RENDER_ENABLE_C=4` (comparar registros e renderizar se diferentes), ignorado pelo runtime. Ambos os pares sequência/contador estavam zerados; portanto essas limpezas deveriam ser omitidas. O front end agora avalia o predicado antes de limpezas e draws, incluindo o override por registrador, e inicializa o modo padrão como sempre renderizar.
+
+Também havia uma leitura incorreta de `SET_CLEAR_SURFACE_CONTROL`: os seletores de clear rectangle, scissor e viewport clip são independentes. A correção usa os registradores correspondentes e intersecta as regiões com o attachment. A referência de bits é o [header Maxwell B publicado pela NVIDIA](https://github.com/NVIDIA/open-gpu-doc/blob/master/classes/3d/clb197.h). O layout dos pares de comparação foi conferido no [driver Nouveau](https://github.com/chaotic-cx/mesa-mirror/blob/main/src/gallium/drivers/nouveau/nvc0/nvc0_query_hw.c) e na implementação original de [condições Maxwell](https://ni.4a.si/anonymous/yuzu/commit/src/video_core/engines/maxwell_3d.cpp?follow=1&id=a78372110ceedf5e3ad71a4b72bb1fd8b3b5f628). Essas referências orientam a compatibilidade da ponte e não representam código do jogo reconstruído.
+
+O teste `vulkan_headless` agora lê pixels RGBA da GPU e verifica retângulo próprio, scissor, interseção com viewport, região vazia e condições que preservam ou substituem o attachment. Na execução do jogo de 90 segundos após a correção, a captura apresentada em 1920×1080 tinha 785.280 pixels não pretos e mostrava a placa Nook Inc. da introdução. Um teste de 180 segundos com dez entradas A terminou em 193,56 segundos e apresentou Timmy e Tommy no balcão do aeroporto, com 2.073.598 pixels não pretos. Isso comprova avanço visual da introdução; não confirma que as entradas avançaram um diálogo. O módulo x64 do jogo permaneceu com o mesmo hash; a alteração foi no runtime. Novos avisos de headers de comandos inesperados surgiram durante o avanço e precisam de diagnóstico. Criação de personagem, ilha, áudio e salvamento continuam sem validação.
+
+RenderDoc 1.46 foi instalado de fonte oficial com SHA-256 e assinatura GPG verificados, registrados em `config/tool-renderdoc.lock.json`. Capturas, imagens e arquivos de replay ficam em `private/windows/`. A camada Vulkan é habilitada somente no processo de diagnóstico. O SDK opcional é detectado pelo script de build. Para o replay sem interface, a configuração recém-criada do RenderDoc recebeu somente o opt-out de analytics, com backup privado, pois o diálogo inicial interrompia `qrenderdoc --py`.
 
 ## Reprodução local
 
@@ -52,3 +62,14 @@ Usar os commits e o LLVM MinGW fixados em `config/windows-sources.lock.json`, al
 ```
 
 Os testes de filesystem usam o temporário NTFS do Windows, pois o disco D: é exFAT e não suporta hard links. Execução dos drivers dentro do sandbox também pode falhar na canonicalização de caminhos; o resultado registrado foi obtido fora dessa restrição. A build conserva os objetos intermediários para retomar compilações. A opção `-Regenerate` refaz C privado a partir dos módulos e hints observados. O primeiro estágio H.264/Opus está desabilitado; não foi validado como desnecessário para todos os cenários do jogo. As flags `-march=native` exigem reproduzir ou ajustar o alvo de CPU antes de distribuir executáveis para outra máquina.
+
+Para capturar dois frames consecutivos de GPU, instalar o arquivo portátil RenderDoc fixado no lock em `private/tools/renderdoc/`, recompilar a ponte e executar:
+
+```powershell
+& acnh-research/scripts/capture_windows_gpu.ps1 -Frame 500 -Seconds 90
+$env:ACNH_RESEARCH_ROOT='D:/ACNH_Decomp/acnh-research'
+$env:ACNH_RENDERDOC_CAPTURE='caminho absoluto da captura .rdc privada'
+& acnh-research/private/tools/renderdoc/RenderDoc_1.46_64/qrenderdoc.exe --py acnh-research/scripts/renderdoc_inspect_capture.py
+```
+
+O replay fornece actions, recursos, vértices transformados, histórico de pixels e imagens privadas. Por padrão escolhe o primeiro target de pelo menos 1280×720 e até 24 draws para inspeção. Para repetir a primeira análise causal, selecionar `ACNH_RENDERDOC_TARGET='ResourceId::131'` e `ACNH_RENDERDOC_EVENTS='1173,1342,1346,1381'`. Capturas de outros trechos podem exigir outros IDs e coordenadas. Desativar o diálogo de analytics na primeira inicialização do RenderDoc antes de usar `--py` sem interface. Para traces de predicados e limpezas, usar `SNX_CONDITION_TRACE=1` e `SNX_CLEAR_TRACE=1` somente no processo de diagnóstico.

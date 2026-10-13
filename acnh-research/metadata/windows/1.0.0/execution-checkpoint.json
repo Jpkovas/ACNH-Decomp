@@ -4,8 +4,8 @@
   "whole_game_decompiled": false,
   "translated_module_bytes": 292099584,
   "translated_module_sha256": "94a5a70154f95981d73de0565a5359958692c99d1c8caea94d67a10e38d11115",
-  "runtime_sha256": "200167d83c802da3723373cdcfc6a078b99493c60b6acba2a94ebeeccb177ee9",
-  "patch_sha256": "2d0c5d16d19f9a11a56974336199c9bc2e2ca9eb88b79fcd94be09060fec211a",
+  "runtime_sha256": "d9b4cb1aba2ba44c381c562dd1e41f4ecd7d9f10806ff3e5f6ab0acee8920fa1",
+  "patch_sha256": "d740819fe082ac418df10c3a3de0e59da532adacf14b12e247a2affbcdc4369b",
   "runs": [
     {
       "mode": "native",
@@ -131,6 +131,44 @@
         "completely_black": true,
         "note": "Nonblack pixels do not by themselves establish correct rendering or gameplay"
       }
+    },
+    {
+      "mode": "native",
+      "headless": true,
+      "docked": 1,
+      "input_script": "",
+      "exit_code": 0,
+      "elapsed_seconds": 91.3,
+      "playable_validated": false,
+      "log_prefix": "native-20261013-033048",
+      "frame_analysis": {
+        "width": 1920,
+        "height": 1080,
+        "rgb_sha256": "593f94cd0ad17d37869ffcf44de67654b44a3ba3119a60cf99900ffe2134d22f",
+        "nonblack_pixels": 785280,
+        "completely_black": false,
+        "note": "Nonblack pixels do not by themselves establish correct rendering or gameplay"
+      },
+      "frames": 3137
+    },
+    {
+      "mode": "native",
+      "headless": true,
+      "docked": 1,
+      "input_script": "30000:1,45000:1,60000:1,75000:1,90000:1,105000:1,120000:1,135000:1,150000:1,165000:1",
+      "exit_code": 0,
+      "elapsed_seconds": 193.56,
+      "playable_validated": false,
+      "log_prefix": "native-20261013-033315",
+      "frame_analysis": {
+        "width": 1920,
+        "height": 1080,
+        "rgb_sha256": "4f7a4ac8c5f3748b1d132f48d84875675a441179249ef9d0e6a20fa154fac376",
+        "nonblack_pixels": 2073598,
+        "completely_black": false,
+        "note": "Nonblack pixels do not by themselves establish correct rendering or gameplay"
+      },
+      "frames": 2495
     }
   ],
   "intermediate_render_targets": {
@@ -142,5 +180,6 @@
       "other targets include uniform color"
     ]
   },
-  "next_investigation": "Final compositor shader, resource bindings and GPU synchronization; stale-alias selection not confirmed"
+  "next_investigation": "Intro dialogue and character creation; unexpected GPU headers; verified input/audio/save; continue manual source reconstruction",
+  "gpu_composition_validation": "gpu-composition-validation.json"
 }

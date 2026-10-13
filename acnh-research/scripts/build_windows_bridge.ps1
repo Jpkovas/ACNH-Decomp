@@ -43,6 +43,8 @@ if($Backend -eq 'tools'){
  $options=@('-DSNX_DEPLOY=OFF','-DSNX_H264=OFF',"-DCPM_SOURCE_CACHE=$root/private/tools/cpm-cache")
  if($Backend -eq 'headless'){$options+=@('-DSNX_BACKEND=headless','-DSNX_VULKAN=OFF')}
  else{$options+=@('-DSNX_BACKEND=sdl3','-DSNX_VULKAN=ON')}
+ $captureSdk=Join-Path $root 'private/tools/renderdoc/RenderDoc_1.46_64'
+ if(Test-Path -LiteralPath (Join-Path $captureSdk 'renderdoc_app.h')){$options+="-DSNX_RENDERDOC_INCLUDE_DIR=$captureSdk"}
  if($GpuTest){$options+='-DSNX_TEST_VULKAN=ON'}
 }
 $env:PATH="$bin;$(Split-Path $ninja);$env:PATH"

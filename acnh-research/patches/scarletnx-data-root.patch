@@ -1,3 +1,12 @@
+diff --git a/runtime/CMakeLists.txt b/runtime/CMakeLists.txt
+index bc5b6b1..ce9ee6a 100644
+--- a/runtime/CMakeLists.txt
++++ b/runtime/CMakeLists.txt
+@@ -74,0 +75,4 @@ if(SNX_VULKAN)
++    if(SNX_RENDERDOC_INCLUDE_DIR)
++        target_include_directories(snx_vk PRIVATE "${SNX_RENDERDOC_INCLUDE_DIR}")
++        target_compile_definitions(snx_vk PRIVATE SNX_RENDERDOC_DIAGNOSTIC)
++    endif()
 diff --git a/runtime/core/main.c b/runtime/core/main.c
 index 7fdf7d1..60eaf9f 100644
 --- a/runtime/core/main.c
@@ -13,11 +22,202 @@ index 7fdf7d1..60eaf9f 100644
 +        if (data_override[len - 1] != '/' && data_override[len - 1] != '\\') g_datadir[len++] = '/';
 +        g_datadir[len] = 0;
 +    }
+diff --git a/runtime/gpu/gpu.c b/runtime/gpu/gpu.c
+index 573c96a..c2d9c1d 100644
+--- a/runtime/gpu/gpu.c
++++ b/runtime/gpu/gpu.c
+@@ -386,0 +387 @@ static GpuChannel* chan_get(u32 id) {
++    c->r3d[0x556] = 1; /* conditional rendering defaults to always */
+diff --git a/runtime/gpu/maxwell3d.c b/runtime/gpu/maxwell3d.c
+index 319b1e4..c187bd5 100644
+--- a/runtime/gpu/maxwell3d.c
++++ b/runtime/gpu/maxwell3d.c
+@@ -14,0 +15,29 @@
++/* SET_RENDER_ENABLE_C and SET_RENDER_ENABLE_OVERRIDE (Maxwell B). The
++   comparison operands are the sequence/count pairs at bytes 0 and 16;
++   timestamps at bytes 8 and 24 do not participate. */
++static int render_enabled(GpuChannel* ch) {
++    const u32* r = ch->r3d;
++    u32 override = r[0x651] & 3, mode = r[0x556] & 7;
++    if (override == 1) return 1;
++    if (override == 2 || mode == 0) return 0;
++    if (mode == 1) return 1;
++    u64 address = ((u64)(r[0x554] & 0xFF) << 32) | r[0x555];
++    u32 words[8];
++    gmem_read(address, words, sizeof words);
++    int enabled;
++    if (mode == 2) enabled = words[0] != 0 && words[1] != 0;
++    else if (mode == 3 || mode == 4) {
++        int equal = words[0] == words[4] && words[1] == words[5];
++        enabled = mode == 3 ? equal : !equal;
++    } else {
++        WARN_LIMIT(1, "gpu: unknown conditional render mode %u\n", mode);
++        return 1;
++    }
++    if (getenv("SNX_CONDITION_TRACE")) {
++        static u32 traces;
++        if (traces++ < 24)
++            LOG("ACNH condition trace: mode=%u address=%llx initial=%08x,%08x current=%08x,%08x enabled=%d\n",
++                mode, (unsigned long long)address, words[0], words[1], words[4], words[5], enabled);
++    }
++    return enabled;
++}
+@@ -15,0 +45 @@ void r3d_clear(GpuChannel* ch, u32 v) {
++    if (!render_enabled(ch)) return;
+@@ -68,0 +99 @@ void r3d_draw(GpuChannel* ch, int indexed, u32 topology, u32 first, u32 count, u
++    if (!render_enabled(ch)) return;
+diff --git a/runtime/gpu/vk/render.c b/runtime/gpu/vk/render.c
+index 91f561e..8362f3d 100644
+--- a/runtime/gpu/vk/render.c
++++ b/runtime/gpu/vk/render.c
+@@ -236,0 +237,8 @@ void vk_render_clear(GpuChannel* ch, u32 v) {
++    if (getenv("SNX_CLEAR_TRACE")) {
++        static u32 traced_frame = ~0u, trace_count;
++        if (traced_frame != g_vk_present) { traced_frame = g_vk_present; trace_count = 0; }
++        if ((g_vk_present < 12 || g_vk_present % 500 == 0) && trace_count++ < 16)
++            LOG("ACNH clear trace: frame=%u v=%08x ctl=%08x target=%llx clear=%08x,%08x scissor=%08x,%08x,%08x viewport=%08x,%08x rgba=%g,%g,%g,%g\n",
++                g_vk_present, v, r[0x43E], (unsigned long long)(slot < n && rt[slot] ? rt[slot]->gva : 0),
++                r[0x35B], r[0x35C], r[0x380], r[0x381], r[0x382], r[0x300], r[0x301], cc[0], cc[1], cc[2], cc[3]);
++    }
+@@ -251,8 +259,18 @@ void vk_render_clear(GpuChannel* ch, u32 v) {
+-    if ((r[0x43E] & 0x10) && (r[0x380] & 1)) { /* scissored clear */
+-        u32 xs = r[0x381], ys = r[0x382];
+-        i32 x0 = (i32)vk_scf(xs & 0xFFFF), x1 = (i32)vk_scf(xs >> 16), y0 = (i32)vk_scf(ys & 0xFFFF),
+-            y1 = (i32)vk_scf(ys >> 16);
+-        if (x1 > (i32)g_rp.ext.width) x1 = (i32)g_rp.ext.width;
+-        if (y1 > (i32)g_rp.ext.height) y1 = (i32)g_rp.ext.height;
+-        if (x1 <= x0 || y1 <= y0) return;
+-        rect.rect = (VkRect2D){{x0, y0}, {(u32)(x1 - x0), (u32)(y1 - y0)}};
++    /* Maxwell B SET_CLEAR_SURFACE_CONTROL has independent selectors: bit 4
++       uses CLEAR_RECT (0xD6C/0xD70), bit 8 uses SCISSOR0, and bit 12 uses
++       VIEWPORT_CLIP0. Enabled rectangles intersect the attachment's bounds. */
++    i32 x0 = 0, y0 = 0, x1 = (i32)g_rp.ext.width, y1 = (i32)g_rp.ext.height;
++    for (u32 selector = 0; selector < 3; selector++) {
++        u32 flag = 1u << (4 + selector * 4);
++        if (!(r[0x43E] & flag) || (selector == 1 && !(r[0x380] & 1))) continue;
++        u32 base = selector == 0 ? 0x35B : selector == 1 ? 0x381 : 0x300;
++        u32 xs = r[base], ys = r[base + 1];
++        u32 left = xs & 0xFFFF, top = ys & 0xFFFF;
++        u32 right = xs >> 16, bottom = ys >> 16;
++        if (selector == 2) { right += left; bottom += top; } /* origin + size */
++        i32 lx = (i32)vk_scf(left), ty = (i32)vk_scf(top);
++        i32 rx = (i32)vk_scf(right), by = (i32)vk_scf(bottom);
++        if (lx > x0) x0 = lx;
++        if (ty > y0) y0 = ty;
++        if (rx < x1) x1 = rx;
++        if (by < y1) y1 = by;
+@@ -259,0 +278,2 @@ void vk_render_clear(GpuChannel* ch, u32 v) {
++    if (x1 <= x0 || y1 <= y0) return;
++    rect.rect = (VkRect2D){{x0, y0}, {(u32)(x1 - x0), (u32)(y1 - y0)}};
+@@ -1279,0 +1300,64 @@ retry:
++    if (getenv("SNX_FRAME_TRACE") && n && rt[0] && rt[0]->w >= 1280 && rt[0]->h >= 720) {
++        static u64 seen[64];
++        static unsigned seen_count;
++        u64 key = vs->hash ^ (fs ? fs->hash : 0) ^ ((u64)r[0x4B3] << 40) ^ ((u64)r[0x646] << 48);
++        unsigned i = 0;
++        while (i < seen_count && seen[i] != key) i++;
++        if (i == seen_count && seen_count < 64) {
++            seen[seen_count++] = key;
++            LOG("ACNH final raster: indexed=%d indexfmt=%u index=%llx first=%u base=%u scissor=%d,%d,%u,%u\n",
++                indexed, ifmt, (unsigned long long)ia, first, base_vertex, sc.offset.x, sc.offset.y,
++                sc.extent.width, sc.extent.height);
++            LOG("ACNH final draw: rt=%llx %ux%u vs=%llx fs=%llx count=%u topology=%u attr=%u "
++                "viewport=%g,%g,%g,%g depth=%u,%x,%g,%g cull=%u,%x,%x yctl=%x transform=%x "
++                "blend=%u,%u,%u mask=%x alpha=%g,%g,%g depthmode=%x zconv=%g ztransform=%g,%g\n",
++                (unsigned long long)rt[0]->gva, rt[0]->w, rt[0]->h,
++                (unsigned long long)vs->hash, (unsigned long long)(fs ? fs->hash : 0), count, topology, k.nattr,
++                vp.x, vp.y, vp.width, vp.height, r[0x4B3], r[0x4C3], vp.minDepth, vp.maxDepth,
++                r[0x646], r[0x647], r[0x648], r[0x4EB], r[0x64B],
++                k.blend[0].en, k.blend[0].sc, k.blend[0].dc, k.blend[0].mask, pc[4], pc[5], pc[6],
++                r[0x35F], pc[1], vt[2], vt[5]);
++            if (fs)
++                for (int t = 0; t < fs->si.ntex && t < SH_MAXTEX; t++) {
++                    Surf* texture = fres[t].t;
++                    if (fres[t].have && texture)
++                        LOG("ACNH final texture: fs=%llx slot=%d handle=%x gva=%llx %ux%u format=%x rt=%d\n",
++                            (unsigned long long)fs->hash, t, fres[t].handle,
++                            (unsigned long long)texture->gva, texture->w, texture->h, texture->fkey, texture->is_rt);
++                }
++            for (u32 a = 0; a < k.nattr && a < 4; a++) {
++                u32 attr = r[0x458 + k.attr[a].loc], stream = attr & 31;
++                u32* va = &r[0x700 + stream * 4];
++                u64 start = ((u64)va[1] << 32) | va[2];
++                const u32* values = (const u32*)gmem_ptr_untracked(start, 16);
++                LOG("ACNH final vertex: loc=%u raw=%x stream=%u address=%llx stride=%u values=%x,%x,%x,%x\n",
++                    k.attr[a].loc, attr, stream, (unsigned long long)start, va[0] & 0xFFF,
++                    values ? values[0] : 0, values ? values[1] : 0, values ? values[2] : 0, values ? values[3] : 0);
++                u64 end = ((u64)r[0x7C0 + stream * 2] << 32) | r[0x7C1 + stream * 2];
++                LOG("ACNH final binding: loc=%u enable=%x limit=%llx format=%u binding=%u boundstride=%llu\n",
++                    k.attr[a].loc, va[0], (unsigned long long)end, k.attr[a].format, k.attr[a].binding,
++                    (unsigned long long)vstride[k.attr[a].binding]);
++            }
++            u64 matrix_addr = g_vk_cb[0][3];
++            const float* matrix = (const float*)gmem_ptr_untracked(matrix_addr, 80);
++            if (matrix)
++                LOG("ACNH final cb3: address=%llx size=%u row1=%g,%g,%g,%g row2=%g,%g,%g,%g "
++                    "row3=%g,%g,%g,%g row4=%g,%g,%g,%g\n",
++                    (unsigned long long)matrix_addr, g_vk_cbsize[0][3],
++                    matrix[4], matrix[5], matrix[6], matrix[7], matrix[8], matrix[9], matrix[10], matrix[11],
++                    matrix[12], matrix[13], matrix[14], matrix[15], matrix[16], matrix[17], matrix[18], matrix[19]);
++            const float* color = (const float*)gmem_ptr_untracked(g_vk_cb[4][3], 32);
++            if (color)
++                LOG("ACNH final fs cb3: fs=%llx address=%llx size=%u color=%g,%g,%g,%g add=%g,%g,%g,%g\n",
++                    (unsigned long long)(fs ? fs->hash : 0), (unsigned long long)g_vk_cb[4][3], g_vk_cbsize[4][3],
++                    color[0], color[1], color[2], color[3], color[4], color[5], color[6], color[7]);
++            const float* ui = (const float*)gmem_ptr_untracked(matrix_addr, 560);
++            if (ui)
++                LOG("ACNH ui projection: vs=%llx mask=%x range=%u row0=%g,%g,%g,%g modely=%g,%g,%g,%g "
++                    "modelz=%g,%g,%g,%g scale=%g,%g,%g,%g\n",
++                    (unsigned long long)vs->hash, vs->si.cbuf_mask, vs->si.cbuf_max[3],
++                    ui[0], ui[1], ui[2], ui[3], ui[20], ui[21], ui[22], ui[23],
++                    ui[24], ui[25], ui[26], ui[27], ui[132], ui[133], ui[134], ui[135]);
++        }
++    }
++
 diff --git a/runtime/gpu/vk/renderer.c b/runtime/gpu/vk/renderer.c
-index e69ff4c..dd80626 100644
+index e69ff4c..fc16cec 100644
 --- a/runtime/gpu/vk/renderer.c
 +++ b/runtime/gpu/vk/renderer.c
-@@ -190,0 +191,7 @@ static void vkr_present_buffer(u64 cpu_addr, u32 w, u32 h, u32 pitch, u32 layout
+@@ -19,0 +20,34 @@
++#ifdef SNX_RENDERDOC_DIAGNOSTIC
++#include "platform/plat.h"
++#include "renderdoc_app.h"
++static RENDERDOC_API_1_6_0* g_rdoc;
++static unsigned g_capture_frame;
++static int g_capture_done;
++static void capture_begin(void) {
++    const char* frame = getenv("SNX_RENDERDOC_FRAME");
++    if (!frame || g_capture_done) return;
++    if (!g_rdoc) {
++        void* library = plat_dl_open("renderdoc.dll");
++        pRENDERDOC_GetAPI get_api = library ? (pRENDERDOC_GetAPI)plat_dl_sym(library, "RENDERDOC_GetAPI") : NULL;
++        if (!get_api || !get_api(eRENDERDOC_API_Version_1_6_0, (void**)&g_rdoc)) {
++            LOG("RenderDoc capture API unavailable\n");
++            g_capture_done = 1;
++            return;
++        }
++        const char* output = getenv("SNX_RENDERDOC_OUTPUT");
++        if (output) g_rdoc->SetCaptureFilePathTemplate(output);
++        g_capture_frame = (unsigned)strtoul(frame, NULL, 10);
++    }
++    if (g_vk_present == g_capture_frame) {
++        g_rdoc->StartFrameCapture((RENDERDOC_DevicePointer)g_vk.instance, NULL);
++        LOG("RenderDoc capture begins at present %u\n", g_capture_frame);
++    }
++}
++static void capture_end(void) {
++    if (g_rdoc && !g_capture_done && g_vk_present == g_capture_frame + 2) {
++        unsigned result = g_rdoc->EndFrameCapture((RENDERDOC_DevicePointer)g_vk.instance, NULL);
++        LOG("RenderDoc capture finished: %u\n", result);
++        g_capture_done = 1;
++    }
++}
++#endif
+@@ -185,0 +220,3 @@ static void vkr_present_buffer(u64 cpu_addr, u32 w, u32 h, u32 pitch, u32 layout
++#ifdef SNX_RENDERDOC_DIAGNOSTIC
++    capture_begin();
++#endif
+@@ -190,0 +228,7 @@ static void vkr_present_buffer(u64 cpu_addr, u32 w, u32 h, u32 pitch, u32 layout
 +        if (getenv("SNX_PRESENT_TRACE")) {
 +            static unsigned samples;
 +            if (samples++ < 12 || g_vk_present % 600 == 0)
@@ -25,7 +225,11 @@ index e69ff4c..dd80626 100644
 +                    (unsigned long long)cpu_addr, w, h, pitch, fmt, src ? "render-target" : "cpu",
 +                    (unsigned long long)(src ? src->gva : 0));
 +        }
-@@ -376,0 +384,15 @@ static u64 vkr_screenshot(const char* path) {
+@@ -299,0 +344,3 @@ static void vkr_present_buffer(u64 cpu_addr, u32 w, u32 h, u32 pitch, u32 layout
++#ifdef SNX_RENDERDOC_DIAGNOSTIC
++    capture_end();
++#endif
+@@ -376,0 +424,15 @@ static u64 vkr_screenshot(const char* path) {
 +    const char* rt_dir = getenv("SNX_RT_DUMP_DIR");
 +    if (rt_dir && *rt_dir) {
 +        Surf* surfaces[24];
@@ -67,3 +271,97 @@ index f8978c6..5323d22 100644
 +++ b/runtime/gpu/vk/vk.h
 @@ -189,0 +190 @@ Surf* vk_rt_for_cpu(u64 cpu_addr, u32 w, u32 h); /* the render target the guest
 +int vk_rt_debug_list(Surf** out, int capacity); /* bounded diagnostic readback candidates */
+diff --git a/tests/vulkan_headless.c b/tests/vulkan_headless.c
+index a1d5aa9..d57843b 100644
+--- a/tests/vulkan_headless.c
++++ b/tests/vulkan_headless.c
+@@ -7,0 +8,2 @@
++#include "gpu/gpu.h"
++#include "hle/nvdrv.h"
+@@ -22,0 +25,81 @@
++/* Inspect the attachment itself, before presentation, including alpha. */
++static int check_clear_pixels(Surf* s, u32 background, u32 foreground, u32 x0, u32 y0, u32 x1, u32 y1) {
++    VkBuffer buffer;
++    u8* data = vk_readback_buffer((u64)s->w * s->h * 4, &buffer);
++    CHECK(data);
++    VkCommandBuffer cb = vk_cmd();
++    vk_surf_use(cb, s, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, VK_PIPELINE_STAGE_2_COPY_BIT, VK_ACCESS_2_TRANSFER_READ_BIT);
++    VkBufferImageCopy copy = {.imageSubresource = {VK_IMAGE_ASPECT_COLOR_BIT, 0, 0, 1}, .imageExtent = {s->w, s->h, 1}};
++    vkCmdCopyImageToBuffer(cb, s->img, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, buffer, 1, &copy);
++    VkMemoryBarrier2 barrier = {.sType = VK_STRUCTURE_TYPE_MEMORY_BARRIER_2,
++        .srcStageMask = VK_PIPELINE_STAGE_2_COPY_BIT, .srcAccessMask = VK_ACCESS_2_TRANSFER_WRITE_BIT,
++        .dstStageMask = VK_PIPELINE_STAGE_2_HOST_BIT, .dstAccessMask = VK_ACCESS_2_HOST_READ_BIT};
++    VkDependencyInfo dependency = {.sType = VK_STRUCTURE_TYPE_DEPENDENCY_INFO,
++        .memoryBarrierCount = 1, .pMemoryBarriers = &barrier};
++    vkCmdPipelineBarrier2(cb, &dependency);
++    vk_finish();
++    vk_readback_ready();
++    for (u32 y = 0; y < s->h; y++)
++        for (u32 x = 0; x < s->w; x++) {
++            u32 expected = x >= x0 && x < x1 && y >= y0 && y < y1 ? foreground : background;
++            CHECK(((const u32*)data)[y * s->w + x] == expected);
++        }
++    return 0;
++}
++
++static int check_clear_regions(void) {
++    nv_init();
++    GpuChannel* ch = calloc(1, sizeof *ch);
++    CHECK(ch);
++    u32* r = ch->r3d;
++    r[0x487] = 1; /* slot zero */
++    r[0x201] = 0x9000; /* unmapped synthetic surface: no game data */
++    r[0x202] = 32 * 4;
++    r[0x203] = 16;
++    r[0x204] = 0xD5; /* RGBA8 UNORM */
++    r[0x205] = 0x1000; /* pitch linear */
++    r[0x206] = 1;
++    r[0x556] = 1;
++    float red[4] = {1, 0, 0, 1}, green[4] = {0, 1, 0, 1};
++    const u32 controls[] = {0x10, 0x100, 0x1110, 0x110};
++    for (u32 i = 0; i < 4; i++) {
++        r[0x43E] = 0;
++        memcpy(&r[0x360], red, sizeof red);
++        r3d_clear(ch, 0x3C);
++        r[0x43E] = controls[i];
++        r[0x380] = 1;
++        r[0x35B] = 4 | (20 << 16);
++        r[0x35C] = 2 | (10 << 16);
++        r[0x381] = 8 | (24 << 16);
++        r[0x382] = 4 | (12 << 16);
++        r[0x300] = 10 | (8 << 16);
++        r[0x301] = 5 | (3 << 16);
++        if (i == 3) r[0x35B] = 4 | (4 << 16); /* empty clear */
++        memcpy(&r[0x360], green, sizeof green);
++        r3d_clear(ch, 0x3C);
++        Surf* s = vk_rt_find(0x9000);
++        CHECK(s);
++        const u32 regions[4][4] = {{4,2,20,10}, {8,4,24,12}, {10,5,18,8}, {0,0,0,0}};
++        CHECK(!check_clear_pixels(s, 0xFF0000FF, 0xFF00FF00,
++            regions[i][0], regions[i][1], regions[i][2], regions[i][3]));
++    }
++    /* Conditional clear compares two zero records in an unmapped range:
++       NOT_EQUAL must retain red, EQUAL must replace it with green. */
++    const u32 modes[] = {0, 4, 3, 1};
++    const u32 overrides[] = {0, 0, 0, 2};
++    for (u32 i = 0; i < 4; i++) {
++        r[0x43E] = 0;
++        r[0x556] = 1;
++        r[0x651] = 0;
++        memcpy(&r[0x360], red, sizeof red);
++        r3d_clear(ch, 0x3C);
++        r[0x556] = modes[i];
++        r[0x651] = overrides[i];
++        memcpy(&r[0x360], green, sizeof green);
++        r3d_clear(ch, 0x3C);
++        CHECK(!check_clear_pixels(vk_rt_find(0x9000), i == 2 ? 0xFF00FF00 : 0xFF0000FF, 0, 0,0,0,0));
++    }
++    free(ch);
++    return 0;
++}
++
+@@ -78,0 +162 @@ int main(int argc, char** argv) {
++    CHECK(!check_clear_regions());
+@@ -82 +166 @@ int main(int argc, char** argv) {
+-    puts("PASS headless Vulkan: 6 uploads, submits, cropped readbacks and PPMs, no WSI");
++    puts("PASS headless Vulkan: 6 uploads, cropped readbacks, 4 clear regions and 4 conditional clears, no WSI");

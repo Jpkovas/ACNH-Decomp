@@ -1,0 +1,79 @@
+{
+  "status": "partial_progress",
+  "playable_validated": false,
+  "whole_game_decompiled": false,
+  "version": "1.0.0",
+  "diagnostic_tool": "RenderDoc 1.46, signed official portable distribution",
+  "capture_private": true,
+  "before_fix": {
+    "capture_sha256": "8d81a29a8815e991bf8bfb62b6faa50e150e693631ff458c736d2a50dfd1c956",
+    "composition_resource": "ResourceId::131",
+    "draw_event": 1342,
+    "nonblack_pixels_after_draw": 14099,
+    "clear_events": [1343, 1344, 1345, 1346],
+    "nonblack_pixels_after_clears": 0,
+    "copy_event": 1381,
+    "presented_resource": "ResourceId::141",
+    "nonblack_pixels_after_copy": 0
+  },
+  "observed_cause": {
+    "render_enable_mode": 4,
+    "meaning": "render if sequence/count pairs differ",
+    "initial_sequence": 0,
+    "initial_count": 0,
+    "current_sequence": 0,
+    "current_count": 0,
+    "expected_condition": false,
+    "old_runtime_evaluated_condition": false,
+    "incorrect_clear_rectangle_selector_also_fixed": true
+  },
+  "regression_validation": {
+    "real_gpu": "AMD Radeon RX 9070 XT",
+    "vulkan_headless_passed": true,
+    "pixel_region_cases": 4,
+    "conditional_clear_cases": 4,
+    "upstream_tests_passed": 11
+  },
+  "after_capture_validation": {
+    "capture_sha256": "faec574d37a9432841663cf0e88627c7c3c88e630c09cd2b714c54dce40eb262",
+    "capture_script_verified": true,
+    "requested_frame": 500,
+    "presented_resource": "ResourceId::141",
+    "inspected_event": 37,
+    "presented_rgb_nonzero": 15341,
+    "packed_composition_format": "R10G10B10A2_UNORM",
+    "presented_format": "R8G8B8A8_SRGB",
+    "note": "Packed formats are not interpreted as bytewise RGBA for channel statistics"
+  },
+  "after_fix": [
+    {
+      "log_prefix": "native-20261013-033048",
+      "requested_seconds": 90,
+      "elapsed_seconds": 91.3,
+      "frames": 3137,
+      "exit_code": 0,
+      "visual_observation": "Nook Inc. introduction sign",
+      "nonblack_pixels": 785280,
+      "rgb_sha256": "593f94cd0ad17d37869ffcf44de67654b44a3ba3119a60cf99900ffe2134d22f"
+    },
+    {
+      "log_prefix": "native-20261013-033315",
+      "requested_seconds": 180,
+      "elapsed_seconds": 193.56,
+      "frames": 2495,
+      "exit_code": 0,
+      "visual_observation": "Timmy and Tommy at airport counter",
+      "scripted_A_presses": 10,
+      "input_response_validated": false,
+      "nonblack_pixels": 2073598,
+      "rgb_sha256": "4f7a4ac8c5f3748b1d132f48d84875675a441179249ef9d0e6a20fa154fac376"
+    }
+  ],
+  "remaining": [
+    "intro dialogue and character creation",
+    "unexpected GPU command headers in advancing runs",
+    "island gameplay and verified input response",
+    "audio and save/reload",
+    "reconstruction of required game source beyond the two replaced entries"
+  ]
+}
