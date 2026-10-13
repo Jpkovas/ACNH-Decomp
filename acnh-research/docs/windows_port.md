@@ -47,6 +47,16 @@ O teste `vulkan_headless` agora lê pixels RGBA da GPU e verifica retângulo pr�
 
 RenderDoc 1.46 foi instalado de fonte oficial com SHA-256 e assinatura GPG verificados, registrados em `config/tool-renderdoc.lock.json`. Capturas, imagens e arquivos de replay ficam em `private/windows/`. A camada Vulkan é habilitada somente no processo de diagnóstico. O SDK opcional é detectado pelo script de build. Para o replay sem interface, a configuração recém-criada do RenderDoc recebeu somente o opt-out de analytics, com backup privado, pois o diálogo inicial interrompia `qrenderdoc --py`.
 
+## Controles reconstruídos e cadastro
+
+O SDK 1.0.0 exporta `nn::hid::detail::GetNpadStates(NpadFullKeyState...)`, localizado no offset `0x341a00`. Seu corpo de 504 bytes foi reconstruído em `reconstructed/src/npad_full_key.cpp`: seleção cronológica de snapshots no ring de 17 entradas, verificação dos carimbos de leitura, retry quando o produtor altera uma entrada, limite de capacidade e filtro dos botões de direção opostos. Os controles do filtro são relidos em cada estado, como no original. A rotina coincidiu com ARM64 não modificado em 3.147 casos, incluindo todos os tails, 17 alterações do produtor e 17 mudanças do filtro durante a leitura. A inicialização do SDK foi isolada nesse teste e continua delegada ao código original pela ponte; não se afirma reconstrução do SDK completo.
+
+A DLL agora substitui três entradas: duas de `main` e esse leitor do SDK. A validação da ABI passou em 1.364 casos, dos quais 272 verificam a adaptação do leitor, a seleção dos IDs de controle e a preservação dos registradores. O módulo atualizado tem 292.552.704 bytes. O link estático inclui o suporte C++ necessário para não exigir `libc++.dll` ao carregar o módulo na máquina de destino.
+
+Pressões A de um segundo avançaram os diálogos e selecionaram caracteres no teclado desenhado pelo jogo. A confirmação por Plus abortava com `0x202` dentro de `nn::ngc::ProfanityFilter`: o runtime fornecia um RomFS vazio para o arquivo de sistema `0100000000000823`. O script `prepare_system_archive.py` localiza esse NCA nos 238 cabeçalhos da firmware fornecida, usa hactool 1.5.4 com saída sanitizada e instala seu RomFS de 98.324 bytes em `private/windows/bridge/ACNH_1_0_0_data/system/archives/`. Chaves, NCA e RomFS ficam fora do Git. A sessão subsequente com a rotina reconstruída passou pela validação do nome e chegou à seleção de aniversário; `metadata/windows/1.0.0/intro-input-validation.json` registra os runs.
+
+Outra sessão com o arquivo real parou antes do cadastro. Uma amostra de backtrace do processo confirmou o thread da GPU executando `dma_method`/`bl_offset`, enquanto o principal esperava o evento nvhost. Esse atraso e os headers inesperados ainda precisam de diagnóstico; `SNX_DMA_TRACE=1` registra os parâmetros de cada cópia sem omiti-la. O áudio ainda é uma implementação de timing que não produz som, conforme `runtime/hle/audren.c` e `audio.c`; será necessário implementar o processamento e a saída de áudio. Aniversário confirmado, criação completa do personagem, gameplay na ilha e save/reload ainda não foram demonstrados.
+
 ## Reprodução local
 
 Usar os commits e o LLVM MinGW fixados em `config/windows-sources.lock.json`, além dos inputs e ferramentas do goal anterior. Executar de `D:/ACNH_Decomp`:
@@ -56,12 +66,17 @@ Usar os commits e o LLVM MinGW fixados em `config/windows-sources.lock.json`, al
 & acnh-research/scripts/build_windows_bridge.ps1 -Backend vulkan -GpuTest
 & acnh-research/scripts/generate_windows_game.ps1
 & acnh-research/private/tools/python/python.exe acnh-research/scripts/prepare_windows_inputs.py --keys gamedump/prod.keys
+& acnh-research/private/tools/python/python.exe acnh-research/scripts/prepare_system_archive.py --keys gamedump/prod.keys --firmware gamedump/Firmware_22.1.0.zip --title-id 0100000000000823
+& acnh-research/scripts/build_native.ps1 -Compiler clang
+& acnh-research/private/tools/python/python.exe acnh-research/scripts/validate_npad_full_key.py --library acnh-research/build/clang/npad_full_key.dll
 & acnh-research/scripts/build_windows_game.ps1 -Jobs 8
 & acnh-research/private/tools/python/python.exe acnh-research/scripts/validate_bridge_replacements.py
 & acnh-research/scripts/run_windows_bridge.ps1 -Mode native -Seconds 45 -Headless
 ```
 
 Os testes de filesystem usam o temporário NTFS do Windows, pois o disco D: é exFAT e não suporta hard links. Execução dos drivers dentro do sandbox também pode falhar na canonicalização de caminhos; o resultado registrado foi obtido fora dessa restrição. A build conserva os objetos intermediários para retomar compilações. A opção `-Regenerate` refaz C privado a partir dos módulos e hints observados. O primeiro estágio H.264/Opus está desabilitado; não foi validado como desnecessário para todos os cenários do jogo. As flags `-march=native` exigem reproduzir ou ajustar o alvo de CPU antes de distribuir executáveis para outra máquina.
+
+Para repetir o teste de cadastro, usar `run_windows_bridge.ps1 -PressLength 1000 -ShotEvery 250` com a sequência A/Plus de `intro-input-validation.json` e dos logs privados referidos. O limite do harness é 1.800 segundos; o teste pode terminar antes com erro do jogo. `build_windows_game.ps1 -OutputDirectory <pasta em private/windows>` permite preparar outro módulo sem relinkar a DLL de uma sessão em execução. A emissão do módulo para outra pasta não altera os dados privados selecionados por `SNX_DATA_DIR`.
 
 Para capturar dois frames consecutivos de GPU, instalar o arquivo portátil RenderDoc fixado no lock em `private/tools/renderdoc/`, recompilar a ponte e executar:
 

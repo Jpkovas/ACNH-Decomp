@@ -1,0 +1,11 @@
+{
+  "title_id": "0100000000000823",
+  "firmware_zip_sha256": "d8cd72869a93cbf7b8e9ceaf135d8760f1ff8aaa001a2c0293210dc958d2fb34",
+  "headers_verified": 238,
+  "nca_sha256": "00d460df4a07b37c6a39c3eb7187f7712c141e9f6ea9e9f87dcbffd6efbc76d4",
+  "romfs_sha256": "259c2edc76e36bf2d971816dbf6e89c00178ec496ecab97a2d954741925b1bad",
+  "romfs_size": 98324,
+  "tool": "hactool 1.5.4",
+  "proprietary_archive_private": true,
+  "whole_game_decompiled": false
+}

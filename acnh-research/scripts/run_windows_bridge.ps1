@@ -1,8 +1,10 @@
 param(
  [ValidateSet('native','probe')][string]$Mode='native',
- [ValidateRange(1,300)][int]$Seconds=30,
+ [ValidateRange(1,1800)][int]$Seconds=30,
  [switch]$Headless,
  [string]$InputScript='',
+ [ValidateRange(1,10000)][int]$PressLength=300,
+ [ValidateRange(0,10000)][int]$ShotEvery=0,
  [switch]$CaptureShaders,
  [switch]$CaptureTargets,
  [ValidateSet(0,1)][int]$Docked=1
@@ -22,7 +24,7 @@ if($CaptureTargets){
  $env:SNX_RT_DUMP_DIR=$prefix+'-targets'
  New-Item -ItemType Directory -Force -Path $env:SNX_RT_DUMP_DIR | Out-Null
 }else{Remove-Item Env:SNX_RT_DUMP_DIR -ErrorAction SilentlyContinue}
-$arguments=@("--game=$game","--seconds=$Seconds",'--log=1','--fullscreen=0',"--docked=$Docked","--shot=$prefix")
+$arguments=@("--game=$game","--seconds=$Seconds",'--log=1','--fullscreen=0',"--docked=$Docked","--shot=$prefix","--press_len=$PressLength","--shot_every=$ShotEvery")
 if($Headless){$arguments+='--headless'}
 if($InputScript){$arguments+="--script=$InputScript"}
 if($CaptureShaders){
@@ -41,7 +43,7 @@ while(-not $process.HasExited){
  }
 }
 $process.WaitForExit()
-$result=[ordered]@{mode=$Mode;headless=[bool]$Headless;docked=$Docked;input_script=$InputScript;exit_code=$process.ExitCode;elapsed_seconds=[math]::Round($timer.Elapsed.TotalSeconds,2);stdout=$prefix+'.stdout.log';stderr=$prefix+'.stderr.log';game_log=$game+'.log';screenshot=if(Test-Path -LiteralPath ($prefix+'.ppm')){$prefix+'.ppm'}else{$null};playable_validated=$false}
+$result=[ordered]@{mode=$Mode;headless=[bool]$Headless;docked=$Docked;input_script=$InputScript;press_length_ms=$PressLength;shot_every_frames=$ShotEvery;exit_code=$process.ExitCode;elapsed_seconds=[math]::Round($timer.Elapsed.TotalSeconds,2);stdout=$prefix+'.stdout.log';stderr=$prefix+'.stderr.log';game_log=$game+'.log';screenshot=if(Test-Path -LiteralPath ($prefix+'.ppm')){$prefix+'.ppm'}else{$null};playable_validated=$false}
 $result | ConvertTo-Json | Set-Content -LiteralPath ($prefix+'.json') -Encoding utf8
 $result | ConvertTo-Json
 Select-String -LiteralPath ($prefix+'.stdout.log'),($prefix+'.stderr.log') -Pattern 'RomFS:|vulkan:|FATAL:|Unsupported instruction|svcBreak|frames=' | Select-Object -First 12 | ForEach-Object {$_.Line}

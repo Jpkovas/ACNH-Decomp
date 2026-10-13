@@ -1,0 +1,25 @@
+{
+  "version_id": "1.0.0",
+  "module": "sdk",
+  "symbol": "_ZN2nn3hid6detail13GetNpadStatesEPiPNS0_16NpadFullKeyStateEiRKj",
+  "module_relative": "0x341a00",
+  "original_bytes": 504,
+  "original_body_sha256": "4a0fa074ed93841eb052a04603aaa805113b44315a4050d2f15c518690f33816",
+  "sdk_input_sha256": "31ce67e8701584ba812dceeae9b590d7a6ad642bcb5aa74d2fe3ea5c5474250d",
+  "differential_cases": 3147,
+  "producer_race_cases": 17,
+  "filter_config_change_cases": 17,
+  "cpp_source_sha256": "16370738b9f19e6f11997bf85e2356c9b8c08839c9eff7e5cd459854ce00caba",
+  "tested_library_sha256": "619adc2535bbf9038c4a62b22086c1a5fbd61c686527336c21d184afac1dddf3",
+  "initializer_invocations": 3147,
+  "original_arm64_unmodified": true,
+  "independent_snapshot_oracle": true,
+  "all_ring_tail_positions": true,
+  "callee_saved_preserved": true,
+  "missing_entry_result": "0x58cca",
+  "limitations": [
+    "SDK initializer isolated, not reconstructed by this test",
+    "Malformed or permanently inconsistent shared-memory producer can retry indefinitely like original",
+    "Not proof of whole-game decompilation or playable build"
+  ]
+}

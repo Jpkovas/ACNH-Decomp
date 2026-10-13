@@ -22,6 +22,15 @@ index 7fdf7d1..60eaf9f 100644
 +        if (data_override[len - 1] != '/' && data_override[len - 1] != '\\') g_datadir[len++] = '/';
 +        g_datadir[len] = 0;
 +    }
+diff --git a/runtime/gpu/dma.c b/runtime/gpu/dma.c
+index 124f711..2e30892 100644
+--- a/runtime/gpu/dma.c
++++ b/runtime/gpu/dma.c
+@@ -85,0 +86,4 @@ void dma_method(GpuChannel* ch, u32 m, u32 v) {
++    if (getenv("SNX_DMA_TRACE"))
++        LOG("ACNH DMA trace: src=%llx dst=%llx bytes=%u lines=%u pitch=%u,%u layout=%d,%d blocks=%u,%u dimensions=%u,%u,%u,%u launch=%08x\n",
++            (unsigned long long)src, (unsigned long long)dst, line_len, lines, pitch_in, pitch_out,
++            src_linear, dst_linear, sbh, dbh, sw, sh, dw, dh, v);
 diff --git a/runtime/gpu/gpu.c b/runtime/gpu/gpu.c
 index 573c96a..c2d9c1d 100644
 --- a/runtime/gpu/gpu.c

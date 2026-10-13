@@ -18,13 +18,13 @@ if(NOT generated)
   message(FATAL_ERROR "Generate the private ACNH C sources first")
 endif()
 add_library(acnh_code SHARED ${generated}
-  ../reconstructed/src/identifier_hash.cpp ../reconstructed/src/constant_zero.cpp)
+  ../reconstructed/src/identifier_hash.cpp ../reconstructed/src/constant_zero.cpp ../reconstructed/src/npad_full_key.cpp)
 target_include_directories(acnh_code PRIVATE "${SCARLET_DIR}/runtime/abi" ../reconstructed/include)
 # O0 produced an image over 2 GiB that Windows rejected with error 193.
 # Keep object files in this incremental build so failed runs can resume.
 target_compile_options(acnh_code PRIVATE -O1 -march=native -mtune=native
   -fno-strict-aliasing -fwrapv -mcx16 -foptimize-sibling-calls
   -fno-semantic-interposition -w)
-target_link_options(acnh_code PRIVATE -static-libgcc)
+target_link_options(acnh_code PRIVATE -static)
 set_target_properties(acnh_code PROPERTIES PREFIX "" OUTPUT_NAME "ACNH_1_0_0_code"
   RUNTIME_OUTPUT_DIRECTORY "${GAME_OUTPUT}")

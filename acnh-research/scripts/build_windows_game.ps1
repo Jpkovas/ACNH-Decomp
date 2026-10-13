@@ -1,4 +1,4 @@
-param([ValidateRange(1,16)][int]$Jobs=8)
+param([ValidateRange(1,16)][int]$Jobs=8,[string]$OutputDirectory='')
 $ErrorActionPreference='Stop'
 $root=Split-Path $PSScriptRoot -Parent
 $python=Join-Path $root 'private/tools/python/python.exe'
@@ -11,8 +11,11 @@ $bin=Join-Path $root 'private/tools/llvm-mingw/llvm-mingw-20261006-ucrt-x86_64/b
 $env:PATH="$bin;$env:PATH"
 $build=Join-Path $root 'build/windows-bridge/game-o1'
 $game=Join-Path $root 'private/windows/bridge'
-& $cmake -S (Join-Path $root 'windows_bridge') -B $build -G Ninja "-DCMAKE_C_COMPILER=$bin/clang.exe" "-DCMAKE_CXX_COMPILER=$bin/clang++.exe" "-DCMAKE_MAKE_PROGRAM=$ninja" "-DGENERATED_DIR=$game/ACNH_1_0_0_build" "-DSCARLET_DIR=$root/vendor/ScarletNX" "-DGAME_OUTPUT=$game" -DCMAKE_BUILD_TYPE=Release
+$output=if($OutputDirectory){[IO.Path]::GetFullPath($OutputDirectory)}else{$game}
+if(-not $output.StartsWith(([IO.Path]::GetFullPath((Join-Path $root 'private/windows'))+[IO.Path]::DirectorySeparatorChar),[StringComparison]::OrdinalIgnoreCase)){throw 'Game output must stay in private/windows'}
+New-Item -ItemType Directory -Force -Path $output | Out-Null
+& $cmake -S (Join-Path $root 'windows_bridge') -B $build -G Ninja "-DCMAKE_C_COMPILER=$bin/clang.exe" "-DCMAKE_CXX_COMPILER=$bin/clang++.exe" "-DCMAKE_MAKE_PROGRAM=$ninja" "-DGENERATED_DIR=$game/ACNH_1_0_0_build" "-DSCARLET_DIR=$root/vendor/ScarletNX" "-DGAME_OUTPUT=$output" -DCMAKE_BUILD_TYPE=Release
 if($LASTEXITCODE -ne 0){throw 'ACNH module configuration failed'}
 & $cmake --build $build --parallel $Jobs
 if($LASTEXITCODE -ne 0){throw 'ACNH module build failed'}
-Copy-Item -LiteralPath (Join-Path $root 'build/windows-bridge/vulkan/scarletnx.exe') -Destination (Join-Path $game 'ACNH_1_0_0.exe')
+Copy-Item -LiteralPath (Join-Path $root 'build/windows-bridge/vulkan/scarletnx.exe') -Destination (Join-Path $output 'ACNH_1_0_0.exe')

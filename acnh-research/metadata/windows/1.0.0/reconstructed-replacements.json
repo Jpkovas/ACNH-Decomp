@@ -3,6 +3,7 @@
   "replacements": [
     {
       "function": "F_8006BF0",
+      "module": "main",
       "module_relative": "0x1bf0",
       "generated_file": "code_000.c",
       "evidence": "Existing original ARM64 differential validation",
@@ -11,11 +12,22 @@
     },
     {
       "function": "F_800FC10",
+      "module": "main",
       "module_relative": "0xac10",
       "generated_file": "code_000.c",
       "evidence": "Existing original ARM64 differential validation",
       "interior_entries": "interpreter fallback",
       "generated_file_sha256": "30d74d77f2f0a1bbd2709952f6007d6961eb097b9f2b62eac0c5d39feaa884bb"
+    },
+    {
+      "function": "F_C50CA00",
+      "module": "sdk",
+      "module_relative": "0x341a00",
+      "generated_file": "code_339.c",
+      "evidence": "npad-full-key-validation.json: original ARM64 comparisons",
+      "initializer": "original SDK entry 0x340fd0",
+      "interior_entries": "interpreter fallback",
+      "generated_file_sha256": "bf38b6f38b9971fb9a8f2b67be8930fe4e15dec92e93043ff9ad3f1197ee8328"
     }
   ],
   "whole_game_decompiled": false

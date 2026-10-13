@@ -1,9 +1,11 @@
 """Exercise reconstructed routines through the actual translated DLL dispatch ABI."""
 from __future__ import annotations
 import ctypes as ct
+import argparse
 import hashlib
 import json
 import random
+import struct
 from pathlib import Path
 import mmh3
 
@@ -48,9 +50,12 @@ def find_entry(module: Module, address: int):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--module', type=Path, default=ROOT/'private/windows/bridge/ACNH_1_0_0_code.dll')
+    args = parser.parse_args()
     if ct.sizeof(CPU) != 896 or CPU.mem.offset != 848 or Module.entry_addr.offset != 24:
         raise ValueError('Unexpected host ABI layout')
-    path = ROOT/'private/windows/bridge/ACNH_1_0_0_code.dll'
+    path = args.module
     dll = ct.CDLL(str(path))
     dll.snx_module.restype = ct.POINTER(Module)
     module = dll.snx_module().contents
@@ -90,12 +95,64 @@ def main():
         if cpu.x[0] != 0 or cpu.pc != cpu.x[30]:
             raise AssertionError('Constant zero dispatch mismatch')
         zero_checks += 1
+    full_key = find_entry(module, 0xc50ca00)
+    # Reserve sparse guest address space for the SDK globals used by its adapter.
+    import mmap
+    guest_memory = mmap.mmap(-1, 0xe000000)
+    guest_base = ct.addressof(ct.c_char.from_buffer(guest_memory))
+    init_calls = [0]
+    guest_function = ct.CFUNCTYPE(None, ct.POINTER(CPU), ct.c_uint64)
+    def isolated_init(pointer, address):
+        if address != 0xc50bfd0: raise AssertionError('Unexpected dependency entry')
+        init_calls[0] += 1
+        pointer.contents.pc = pointer.contents.x[30]
+    initialize = guest_function(isolated_init)
+    dispatch = (ct.c_void_p*1)(ct.cast(initialize,ct.c_void_p).value)
+    full_key_checks = 0
+    for tail in range(17):
+        for capacity in (0,1,8,17):
+            entry = 0x4000
+            for age in range(17):
+                slot = (tail-age)%17
+                payload = struct.pack('<QQ4iII',1000-age,1<<age,age,-age,age*2,-age*2,1,0)
+                guest_memory[entry+0x48+slot*48:entry+0x50+slot*48] = struct.pack('<Q',1000-age)
+                guest_memory[entry+0x50+slot*48:entry+0x78+slot*48] = payload
+            guest_memory[entry+0x38:entry+0x48] = struct.pack('<QQ',tail,17)
+            for device in (0,7,0x10,0x20):
+                index = device if device < 8 else 9 if device == 0x10 else 8
+                guest_memory[0xd427090+index*8:0xd427098+index*8] = struct.pack('<Q',entry)
+                guest_memory[0x2000:0x2004] = struct.pack('<I',device)
+                guest_memory[0x1000:0x1000+0x500] = b'\xa5'*0x500
+                cpu = CPU()
+                cpu.mem = guest_base
+                cpu.disp = ct.addressof(dispatch)
+                cpu.code_lo, cpu.code_hi = 0xc50bfd0,0xc50bfd4
+                cpu.x[0],cpu.x[1],cpu.x[2],cpu.x[3],cpu.x[30] = 0x800,0x1000,capacity,0x2000,0x1234567890
+                for i in range(19,30):cpu.x[i]=rng.getrandbits(64)
+                cpu.x[31]=0x3000
+                preserved=list(cpu.x[19:30])+[cpu.x[31]]
+                full_key(ct.byref(cpu),0xc50ca00)
+                if cpu.x[0] or cpu.pc != cpu.x[30] or list(cpu.x[19:30])+[cpu.x[31]] != preserved:
+                    raise AssertionError('FullKey dispatch ABI mismatch')
+                if struct.unpack('<i',guest_memory[0x800:0x804])[0] != capacity:
+                    raise AssertionError('FullKey dispatch count mismatch')
+                for age in range(capacity):
+                    data=struct.unpack('<QQ4iII',guest_memory[0x1000+age*40:0x1028+age*40])
+                    if data != (1000-age,1<<age,age,-age,age*2,-age*2,1,0):
+                        raise AssertionError('FullKey dispatch payload mismatch')
+                if guest_memory[0x1000+capacity*40:0x1500] != b'\xa5'*(0x500-capacity*40):
+                    raise AssertionError('FullKey dispatch wrote past caller capacity')
+                full_key_checks += 1
+    if init_calls[0] != full_key_checks:raise AssertionError('FullKey initializer delegation mismatch')
+    guest_memory.close()
     with path.open('rb') as source:
         checksum = hashlib.file_digest(source, 'sha256').hexdigest()
     report = dict(version_id='1.0.0', passed=True, snx_abi=module.abi,
                   dll_sha256=checksum, dll_size=path.stat().st_size,
                   hash_dispatch_cases=checks, zero_dispatch_cases=zero_checks,
-                  scope='Two reviewed entries through the actual DLL; interior fallback and whole gameplay unvalidated')
+                  full_key_dispatch_cases=full_key_checks,
+                  full_key_initializer='isolated callback; actual initializer remains original SDK',
+                  scope='Three reviewed entries through the actual DLL; interior fallback and whole gameplay unvalidated')
     target = ROOT/'metadata/windows/1.0.0/replacements-validation.json'
     target.write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8')
     print(json.dumps(report))

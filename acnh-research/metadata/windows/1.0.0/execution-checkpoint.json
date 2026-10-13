@@ -2,10 +2,10 @@
   "status": "active",
   "playable_validated": false,
   "whole_game_decompiled": false,
-  "translated_module_bytes": 292099584,
-  "translated_module_sha256": "94a5a70154f95981d73de0565a5359958692c99d1c8caea94d67a10e38d11115",
-  "runtime_sha256": "d9b4cb1aba2ba44c381c562dd1e41f4ecd7d9f10806ff3e5f6ab0acee8920fa1",
-  "patch_sha256": "d740819fe082ac418df10c3a3de0e59da532adacf14b12e247a2affbcdc4369b",
+  "translated_module_bytes": 292552704,
+  "translated_module_sha256": "484f5c8a30472f403f7958781801d81c5a9e99460b161ef5fc9b4102cc7ac0e0",
+  "runtime_sha256": "302502ab67284eacc090b84c625f80e8ec5136484c5a222dad1cde77a8cb13bf",
+  "patch_sha256": "eb608d00d013f1f57cd51f3a5e941b5ca6c6ffaaa072708c89556ed4ddeb9581",
   "runs": [
     {
       "mode": "native",
@@ -169,6 +169,77 @@
         "note": "Nonblack pixels do not by themselves establish correct rendering or gameplay"
       },
       "frames": 2495
+    },
+    {
+      "mode": "native",
+      "headless": true,
+      "docked": 1,
+      "input_script": "30000:1,45000:1,60000:1,75000:1,90000:1,105000:1,120000:1,135000:1,150000:1,165000:1",
+      "exit_code": 0,
+      "elapsed_seconds": 190.7,
+      "playable_validated": false,
+      "log_prefix": "native-20261013-034938",
+      "press_length_ms": 1000
+    },
+    {
+      "mode": "native",
+      "headless": true,
+      "docked": 1,
+      "input_script": "120000:1,128000:1,136000:1,144000:1,152000:1,160000:1,168000:1,176000:1,184000:1,192000:1,200000:1,208000:1,216000:1,224000:1,232000:1,240000:1,248000:1,256000:1,264000:1,272000:1,280000:1,288000:1",
+      "exit_code": 0,
+      "elapsed_seconds": 300.61,
+      "playable_validated": false,
+      "log_prefix": "native-20261013-035413",
+      "press_length_ms": 1000
+    },
+    {
+      "mode": "native",
+      "headless": true,
+      "docked": 1,
+      "input_script": "30000:1,38000:1,46000:1,54000:1,62000:1,70000:1,78000:1,86000:1,105000:1,113000:1,121000:1,129000:1,137000:1,145000:1,155000:400,165000:1,175000:1,185000:1,195000:1,205000:400,215000:1,225000:1,235000:1",
+      "exit_code": 1,
+      "elapsed_seconds": 155.59,
+      "playable_validated": false,
+      "log_prefix": "native-20261013-040043",
+      "press_length_ms": 1000
+    },
+    {
+      "mode": "native",
+      "headless": true,
+      "docked": 1,
+      "input_script": "30000:1,38000:1,46000:1,54000:1,62000:1,70000:1,78000:1,86000:1,105000:1,113000:1,121000:1,129000:1,137000:1,145000:1,155000:400,165000:1,175000:1,185000:1,195000:1,205000:400,215000:1,225000:1,235000:1",
+      "exit_code": 0,
+      "elapsed_seconds": 600.7,
+      "playable_validated": false,
+      "log_prefix": "native-20261013-041126",
+      "press_length_ms": 1000,
+      "frame_analysis": {
+        "width": 1920,
+        "height": 1080,
+        "rgb_sha256": "6de9278de7a3f4a9b7a82601f7081749c8b3f62a834bedf9604b00edd1cf6a87",
+        "nonblack_pixels": 785280,
+        "completely_black": false,
+        "note": "Nonblack pixels do not by themselves establish correct rendering or gameplay"
+      }
+    },
+    {
+      "mode": "native",
+      "headless": true,
+      "docked": 1,
+      "input_script": "30000:1,38000:1,46000:1,54000:1,62000:1,70000:1,78000:1,86000:1,105000:1,113000:1,121000:1,129000:1,137000:1,145000:1,155000:400,165000:1,175000:1,185000:1,195000:1,205000:400,215000:1,225000:1,235000:1",
+      "exit_code": 0,
+      "elapsed_seconds": 241.65,
+      "playable_validated": false,
+      "log_prefix": "native-20261013-042535",
+      "press_length_ms": 1000,
+      "frame_analysis": {
+        "width": 1920,
+        "height": 1080,
+        "rgb_sha256": "4bcd1c540d46993cca373ff3392d98fe6e3fd179ae899b3212fefec145e73de7",
+        "nonblack_pixels": 2073600,
+        "completely_black": false,
+        "note": "Nonblack pixels do not by themselves establish correct rendering or gameplay"
+      }
     }
   ],
   "intermediate_render_targets": {
@@ -180,6 +251,13 @@
       "other targets include uniform color"
     ]
   },
-  "next_investigation": "Intro dialogue and character creation; unexpected GPU headers; verified input/audio/save; continue manual source reconstruction",
-  "gpu_composition_validation": "gpu-composition-validation.json"
+  "next_investigation": "Confirm birthday and character appearance; GPU stream/DMA stalls; implement real audio; island and save/reload; continue source reconstruction",
+  "gpu_composition_validation": "gpu-composition-validation.json",
+  "manual_entry_count": 3,
+  "manual_entry_modules": {
+    "main": 2,
+    "sdk": 1
+  },
+  "input_validation": "intro-input-validation.json",
+  "full_key_original_validation": "npad-full-key-validation.json"
 }

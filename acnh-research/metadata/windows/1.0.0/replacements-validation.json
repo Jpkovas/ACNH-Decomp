@@ -2,9 +2,11 @@
   "version_id": "1.0.0",
   "passed": true,
   "snx_abi": 3,
-  "dll_sha256": "94a5a70154f95981d73de0565a5359958692c99d1c8caea94d67a10e38d11115",
-  "dll_size": 292099584,
+  "dll_sha256": "484f5c8a30472f403f7958781801d81c5a9e99460b161ef5fc9b4102cc7ac0e0",
+  "dll_size": 292552704,
   "hash_dispatch_cases": 1088,
   "zero_dispatch_cases": 4,
-  "scope": "Two reviewed entries through the actual DLL; interior fallback and whole gameplay unvalidated"
+  "full_key_dispatch_cases": 272,
+  "full_key_initializer": "isolated callback; actual initializer remains original SDK",
+  "scope": "Three reviewed entries through the actual DLL; interior fallback and whole gameplay unvalidated"
 }

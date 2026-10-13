@@ -2,7 +2,7 @@
 
 Goal atual: **ativo e incompleto**, decompilação de ACNH e build jogável para Windows, solicitado em 2026-10-13. Não há build jogável validada. Escopo e critérios em [windows_port.md](windows_port.md), com estado em `config/windows-goal.json`.
 
-Avanço Windows: a DLL x64 carrega e duas entradas usam C++ reconstruído. A tela preta da composição inicial foi corrigida com predicados e retângulos de limpeza Maxwell. As capturas agora mostram a introdução e Timmy/Tommy no aeroporto. Onze testes upstream e a regressão Vulkan com leitura de pixels passaram. Diálogo, criação do personagem, ilha, áudio e save/reload ainda precisam de validação; a decompilação integral permanece incompleta.
+Avanço Windows: a DLL x64 carrega e três entradas usam C++ reconstruído, duas em `main` e uma no SDK de controles. A tela preta da composição inicial foi corrigida com predicados e retângulos de limpeza Maxwell. As capturas mostram diálogo, resposta a A no teclado de nome, confirmação do nome e a tela de aniversário. O arquivo de sistema exigido pelo filtro de texto foi preparado da firmware local. Onze testes upstream e a regressão Vulkan com leitura de pixels passaram; a nova rotina coincidiu com o ARM64 em 3.147 casos. Criação completa do personagem, ilha, áudio e save/reload ainda precisam de validação; a decompilação integral permanece incompleta.
 
 Histórico do goal anterior: entregas técnicas concluídas no escopo incremental acordado, em 2026-10-13. M0–M4 e M6 passaram nos critérios registrados; M5 foi excluído pelo usuário. Esse resultado é pesquisa e reconstrução incremental com contratos delimitados, conforme a definição de sucesso do plano; não representa decompilação integral.
 
