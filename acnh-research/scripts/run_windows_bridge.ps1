@@ -5,8 +5,13 @@ param(
  [string]$InputScript='',
  [ValidateRange(1,10000)][int]$PressLength=300,
  [ValidateRange(0,10000)][int]$ShotEvery=0,
+ [switch]$LiveInput,
+ [switch]$CaptureAudioInputs,
+ [switch]$NativeAudio,
+ [switch]$AudioWavOnly,
  [switch]$CaptureShaders,
  [switch]$CaptureTargets,
+ [switch]$CaptureGpuFifo,
  [ValidateSet(0,1)][int]$Docked=1
 )
 $ErrorActionPreference='Stop'
@@ -20,13 +25,38 @@ $env:SNX_DATA_DIR=$data
 $logs=Join-Path $root 'private/windows/logs'
 New-Item -ItemType Directory -Force -Path $logs | Out-Null
 $prefix=Join-Path $logs ("{0}-{1}" -f $Mode,(Get-Date -Format 'yyyyMMdd-HHmmss'))
+if($CaptureGpuFifo){
+ $env:SNX_FIFO_TRACE_DIR=$prefix+'-fifo'
+ New-Item -ItemType Directory -Force -Path $env:SNX_FIFO_TRACE_DIR | Out-Null
+}else{Remove-Item Env:SNX_FIFO_TRACE_DIR -ErrorAction SilentlyContinue}
+if($NativeAudio){
+ $env:SNX_AUDIO_BACKEND=Join-Path $root 'private/windows/audio/ACNH_audio.dll'
+ if(-not(Test-Path -LiteralPath $env:SNX_AUDIO_BACKEND)){throw 'Build the native audio module first'}
+ $env:SNX_AUDIO_WAV=$prefix+'.wav'
+ $env:SNX_AUDIO_WAV_ONLY=if($AudioWavOnly){'1'}else{'0'}
+}else{
+ Remove-Item Env:SNX_AUDIO_BACKEND,Env:SNX_AUDIO_WAV,Env:SNX_AUDIO_WAV_ONLY -ErrorAction SilentlyContinue
+}
 if($CaptureTargets){
  $env:SNX_RT_DUMP_DIR=$prefix+'-targets'
  New-Item -ItemType Directory -Force -Path $env:SNX_RT_DUMP_DIR | Out-Null
 }else{Remove-Item Env:SNX_RT_DUMP_DIR -ErrorAction SilentlyContinue}
 $arguments=@("--game=$game","--seconds=$Seconds",'--log=1','--fullscreen=0',"--docked=$Docked","--shot=$prefix","--press_len=$PressLength","--shot_every=$ShotEvery")
+$arguments+='--script='
 if($Headless){$arguments+='--headless'}
-if($InputScript){$arguments+="--script=$InputScript"}
+$runtimeHash=(Get-FileHash -LiteralPath $runtime -Algorithm SHA256).Hash.ToLowerInvariant()
+$codeHash=(Get-FileHash -LiteralPath ($game+'_code.dll') -Algorithm SHA256).Hash.ToLowerInvariant()
+$audioHash=if($NativeAudio){(Get-FileHash -LiteralPath $env:SNX_AUDIO_BACKEND -Algorithm SHA256).Hash.ToLowerInvariant()}else{$null}
+if($LiveInput){
+ $livePath=$prefix+'.inputs.csv'
+ Set-Content -LiteralPath $livePath -Value $InputScript -Encoding utf8
+ $arguments+="--script_file=$livePath"
+ Write-Output "Live diagnostic input: $livePath"
+}elseif($InputScript){$arguments+="--script=$InputScript"}
+if($CaptureAudioInputs){
+ $env:SNX_AUDIO_TRACE_DIR=$prefix+'-audio-inputs'
+ New-Item -ItemType Directory -Force -Path $env:SNX_AUDIO_TRACE_DIR | Out-Null
+}else{Remove-Item Env:SNX_AUDIO_TRACE_DIR -ErrorAction SilentlyContinue}
 if($CaptureShaders){
  $env:SNX_SHADER_CORPUS=Join-Path $root 'private/windows/shader-corpus'
  New-Item -ItemType Directory -Force -Path $env:SNX_SHADER_CORPUS | Out-Null
@@ -43,7 +73,24 @@ while(-not $process.HasExited){
  }
 }
 $process.WaitForExit()
-$result=[ordered]@{mode=$Mode;headless=[bool]$Headless;docked=$Docked;input_script=$InputScript;press_length_ms=$PressLength;shot_every_frames=$ShotEvery;exit_code=$process.ExitCode;elapsed_seconds=[math]::Round($timer.Elapsed.TotalSeconds,2);stdout=$prefix+'.stdout.log';stderr=$prefix+'.stderr.log';game_log=$game+'.log';screenshot=if(Test-Path -LiteralPath ($prefix+'.ppm')){$prefix+'.ppm'}else{$null};playable_validated=$false}
+$audioOutput=if($NativeAudio){$prefix+'.wav'}else{$null}
+$result=[ordered]@{mode=$Mode;headless=[bool]$Headless;docked=$Docked;input_script=$InputScript;live_input_file=if($LiveInput){$livePath}else{$null};audio_input_capture=if($CaptureAudioInputs){$env:SNX_AUDIO_TRACE_DIR}else{$null};press_length_ms=$PressLength;shot_every_frames=$ShotEvery;exit_code=$process.ExitCode;elapsed_seconds=[math]::Round($timer.Elapsed.TotalSeconds,2);stdout=$prefix+'.stdout.log';stderr=$prefix+'.stderr.log';game_log=$game+'.log';screenshot=if(Test-Path -LiteralPath ($prefix+'.ppm')){$prefix+'.ppm'}else{$null};playable_validated=$false}
+$result['native_audio']=[bool]$NativeAudio
+$result['audio_wav']=$audioOutput
+$result['audio_wav_only']=[bool]$AudioWavOnly
+$result['gpu_fifo_capture']=if($CaptureGpuFifo){$env:SNX_FIFO_TRACE_DIR}else{$null}
+$result['runtime_sha256']=$runtimeHash
+$result['game_code_sha256']=$codeHash
+$result['audio_backend_sha256']=$audioHash
+if(Test-Path -LiteralPath ($game+'.log')){
+ Copy-Item -LiteralPath ($game+'.log') -Destination ($prefix+'.game.log')
+ $result['game_log']=$prefix+'.game.log'
+}
+if($NativeAudio -and (Test-Path -LiteralPath $audioOutput)){
+ & (Join-Path $root 'private/tools/python/python.exe') (Join-Path $root 'scripts/inspect_bridge_audio.py') $audioOutput --finalize
+ if($LASTEXITCODE -ne 0){throw 'Audio capture verification failed'}
+ $result['audio_analysis']=$prefix+'.audio.json'
+}
 $result | ConvertTo-Json | Set-Content -LiteralPath ($prefix+'.json') -Encoding utf8
 $result | ConvertTo-Json
 Select-String -LiteralPath ($prefix+'.stdout.log'),($prefix+'.stderr.log') -Pattern 'RomFS:|vulkan:|FATAL:|Unsupported instruction|svcBreak|frames=' | Select-Object -First 12 | ForEach-Object {$_.Line}

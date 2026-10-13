@@ -103,12 +103,42 @@ void F_C50CA00(CPU* RESTRICT c,u64 e) {
     records.append(dict(function='F_C50CA00',module='sdk',module_relative='0x341a00',
         generated_file=path.name,evidence='npad-full-key-validation.json: original ARM64 comparisons',
         initializer='original SDK entry 0x340fd0',interior_entries='interpreter fallback'))
+    # Only the terminal predicate is recovered here. The access-key parser, SaveIO
+    # backends and other entries remain the original translation.
+    flag_validation = json.loads((ROOT/'metadata/1.0.0/flag-int-validation.json').read_text())
+    if flag_validation['differential_cases'] < 3806 or not flag_validation['original_arm64_vs_native_vs_independent_oracle']:
+        raise ValueError('EventFlagInt original terminal validation missing')
+    flag_matches = []
+    for candidate in sorted(generated.glob('code_*.c')):
+        candidate_text = candidate.read_text(encoding='utf-8')
+        definition = re.search(r'void F_840B390\(CPU\* RESTRICT c,u64 e\)\s*\{', candidate_text)
+        if definition: flag_matches.append((candidate, candidate_text, definition))
+    if len(flag_matches) != 1: raise ValueError('Expected exactly one EventFlagInt handler')
+    flag_path, flag_text, flag_definition = flag_matches[0]
+    terminal = 'L_840B85C:;'
+    if flag_text.count(terminal) != 1 or flag_text.count('L_840BA2C:;') != 1:
+        raise ValueError('Reviewed EventFlagInt region boundaries changed')
+    if 'ACNH_RECONSTRUCTED_FLAG_TERMINAL' not in flag_text:
+        flag_text = flag_text[:flag_definition.start()] + 'extern unsigned acnh_flag_int_predicate(unsigned,int,unsigned);\n' + flag_text[flag_definition.start():]
+        replacement = '''L_840B85C:;
+ /* ACNH_RECONSTRUCTED_FLAG_TERMINAL: only this predicate; other interior entries retain translated code. */
+ c->x[0]=acnh_flag_int_predicate((u32)c->x[0],(int)RD32(c->x[19]+0x100),(u32)RD32(c->x[19]+0x128));
+ goto L_840BA2C;
+'''
+        flag_text = flag_text.replace(terminal, replacement, 1)
+        flag_path.write_text(flag_text, encoding='utf-8', newline='\n')
+    partial_regions = [dict(module='main', binding='EventFlagInt', handler_relative='0x406390',
+        region_relative='0x40685c..0x406a2c', generated_file=flag_path.name,
+        generated_file_sha256=hashlib.sha256(flag_path.read_bytes()).hexdigest(),
+        cpp_source_sha256=hashlib.sha256((ROOT/'reconstructed/src/flag_int.cpp').read_bytes()).hexdigest(),
+        evidence='flag-int-validation.json: 3806 original ARM64/native/oracle cases',
+        whole_handler_reconstructed=False, remaining='Access-key parsing and SaveIO backends remain translated')]
     for record in records:
         record['generated_file_sha256'] = hashlib.sha256((generated/record['generated_file']).read_bytes()).hexdigest()
     target = ROOT/'metadata/windows/1.0.0/reconstructed-replacements.json'
-    target.write_text(json.dumps(dict(version_id='1.0.0', replacements=records,
+    target.write_text(json.dumps(dict(version_id='1.0.0', replacements=records, partial_regions=partial_regions,
                                      whole_game_decompiled=False), indent=2)+'\n', encoding='utf-8')
-    print(json.dumps(dict(replaced_entries=len(records), entire_game_decompiled=False)))
+    print(json.dumps(dict(replaced_entries=len(records), replaced_partial_regions=len(partial_regions), entire_game_decompiled=False)))
 
 
 if __name__ == '__main__':

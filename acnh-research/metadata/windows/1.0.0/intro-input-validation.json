@@ -2,32 +2,72 @@
   "status": "partial_progress",
   "playable_validated": false,
   "whole_game_decompiled": false,
-  "input_response_scope": "intro dialogue, name keyboard, name confirmation",
+  "input_response_scope": "intro dialogue, name/birthday registration, character appearance and its confirmation",
   "keyboard_type_observed": "drawn and controlled by the game",
   "registration_input_script": "30000:1,38000:1,46000:1,54000:1,62000:1,70000:1,78000:1,86000:1,105000:1,113000:1,121000:1,129000:1,137000:1,145000:1,155000:400,165000:1,175000:1,185000:1,195000:1,205000:400,215000:1,225000:1,235000:1",
   "registration_press_length_ms": 1000,
   "registration_shot_every_frames": 250,
   "runs": [
-    {"log_prefix": "native-20261013-034938", "exit_code": 0, "elapsed_seconds": 190.7,
-     "press_length_ms": 1000, "observed": "dialogue advanced to name and birthday request"},
-    {"log_prefix": "native-20261013-035413", "exit_code": 0, "elapsed_seconds": 300.61,
-     "press_length_ms": 1000, "observed": "A presses entered characters on the game's keyboard"},
-    {"log_prefix": "native-20261013-040043", "exit_code": 1, "elapsed_seconds": 155.59,
-     "observed": "Plus confirmation reached SDK ProfanityFilter and aborted with filesystem result 0x202",
-     "system_archive_0823_was_empty": true},
-    {"log_prefix": "native-20261013-041126", "exit_code": 0, "elapsed_seconds": 600.7,
-     "frames": 620, "observed": "stalled before registration; native GPU thread sampled in DMA block-linear copy",
-     "system_archive_0823_real": true},
-    {"log_prefix": "native-20261013-042535", "exit_code": 0, "elapsed_seconds": 241.65,
-     "frames": 3005, "observed": "name passed SDK text validation and the game reached birthday selection",
-     "system_archive_0823_real": true, "manual_sdk_fullkey_entry_in_module": true,
-     "frame_rgb_sha256": "4bcd1c540d46993cca373ff3392d98fe6e3fd179ae899b3212fefec145e73de7"}
+    {
+      "log_prefix": "native-20261013-034938",
+      "exit_code": 0,
+      "elapsed_seconds": 190.7,
+      "press_length_ms": 1000,
+      "observed": "dialogue advanced to name and birthday request"
+    },
+    {
+      "log_prefix": "native-20261013-035413",
+      "exit_code": 0,
+      "elapsed_seconds": 300.61,
+      "press_length_ms": 1000,
+      "observed": "A presses entered characters on the game's keyboard"
+    },
+    {
+      "log_prefix": "native-20261013-040043",
+      "exit_code": 1,
+      "elapsed_seconds": 155.59,
+      "observed": "Plus confirmation reached SDK ProfanityFilter and aborted with filesystem result 0x202",
+      "system_archive_0823_was_empty": true
+    },
+    {
+      "log_prefix": "native-20261013-041126",
+      "exit_code": 0,
+      "elapsed_seconds": 600.7,
+      "frames": 620,
+      "observed": "stalled before registration; native GPU thread sampled in DMA block-linear copy",
+      "system_archive_0823_real": true
+    },
+    {
+      "log_prefix": "native-20261013-042535",
+      "exit_code": 0,
+      "elapsed_seconds": 241.65,
+      "frames": 3005,
+      "observed": "name passed SDK text validation and the game reached birthday selection",
+      "system_archive_0823_real": true,
+      "manual_sdk_fullkey_entry_in_module": true,
+      "frame_rgb_sha256": "4bcd1c540d46993cca373ff3392d98fe6e3fd179ae899b3212fefec145e73de7"
+    },
+    {
+      "log_prefix": "native-20261013-045204",
+      "exit_code": 0,
+      "elapsed_seconds": 600.63,
+      "observed": "Birthday confirmation and character appearance with 3D model",
+      "live_ini_attempt": "Ineffective: explicit CLI arguments override ini values"
+    },
+    {
+      "log_prefix": "native-20261013-050659",
+      "exit_code": 0,
+      "elapsed_seconds": 900.65,
+      "observed": "Appearance followed by confirmation dialogue",
+      "live_input_file_reloaded": true,
+      "script_reloaded_elapsed_seconds": 468.13,
+      "frame_rgb_sha256": "9def57d8715c503a3c98bfe8b38fb0a4d9548545e5e4246c9584f7807c8eefa6"
+    }
   ],
   "remaining": [
-    "birthday confirmation and character appearance",
     "island gameplay and island input controls",
     "GPU command stream and long DMA stalls",
-    "real audio output: current audren/audout only model timing",
+    "complete audio validation beyond intro PCM signal",
     "save/reload and remaining source reconstruction"
   ]
 }

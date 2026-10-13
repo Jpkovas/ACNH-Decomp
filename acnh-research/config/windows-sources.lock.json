@@ -29,6 +29,23 @@
           "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
         }
       ]
+    },
+    {
+      "name": "Ryujinx.Audio",
+      "url": "https://git.axenov.dev/Museum/ryujinx.git",
+      "commit": "fec4f4ada9f28f897457033f9954c84cc15d0b02",
+      "licenses": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "781bbdf040b7d0286c47cca6bffdb9148dfe751c0c9cabdf1a1752412a2e56b4"
+        }
+      ],
+      "components": [
+        "src/Ryujinx.Audio",
+        "src/Ryujinx.Memory",
+        "src/Ryujinx.Common"
+      ],
+      "cpu_dependency": "Only the ElapsedSeconds clock interface is provided by windows_audio/Clock.cs; CPU emulation code is excluded"
     }
   ],
   "toolchain": {

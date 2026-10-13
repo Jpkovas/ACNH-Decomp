@@ -1,6 +1,6 @@
 # Goal: decompilação de ACNH e build Windows
 
-Solicitação explícita do usuário em 2026-10-13. O goal anterior concluiu o plano de pesquisa incremental. Este goal amplia o escopo para o jogo executável no Windows; está **ativo e incompleto**. A integração Elysium continua excluída.
+Solicitação explícita do usuário em 2026-10-13. O goal anterior concluiu o plano de pesquisa incremental. Este goal amplia o escopo para o jogo executável no Windows; está **incompleto**. A integração Elysium continua excluída. O agendador registrou `blocked` durante falhas de capacidade do modelo em tentativas anteriores; a execução técnica deste turno continuou com progresso. Esse estado do agendador não representa conclusão do projeto.
 
 O primeiro alvo de execução é 1.0.0, com a pesquisa 3.0.3 preservada. O trabalho existente recuperou apenas rotinas delimitadas. Não existe ainda uma build jogável validada, nem código-fonte recuperado para o jogo completo.
 
@@ -22,6 +22,32 @@ Uma build Windows x64 reproduzível deve iniciar o jogo real, permitir criar o p
 ScarletNX fornece um carregador genérico de NSO, tradutor AArch64 para C, serviços Horizon e backend Maxwell/Vulkan. Será avaliado como ponte diagnóstica. SSBU Recomp fornece exemplos de tradução AArch64 e adaptação NVN/serviços para Windows, mas seu pipeline contém endereços e estruturas específicos de SSBU; não será aplicado diretamente como se fosse um port de ACNH. As revisões e licenças estão em `config/windows-sources.lock.json`.
 
 Os repositórios upstream permanecem em `vendor/`, os arquivos traduzidos e dados do jogo em `private/` ou `build/`, fora do Git. Chaves, firmware e assets não serão incluídos nos arquivos publicáveis. A dependência de cada ferramenta será registrada; nenhuma condição do plano antigo que limitava o objetivo a pilotos será usada para declarar este goal concluído.
+
+## Áudio nativo em validação
+
+`windows_audio/` liga o protocolo IAudioRenderer ao AudioRenderer de `Ryujinx.Audio`, revisão `fec4f4ada9f28f897457033f9954c84cc15d0b02`, sob MIT. O módulo inclui DSP, ADPCM, resampling, efeitos, mixes e splitters dessa dependência. Seu único contrato com o antigo namespace de CPU é um relógio `ElapsedSeconds`; não compila o emulador de CPU. NativeAOT gera `ACNH_audio.dll`, carregada pelo runtime Windows. A memória do jogo permanece sob controle do runtime e cada acesso do DSP passa pela verificação de mapeamento/permissão. O evento de atualização pertence a cada renderer e segue seu processamento; Start/Stop e RequestUpdate usam os estados reais do DSP.
+
+A saída Windows usa PCM16 estéreo a 48 kHz pelo `waveOut`, com buffers copiados antes de retornar ao DSP. O teste de 90 segundos `native-20261013-054422` abriu o dispositivo e produziu 89,27 segundos de PCM, com cerca de 3,08 milhões de amostras não nulas por canal e nenhuma saturação. Isso verifica sinal e encaminhamento ao dispositivo; não equivale a uma comparação perceptual ou com hardware. A imagem parou em 652 frames durante esse teste, com headers gráficos inconsistentes. A falha gráfica já apareceu em testes anteriores e continua sob investigação.
+
+Quatro testes construídos sem assets verificam amostras conhecidas PCM16/ADPCM, volumes 1 e 0,25, mute, término dos buffers e contadores de consumo. A validação não cobre todos os coeficientes ADPCM, filtros, efeitos e splitters contra hardware. `metadata/windows/1.0.0/native-audio-validation.json` registra a DLL efetivamente testada. O build ainda emite um aviso de trimming em `Ryujinx.Common`; as rotas exercitadas passaram, mas o aviso precisa de revisão para módulos adicionais. O HLE antigo permanece silencioso quando o módulo não é selecionado.
+
+Preparação e reprodução, a partir da raiz `D:/ACNH_Decomp`:
+
+```powershell
+& acnh-research/scripts/prepare_windows_audio.ps1
+& acnh-research/scripts/build_windows_audio.ps1
+& acnh-research/scripts/build_windows_bridge.ps1 -Backend vulkan -Jobs 4 -GpuTest
+& acnh-research/private/tools/python/python.exe acnh-research/scripts/validate_windows_audio.py
+& acnh-research/scripts/run_windows_bridge.ps1 -Mode native -Seconds 90 -Headless -NativeAudio -CaptureAudioInputs
+```
+
+O SDK .NET privado é fixado por SHA-512. Fontes, licenças e dependências NuGet ficam locais. As capturas PCM e os pacotes/coeficientes extraídos do jogo ficam exclusivamente em `private/`. `-AudioWavOnly` valida a geração sem abrir o dispositivo sonoro e não conta como saída sonora do Windows. Para adaptar comandos à tela observada, `-LiveInput` fornece um CSV privado recarregado a cada 100 ms; alterações do `.ini` não substituem os argumentos explícitos do teste.
+
+O teste seguinte `native-20261013-061039` terminou após 900,68 segundos, mantendo imagens e PCM ativos, com 897,67 segundos capturados e nenhuma saturação ou falha registrada no dispositivo. Os prefixes de FIFO amostrados não mudaram entre enqueue e execução; isso não cobre o conteúdo integral dos buffers. O cadastro mostrou a regra real de no máximo cinco números no nome. Dois comandos adaptativos foram agendados tarde demais e não executaram, como registrado nos arquivos privados; não contam como validação de entrada. Para evitar isso e repetição de caracteres, `send_windows_input.ps1` calcula o tempo do processo, verifica seu prazo e produz `ms:hex:duração`. Uma execução estável com diagnóstico não resolve a causa das paradas anteriores.
+
+## Predicado EventFlagInt integrado
+
+A região `main+0x40685c..0x406a2c` agora chama `acnh_flag_int_predicate` no handler ligado a EventFlagInt. O handler completo continua parcialmente traduzido: parsing de AccessKey, seleção dos backends SaveIO e entradas internas distintas continuam originais. O epílogo original restaura os registradores e a pilha. A DLL candidata de 292.553.216 bytes passou em 5.170 casos pela ABI: 1.088 de hash, quatro do retorno zero, 272 de FullKey e 3.806 do predicado/epílogo. São três entradas completas delimitadas e **uma região parcial**, sem declarar o handler completo recuperado. Evidência em `replacements-validation.json` e `reconstructed-replacements.json`. A DLL em teste real usa SHA-256 `4e9d96da793ef1e2d056cb187aea79d8b16aaf06880b00b081d308336d21123a`.
 
 ## Evidência de execução inicial
 

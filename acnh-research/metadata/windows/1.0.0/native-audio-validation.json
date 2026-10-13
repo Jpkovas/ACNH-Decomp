@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "format": "PCM16",
+      "right_gain": 1,
+      "muted": false,
+      "end_of_stream": false,
+      "exact_samples_verified": 480,
+      "played_samples": 1792,
+      "consumed_wave_buffers": 1,
+      "memory_checks": 8,
+      "passed": true
+    },
+    {
+      "format": "GC-ADPCM",
+      "right_gain": 1,
+      "muted": false,
+      "end_of_stream": true,
+      "exact_samples_verified": 480,
+      "played_samples": 0,
+      "consumed_wave_buffers": 1,
+      "memory_checks": 16,
+      "passed": true
+    },
+    {
+      "format": "GC-ADPCM",
+      "right_gain": 0.25,
+      "muted": false,
+      "end_of_stream": true,
+      "exact_samples_verified": 480,
+      "played_samples": 0,
+      "consumed_wave_buffers": 1,
+      "memory_checks": 16,
+      "passed": true
+    },
+    {
+      "format": "GC-ADPCM",
+      "right_gain": 0.25,
+      "muted": true,
+      "end_of_stream": true,
+      "exact_samples_verified": 480,
+      "played_samples": 0,
+      "consumed_wave_buffers": 1,
+      "memory_checks": 16,
+      "passed": true
+    }
+  ],
+  "library_sha256": "e4d549d181409704d5c6d4545ba22368ba72d4922492d22d15eb00929b01a77e",
+  "scope": "Known PCM16 and zero-predictor ADPCM, channel gains, mute, bounds checks, end of stream and DSP statuses",
+  "limitations": "Not a hardware-reference comparison of all effects, resamplers or splitters",
+  "adapter_source_sha256": {
+    "GuestMemory.cs": "0226d6975e4edcb2a7f59bac0d248bcaadf9cb6cd68677db3cb820160867a638",
+    "Directory.Build.props": "8b1f072cfa4a31a9712219872728c0675c8f01cfe9645237395f5ac0d17d821a",
+    "Clock.cs": "6a0e80d56da238a0d4fbf85dc50371526ed968832d0127a9147998f5ca18416c",
+    "AcnhAudio.csproj": "a277a723ce1515251a2e19585deb1cf42530847ff2b7e1a10857e523a2af5c7f",
+    "PcmDriver.cs": "07eec4ab9bc4803540b47c2b6e8eefa3583a93b3cae57615e9c328a6e6e48c5e",
+    "Exports.cs": "e1894b7d772d8a59cf1b6077d51678ee970bd1b69a05fa000f5d271149c9c8ce",
+    "native_backend.c": "ba5f5ed221db69823386fd1ec50d5bc490ffa7d1327a2c44511fc46c0f2ac941",
+    "native_backend.h": "6f98b5f819071498c7297557fec95a774cffce5052fce7fd6120edaa736a00bd"
+  }
+}

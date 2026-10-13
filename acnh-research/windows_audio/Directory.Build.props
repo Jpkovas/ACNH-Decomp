@@ -1,0 +1,5 @@
+<Project>
+  <PropertyGroup>
+    <BaseIntermediateOutputPath>../build/windows-audio/obj/</BaseIntermediateOutputPath>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PublishAot>true</PublishAot>
+    <NativeLib>Shared</NativeLib>
+    <AssemblyName>ACNH_audio</AssemblyName>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <IlcOptimizationPreference>Speed</IlcOptimizationPreference>
+    <RestorePackagesPath>../private/tools/nuget-packages</RestorePackagesPath>
+    <OutputPath>../build/windows-audio/bin/</OutputPath>
+    <RyujinxSource>../vendor/ryujinx-audio-reference/src</RyujinxSource>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(RyujinxSource)/Ryujinx.Audio/**/*.cs"
+             Exclude="$(RyujinxSource)/Ryujinx.Audio/obj/**;$(RyujinxSource)/Ryujinx.Audio/bin/**" />
+    <ProjectReference Include="$(RyujinxSource)/Ryujinx.Common/Ryujinx.Common.csproj" />
+    <ProjectReference Include="$(RyujinxSource)/Ryujinx.Memory/Ryujinx.Memory.csproj" />
+  </ItemGroup>
+</Project>

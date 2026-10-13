@@ -1,8 +1,14 @@
 diff --git a/runtime/CMakeLists.txt b/runtime/CMakeLists.txt
-index bc5b6b1..ce9ee6a 100644
+index bc5b6b1..30cede2 100644
 --- a/runtime/CMakeLists.txt
 +++ b/runtime/CMakeLists.txt
-@@ -74,0 +75,4 @@ if(SNX_VULKAN)
+@@ -43,0 +44,5 @@ snx_component(hle hle/services.c hle/audren.c hle/pl.c hle/sm.c hle/am.c hle/set
++if(WIN32 AND SNX_AUDIO_NATIVE_SOURCE)
++    target_sources(snx_hle PRIVATE "${SNX_AUDIO_NATIVE_SOURCE}/native_backend.c")
++    target_include_directories(snx_hle PRIVATE "${SNX_AUDIO_NATIVE_SOURCE}")
++    target_compile_definitions(snx_hle PRIVATE SNX_AUDIO_NATIVE)
++endif()
+@@ -74,0 +80,4 @@ if(SNX_VULKAN)
 +    if(SNX_RENDERDOC_INCLUDE_DIR)
 +        target_include_directories(snx_vk PRIVATE "${SNX_RENDERDOC_INCLUDE_DIR}")
 +        target_compile_definitions(snx_vk PRIVATE SNX_RENDERDOC_DIAGNOSTIC)
@@ -32,11 +38,75 @@ index 124f711..2e30892 100644
 +            (unsigned long long)src, (unsigned long long)dst, line_len, lines, pitch_in, pitch_out,
 +            src_linear, dst_linear, sbh, dbh, sw, sh, dw, dh, v);
 diff --git a/runtime/gpu/gpu.c b/runtime/gpu/gpu.c
-index 573c96a..c2d9c1d 100644
+index 573c96a..3c33c0c 100644
 --- a/runtime/gpu/gpu.c
 +++ b/runtime/gpu/gpu.c
 @@ -386,0 +387 @@ static GpuChannel* chan_get(u32 id) {
 +    c->r3d[0x556] = 1; /* conditional rendering defaults to always */
+@@ -404 +405,41 @@ void gpu_channel_close(u32 channel) {
+-static void gpu_submit_now(u64* e, u32 n, u32 channel) {
++/* Diagnostic copies only: compare bounded FIFO prefixes at enqueue and execution. The live stream is still used. */
++typedef struct {
++    u64 address;
++    u32 count;
++    u32 words[128];
++} FifoSample;
++static void fifo_sample(FifoSample* sample, u64 entry) {
++    sample->address = entry & 0xFFFFFFFFFCull;
++    sample->count = (u32)((entry >> 42) & 0x1FFFFF);
++    if (sample->count > 128) sample->count = 128;
++    for (u32 i = 0; i < sample->count; i++) {
++        u64 address = gmmu_translate(sample->address + i * 4);
++        MemBlock block;
++        mem_query(address, &block);
++        if (address && (block.perm & PERM_R))
++            memcpy(sample->words + i, GP(address), 4);
++        else
++            sample->words[i] = 0;
++    }
++}
++static void fifo_compare(const FifoSample* before, u64 entry, u32 channel) {
++    FifoSample after = {0};
++    fifo_sample(&after, entry);
++    if (before->count == after.count && !memcmp(before->words, after.words, after.count * 4)) return;
++    static unsigned captures;
++    if (captures >= 12) return;
++    unsigned index = captures++;
++    LOG("gpu: FIFO prefix changed between enqueue and execution: channel=%u address=%llx words=%u\n", channel,
++        (unsigned long long)before->address, before->count);
++    const char* directory = getenv("SNX_FIFO_TRACE_DIR");
++    if (!directory) return;
++    char path[1400];
++    snprintf(path, sizeof path, "%s/fifo-%02u-%llx.bin", directory, index, (unsigned long long)before->address);
++    FILE* file = fopen(path, "wb");
++    if (file) {
++        fwrite(before, 1, sizeof *before, file);
++        fwrite(&after, 1, sizeof after, file);
++        fclose(file);
++    }
++}
++static void gpu_submit_now(u64* e, u32 n, u32 channel, FifoSample* samples) {
+@@ -411,0 +453 @@ static void gpu_submit_now(u64* e, u32 n, u32 channel) {
++        if (samples) fifo_compare(samples + k, ent, channel);
+@@ -441,0 +484 @@ typedef struct {
++    FifoSample* samples;
+@@ -459 +502 @@ static void gpu_run(GpuJob* j) {
+-    gpu_submit_now(j->e, j->n, j->channel);
++    gpu_submit_now(j->e, j->n, j->channel, j->samples);
+@@ -475,0 +519 @@ static void gpu_thread(void* p) {
++        free(j.samples);
+@@ -504 +548 @@ void gpu_submit(u64* e, u32 n, u32 channel, u32 incs, u32 wait_id, u32 wait_val,
+-    GpuJob j = {malloc((u64)n * 8 + 8), n, channel, incs, wait_id, wait_val, expect, NULL, NULL};
++    GpuJob j = {malloc((u64)n * 8 + 8), n, channel, incs, wait_id, wait_val, expect, NULL, NULL, NULL};
+@@ -506,0 +551,5 @@ void gpu_submit(u64* e, u32 n, u32 channel, u32 incs, u32 wait_id, u32 wait_val,
++    if (getenv("SNX_FIFO_TRACE_DIR") && n <= 4096) {
++        j.samples = calloc(n, sizeof *j.samples);
++        if (j.samples)
++            for (u32 i = 0; i < n; i++) fifo_sample(j.samples + i, e[i]);
++    }
+@@ -510 +559 @@ void gpu_call(void (*fn)(void*), void* arg) {
+-    GpuJob j = {NULL, 0, 0, 0, ~0u, 0, 0, fn, arg};
++    GpuJob j = {NULL, 0, 0, 0, ~0u, 0, 0, fn, arg, NULL};
 diff --git a/runtime/gpu/maxwell3d.c b/runtime/gpu/maxwell3d.c
 index 319b1e4..c187bd5 100644
 --- a/runtime/gpu/maxwell3d.c
@@ -280,6 +350,246 @@ index f8978c6..5323d22 100644
 +++ b/runtime/gpu/vk/vk.h
 @@ -189,0 +190 @@ Surf* vk_rt_for_cpu(u64 cpu_addr, u32 w, u32 h); /* the render target the guest
 +int vk_rt_debug_list(Surf** out, int capacity); /* bounded diagnostic readback candidates */
+diff --git a/runtime/hle/audio.c b/runtime/hle/audio.c
+index e03d4c1..4487cf1 100644
+--- a/runtime/hle/audio.c
++++ b/runtime/hle/audio.c
+@@ -7,0 +8,3 @@
++#ifdef SNX_AUDIO_NATIVE
++#include "native_backend.h"
++#endif
+@@ -103,4 +106,36 @@ static int audren_obj(SvcObj* o, IpcCtx* c) {
+-        case 5: o->u[3] = 0; return 0;
+-        case 6: o->u[3] = 1; return 0;
+-        case 7: out_copy_h(c, ev_handle(audio.ev)); return 0;
+-        case 8: o->u[6] = in32(c, 0); return 0;   /* SetRenderingTimeLimit */
++        case 5:
++#ifdef SNX_AUDIO_NATIVE
++            if (audren_native_enabled(o)) {
++                int result = audren_native_control(o, 0, 0);
++                if (result) return result;
++            }
++#endif
++            o->u[3] = 0;
++            return 0;
++        case 6:
++#ifdef SNX_AUDIO_NATIVE
++            if (audren_native_enabled(o)) {
++                int result = audren_native_control(o, 1, 0);
++                if (result) return result;
++            }
++#endif
++            o->u[3] = 1;
++            return 0;
++        case 7:
++#ifdef SNX_AUDIO_NATIVE
++            if (audren_native_enabled(o)) {
++                out_copy_h(c, ev_handle(audren_native_event(o)));
++                return 0;
++            }
++#endif
++            out_copy_h(c, ev_handle(audio.ev));
++            return 0;
++        case 8:
++#ifdef SNX_AUDIO_NATIVE
++            if (audren_native_enabled(o)) {
++                int result = audren_native_control(o, 2, in32(c, 0));
++                if (result) return result;
++            }
++#endif
++            o->u[6] = in32(c, 0);
++            return 0;                             /* SetRenderingTimeLimit */
+@@ -108 +143,5 @@ static int audren_obj(SvcObj* o, IpcCtx* c) {
+-        case 11: return 0;                        /* ExecuteAudioRendererRendering */
++        case 11:
++#ifdef SNX_AUDIO_NATIVE
++            if (audren_native_enabled(o)) return audren_native_control(o, 3, 0);
++#endif
++            return 0; /* ExecuteAudioRendererRendering */
+@@ -172,0 +212,7 @@ static int audren_disp(SvcObj* o, IpcCtx* c) {
++#ifdef SNX_AUDIO_NATIVE
++            int native = audren_native_open(r, c);
++            if (native < 0) {
++                svcobj_unref(r);
++                return RC(153, 2);
++            }
++#endif
+@@ -176,0 +223,9 @@ static int audren_disp(SvcObj* o, IpcCtx* c) {
++#ifdef SNX_AUDIO_NATIVE
++            u64 native_size = 0;
++            int native = audren_native_work_size(c, &native_size);
++            if (native < 0) return RC(153, 2);
++            if (native > 0) {
++                out64(c, (native_size + 0xFFF) & ~0xFFFull);
++                return 0;
++            }
++#endif
+diff --git a/runtime/hle/audren.c b/runtime/hle/audren.c
+index c02e9ba..7e03387 100644
+--- a/runtime/hle/audren.c
++++ b/runtime/hle/audren.c
+@@ -6,0 +7,3 @@
++#ifdef SNX_AUDIO_NATIVE
++#include "native_backend.h"
++#endif
+@@ -77,0 +81,88 @@ int audren_update(SvcObj* o, IpcCtx* c) {
++    /* One bounded private snapshot for implementing the DSP/output contract. */
++    const char* capture_dir = getenv("SNX_AUDIO_TRACE_DIR");
++    static u32 initial_captures;
++    if (capture_dir && initial_captures < 64) {
++        char path[1400];
++        snprintf(path, sizeof path, "%s/update-%04u.bin", capture_dir, initial_captures++);
++        FILE* file = fopen(path, "wb");
++        if (file) {
++            fwrite(in, 1, (size_t)is, file);
++            fclose(file);
++        }
++    }
++    static int captured;
++    if (capture_dir && !captured) {
++        int active = 0;
++        for (u32 i = 0; i < vo / 0x170; i++) {
++            const u8* vi = voices_in + i * 0x170;
++            u64 address;
++            memcpy(&address, vi + 0x60, 8);
++            if (vi[9] && vi[0xA] == 0 && address) active++;
++        }
++        if (active) {
++            captured = 1;
++            char path[1400];
++            snprintf(path, sizeof path, "%s/input.bin", capture_dir);
++            FILE* file = fopen(path, "wb");
++            if (file) {
++                fwrite(in, 1, (size_t)is, file);
++                fclose(file);
++            }
++            snprintf(path, sizeof path, "%s/profile.txt", capture_dir);
++            file = fopen(path, "w");
++            if (file) {
++                fprintf(file, "revision=%08x sections", rev);
++                for (int i = 1; i < 16; i++) fprintf(file, " %u", ih[i]);
++                fprintf(file, "\n");
++                for (u32 i = 0; i < vo / 0x170; i++) {
++                    const u8* vi = voices_in + i * 0x170;
++                    if (!vi[9] || vi[0xA] != 0) continue;
++                    u32 fields[6];
++                    memcpy(fields, vi + 0xC, sizeof fields);
++                    fprintf(file, "voice=%u format=%u rate=%u channels=%u pitch=%08x volume=%08x\n", i, vi[0xB],
++                            fields[0], fields[3], fields[4], fields[5]);
++                    for (u32 slot = 0; slot < 6; slot++) {
++                        const u8* section = slot < 4 ? vi + 0x60 + slot * 0x38 : vi + 0x48;
++                        u64 address, bytes;
++                        memcpy(&address, section, 8);
++                        memcpy(&bytes, section + 8, 8);
++                        if (slot == 5) {
++                            section = vi + 0x80;
++                            memcpy(&address, section, 8);
++                            memcpy(&bytes, section + 8, 8);
++                        }
++                        if (!address || !bytes || bytes > 2 * 1024 * 1024 || address >= AS_SIZE ||
++                            bytes > AS_SIZE - address)
++                            continue;
++                        u64 remaining = bytes, at = address;
++                        int readable = 1;
++                        while (remaining) {
++                            MemBlock block;
++                            mem_query(at, &block);
++                            if (!(block.perm & PERM_R) || at < block.addr || at >= block.addr + block.size) {
++                                readable = 0;
++                                break;
++                            }
++                            u64 span = block.addr + block.size - at;
++                            if (span > remaining) span = remaining;
++                            remaining -= span;
++                            at += span;
++                        }
++                        if (!readable) continue;
++                        snprintf(path, sizeof path, "%s/%llx-%llu.bin", capture_dir, (unsigned long long)address,
++                                 (unsigned long long)bytes);
++                        FILE* raw = fopen(path, "wb");
++                        if (raw) {
++                            fwrite(GP(address), 1, (size_t)bytes, raw);
++                            fclose(raw);
++                        }
++                    }
++                }
++                fclose(file);
++            }
++            LOG("audren: captured %d active voices for private DSP analysis\n", active);
++        }
++    }
++#ifdef SNX_AUDIO_NATIVE
++    if (audren_native_enabled(o)) return audren_native_update(o, c);
++#endif
+diff --git a/runtime/platform/unattended.c b/runtime/platform/unattended.c
+index 9d049e4..b6ac7a9 100644
+--- a/runtime/platform/unattended.c
++++ b/runtime/platform/unattended.c
+@@ -23 +23 @@ static u64 g_press = 0, g_press_at = 0, g_press_len = 300;
+-/* script: "ms:hex,ms:hex,...", parsed once when the option is set */
++/* script: "ms:hex[:duration],..."; duration defaults to press_len. */
+@@ -25 +25 @@ typedef struct {
+-    u64 t, mask;
++    u64 t, mask, duration;
+@@ -28,0 +29,2 @@ static int g_nscript;
++static char* g_script_file;
++static u64 g_script_hash, g_script_check;
+@@ -42 +44,8 @@ static void script_parse(const char* v) {
+-        if (e == m0 || (*e && *e != ',')) break;
++        if (e == m0) break;
++        u64 duration = 0;
++        if (*e == ':') {
++            const char* d0 = e + 1;
++            duration = strtoull(d0, &e, 10);
++            if (e == d0 || !duration || duration > 10000) break;
++        }
++        if (*e && *e != ',') break;
+@@ -49 +58 @@ static void script_parse(const char* v) {
+-        g_script[g_nscript++] = (ScriptPress){t, m};
++        g_script[g_nscript++] = (ScriptPress){t, m, duration};
+@@ -52 +61,28 @@ static void script_parse(const char* v) {
+-    if (*p) WARN("script: \"%s\" is not ms:hex, so it and the presses after it are ignored\n", p);
++    if (*p) WARN("script: \"%s\" is not ms:hex[:duration], so it and the presses after it are ignored\n", p);
++}
++static void script_file_poll(void) {
++    if (!g_script_file) return;
++    u64 now = plat_ns();
++    if (g_script_check && now - g_script_check < 100000000ull) return;
++    g_script_check = now;
++    FILE* f = fopen(g_script_file, "rb");
++    if (!f) return;
++    char text[65537];
++    size_t n = fread(text, 1, sizeof text - 1, f);
++    int too_long = !feof(f);
++    fclose(f);
++    if (too_long) return;
++    size_t j = 0, begin = n >= 3 && (u8)text[0] == 0xEF && (u8)text[1] == 0xBB && (u8)text[2] == 0xBF ? 3 : 0;
++    u64 hash = 1469598103934665603ull;
++    for (size_t i = begin; i < n; i++) {
++        char c = text[i];
++        if (c == ' ' || c == '\t' || c == '\r' || c == '\n') continue;
++        text[j++] = c;
++        hash = (hash ^ (u8)c) * 1099511628211ull;
++    }
++    text[j] = 0;
++    if (hash != g_script_hash) {
++        g_script_hash = hash;
++        script_parse(text);
++        LOG("script: reloaded %d scheduled presses from private input file\n", g_nscript);
++    }
+@@ -74 +110,5 @@ int unattended_ini(const char* k, const char* v) {
+-    else
++    else if (!strcmp(k, "script_file")) {
++        free(g_script_file);
++        g_script_file = *v ? strdup(v) : NULL;
++        g_script_hash = g_script_check = 0;
++    } else
+@@ -80,0 +121 @@ u64 unattended_buttons(void) {
++    script_file_poll();
+@@ -84 +125,2 @@ u64 unattended_buttons(void) {
+-        if (el >= g_script[i].t && el < g_script[i].t + g_press_len) b |= g_script[i].mask;
++        if (el >= g_script[i].t && el < g_script[i].t + (g_script[i].duration ? g_script[i].duration : g_press_len))
++            b |= g_script[i].mask;
 diff --git a/tests/vulkan_headless.c b/tests/vulkan_headless.c
 index a1d5aa9..d57843b 100644
 --- a/tests/vulkan_headless.c

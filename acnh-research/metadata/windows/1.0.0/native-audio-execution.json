@@ -1,0 +1,172 @@
+{
+  "status": "partial_progress",
+  "whole_game_decompiled": false,
+  "playable_validated": false,
+  "backend": "Ryujinx.Audio renderer in NativeAOT with Windows waveOut PCM16 stereo 48000 Hz",
+  "reference_revision": "fec4f4ada9f28f897457033f9954c84cc15d0b02",
+  "current_audio_backend_sha256": "e4d549d181409704d5c6d4545ba22368ba72d4922492d22d15eb00929b01a77e",
+  "synthetic_validation": "native-audio-validation.json",
+  "runs": [
+    {
+      "exit_code": 0,
+      "elapsed_seconds": 90.7,
+      "native_audio": true,
+      "audio_wav_only": false,
+      "log_prefix": "native-20261013-054422",
+      "observed": "GPU image stopped after inconsistent command headers; PCM continued",
+      "playable_validated": false,
+      "pcm": {
+        "sample_rate": 48000,
+        "channels": 2,
+        "bits": 16,
+        "pcm_frames": 4284960,
+        "duration_seconds": 89.27,
+        "channel_metrics": [
+          {
+            "nonzero_samples": 3077025,
+            "peak": 6071,
+            "rms": 545.9784306145727,
+            "clipped_samples": 0
+          },
+          {
+            "nonzero_samples": 3076395,
+            "peak": 5556,
+            "rms": 530.5891712339649,
+            "clipped_samples": 0
+          }
+        ],
+        "sha256": "ab6bca0f2a1f2a2afe3ae39758e107f3648912a618afd01732d97a0ede6a055e",
+        "riff_lengths_finalized": true,
+        "previous_advertised_data_bytes": 17088000,
+        "actual_data_bytes": 17139840,
+        "limitations": "Signal measurements do not establish perceptual accuracy or complete game playability"
+      },
+      "game_code_sha256": "484f5c8a30472f403f7958781801d81c5a9e99460b161ef5fc9b4102cc7ac0e0",
+      "audio_backend_sha256": null,
+      "runtime_sha256": null,
+      "frames_at_image_stall": 652
+    },
+    {
+      "exit_code": 0,
+      "elapsed_seconds": 240.82,
+      "native_audio": true,
+      "audio_wav_only": false,
+      "log_prefix": "native-20261013-055600",
+      "observed": "GPU stopped in large DMA copy following inconsistent headers; PCM continued",
+      "playable_validated": false,
+      "pcm": {
+        "sample_rate": 48000,
+        "channels": 2,
+        "bits": 16,
+        "pcm_frames": 11486880,
+        "duration_seconds": 239.31,
+        "channel_metrics": [
+          {
+            "nonzero_samples": 10282627,
+            "peak": 6202,
+            "rms": 599.644717365083,
+            "clipped_samples": 0
+          },
+          {
+            "nonzero_samples": 10281471,
+            "peak": 5597,
+            "rms": 588.4432913701326,
+            "clipped_samples": 0
+          }
+        ],
+        "sha256": "52b1b31fe4cf19b388bb8760fd07f8bb867db96da6b831b2453e2a20b11423a6",
+        "riff_lengths_finalized": true,
+        "previous_advertised_data_bytes": 45888000,
+        "actual_data_bytes": 45947520,
+        "limitations": "Signal measurements do not establish perceptual accuracy or complete game playability"
+      },
+      "game_code_sha256": "484f5c8a30472f403f7958781801d81c5a9e99460b161ef5fc9b4102cc7ac0e0",
+      "audio_backend_sha256": "e4d549d181409704d5c6d4545ba22368ba72d4922492d22d15eb00929b01a77e",
+      "runtime_sha256": "1d3a633897d0204f15af2cd7e20ed3c4e1ca9926250c5f44b56748c72fb762e4",
+      "frames_at_image_stall": 718
+    },
+    {
+      "exit_code": 0,
+      "elapsed_seconds": 90.68,
+      "native_audio": true,
+      "audio_wav_only": false,
+      "log_prefix": "native-20261013-060704",
+      "observed": "Airport dialogue with graphics and audio; no FIFO prefix changes detected",
+      "playable_validated": false,
+      "pcm": {
+        "sample_rate": 48000,
+        "channels": 2,
+        "bits": 16,
+        "pcm_frames": 4201200,
+        "duration_seconds": 87.525,
+        "channel_metrics": [
+          {
+            "nonzero_samples": 3098229,
+            "peak": 13029,
+            "rms": 720.8266189590089,
+            "clipped_samples": 0
+          },
+          {
+            "nonzero_samples": 3097747,
+            "peak": 11813,
+            "rms": 715.1230186105352,
+            "clipped_samples": 0
+          }
+        ],
+        "sha256": "7177813a8f29f02aeb0cf2130510765175875a3a95a5ff79e446aa7610049aa8",
+        "riff_lengths_finalized": true,
+        "previous_advertised_data_bytes": 16704000,
+        "actual_data_bytes": 16804800,
+        "limitations": "Signal measurements do not establish perceptual accuracy or complete game playability"
+      },
+      "game_code_sha256": "484f5c8a30472f403f7958781801d81c5a9e99460b161ef5fc9b4102cc7ac0e0",
+      "audio_backend_sha256": "e4d549d181409704d5c6d4545ba22368ba72d4922492d22d15eb00929b01a77e",
+      "runtime_sha256": "67fec303da56a6210e1bd8541280a68780b0e27560830c876dd793dc1c6d553c"
+    },
+    {
+      "exit_code": 0,
+      "elapsed_seconds": 900.68,
+      "native_audio": true,
+      "audio_wav_only": false,
+      "log_prefix": "native-20261013-061039",
+      "observed": "Graphics and audio remained active for 900 seconds; name rejected by the five-number rule",
+      "playable_validated": false,
+      "pcm": {
+        "sample_rate": 48000,
+        "channels": 2,
+        "bits": 16,
+        "pcm_frames": 43088160,
+        "duration_seconds": 897.67,
+        "channel_metrics": [
+          {
+            "nonzero_samples": 41850235,
+            "peak": 16617,
+            "rms": 645.3997978564394,
+            "clipped_samples": 0
+          },
+          {
+            "nonzero_samples": 41843630,
+            "peak": 16791,
+            "rms": 643.3349183990471,
+            "clipped_samples": 0
+          }
+        ],
+        "sha256": "f4e47f3877d9a2cee69672cf66ee77dee3cb37743fc155ec85e7d16e3d872d25",
+        "riff_lengths_finalized": true,
+        "previous_advertised_data_bytes": 172224000,
+        "actual_data_bytes": 172352640,
+        "limitations": "Signal measurements do not establish perceptual accuracy or complete game playability"
+      },
+      "game_code_sha256": "484f5c8a30472f403f7958781801d81c5a9e99460b161ef5fc9b4102cc7ac0e0",
+      "audio_backend_sha256": "e4d549d181409704d5c6d4545ba22368ba72d4922492d22d15eb00929b01a77e",
+      "runtime_sha256": "67fec303da56a6210e1bd8541280a68780b0e27560830c876dd793dc1c6d553c"
+    }
+  ],
+  "limitations": [
+    "Full audio and hardware/perceptual comparisons incomplete",
+    "Legacy audout remains silent",
+    "Intermittent graphics/DMA stalls remain unresolved",
+    "FIFO diagnostics compare only bounded prefixes",
+    "Initial run binary hashes were not recorded at launch and remain null where not independently captured"
+  ]
+}

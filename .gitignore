@@ -2,6 +2,7 @@
 /acnh-research/private/
 /acnh-research/vendor/
 /acnh-research/build/
+/acnh-research/windows_audio/obj/
 **/__pycache__/
 **/*.pyc
 *.keys

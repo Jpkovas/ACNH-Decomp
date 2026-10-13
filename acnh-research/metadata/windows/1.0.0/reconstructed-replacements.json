@@ -30,5 +30,19 @@
       "generated_file_sha256": "bf38b6f38b9971fb9a8f2b67be8930fe4e15dec92e93043ff9ad3f1197ee8328"
     }
   ],
+  "partial_regions": [
+    {
+      "module": "main",
+      "binding": "EventFlagInt",
+      "handler_relative": "0x406390",
+      "region_relative": "0x40685c..0x406a2c",
+      "generated_file": "code_034.c",
+      "generated_file_sha256": "4bfda0db2afb83394eb54d3b43fd501b2f84df434c25dda32d842123eefeb1d6",
+      "cpp_source_sha256": "581dad932392af37d0c3ce53211fd8ee32c926aeb581c696b3d87892f9db8607",
+      "evidence": "flag-int-validation.json: 3806 original ARM64/native/oracle cases",
+      "whole_handler_reconstructed": false,
+      "remaining": "Access-key parsing and SaveIO backends remain translated"
+    }
+  ],
   "whole_game_decompiled": false
 }

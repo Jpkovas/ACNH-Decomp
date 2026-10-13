@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "requested_on": "2026-10-13",
-  "status": "active",
+  "status": "blocked",
   "objective": "ACNH decompilation and playable native Windows build",
   "initial_runtime_version": "1.0.0",
   "preserved_research_version": "3.0.3",
@@ -21,11 +21,11 @@
     "whole_game_source_reconstructed": false,
     "automatic_translation_counts_as_decompilation": false,
     "native_x64_module_loads": true,
-    "native_x64_module_bytes": 292552704,
+    "native_x64_module_bytes": 292553216,
     "reviewed_entries_replaced": 3,
     "reviewed_main_entries_replaced": 2,
     "reviewed_sdk_entries_replaced": 1,
-    "dispatch_validation_cases": 1364,
+    "dispatch_validation_cases": 5170,
     "full_key_original_differential_cases": 3147,
     "upstream_unit_tests_passed": 11,
     "vulkan_offscreen_test_passed": true,
@@ -41,7 +41,16 @@
     "intermediate_3d_terrain_observed": true,
     "first_character_creation_validated": false,
     "audio_validated": false,
-    "current_audio_hle_produces_sound": false,
-    "save_reload_validated": false
-  }
+    "current_audio_hle_produces_sound": true,
+    "save_reload_validated": false,
+    "native_audio_scope": "Optional NativeAOT AudioRenderer module: Windows PCM16 stereo 48 kHz and intro signal verified; full perceptual/hardware/gameplay coverage incomplete",
+    "native_audio_synthetic_cases": 4,
+    "character_appearance_screen_observed": true,
+    "character_appearance_confirmation_observed": true,
+    "graphics_long_run_stable": false,
+    "reviewed_partial_regions_replaced": 1,
+    "partial_region_original_cases": 3806,
+    "native_audio_long_run_pcm_seconds": 897.67
+  },
+  "scheduler_status_note": "Goal API reports blocked after prior selected-model capacity failures. Current authorized turn is making technical progress; source reconstruction and playability remain incomplete."
 }

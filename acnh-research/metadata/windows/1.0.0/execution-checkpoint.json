@@ -2,10 +2,10 @@
   "status": "active",
   "playable_validated": false,
   "whole_game_decompiled": false,
-  "translated_module_bytes": 292552704,
-  "translated_module_sha256": "484f5c8a30472f403f7958781801d81c5a9e99460b161ef5fc9b4102cc7ac0e0",
-  "runtime_sha256": "302502ab67284eacc090b84c625f80e8ec5136484c5a222dad1cde77a8cb13bf",
-  "patch_sha256": "eb608d00d013f1f57cd51f3a5e941b5ca6c6ffaaa072708c89556ed4ddeb9581",
+  "translated_module_bytes": 292553216,
+  "translated_module_sha256": "4e9d96da793ef1e2d056cb187aea79d8b16aaf06880b00b081d308336d21123a",
+  "runtime_sha256": "051f2e553425708640ed3fdc92eafcbb8a94041598f1c0c2980c92d180fbbc4c",
+  "patch_sha256": "6095696298be277a6845c292ff980d6401c516efe372fa0177478bdc7d463573",
   "runs": [
     {
       "mode": "native",
@@ -240,6 +240,56 @@
         "completely_black": false,
         "note": "Nonblack pixels do not by themselves establish correct rendering or gameplay"
       }
+    },
+    {
+      "exit_code": 0,
+      "elapsed_seconds": 90.7,
+      "native_audio": true,
+      "audio_wav_only": false,
+      "log_prefix": "native-20261013-054422",
+      "observed": "GPU image stopped after inconsistent command headers; PCM continued",
+      "playable_validated": false,
+      "game_code_sha256": "484f5c8a30472f403f7958781801d81c5a9e99460b161ef5fc9b4102cc7ac0e0",
+      "audio_backend_sha256": null,
+      "runtime_sha256": null,
+      "frames_at_image_stall": 652
+    },
+    {
+      "exit_code": 0,
+      "elapsed_seconds": 240.82,
+      "native_audio": true,
+      "audio_wav_only": false,
+      "log_prefix": "native-20261013-055600",
+      "observed": "GPU stopped in large DMA copy following inconsistent headers; PCM continued",
+      "playable_validated": false,
+      "game_code_sha256": "484f5c8a30472f403f7958781801d81c5a9e99460b161ef5fc9b4102cc7ac0e0",
+      "audio_backend_sha256": "e4d549d181409704d5c6d4545ba22368ba72d4922492d22d15eb00929b01a77e",
+      "runtime_sha256": "1d3a633897d0204f15af2cd7e20ed3c4e1ca9926250c5f44b56748c72fb762e4",
+      "frames_at_image_stall": 718
+    },
+    {
+      "exit_code": 0,
+      "elapsed_seconds": 90.68,
+      "native_audio": true,
+      "audio_wav_only": false,
+      "log_prefix": "native-20261013-060704",
+      "observed": "Airport dialogue with graphics and audio; no FIFO prefix changes detected",
+      "playable_validated": false,
+      "game_code_sha256": "484f5c8a30472f403f7958781801d81c5a9e99460b161ef5fc9b4102cc7ac0e0",
+      "audio_backend_sha256": "e4d549d181409704d5c6d4545ba22368ba72d4922492d22d15eb00929b01a77e",
+      "runtime_sha256": "67fec303da56a6210e1bd8541280a68780b0e27560830c876dd793dc1c6d553c"
+    },
+    {
+      "exit_code": 0,
+      "elapsed_seconds": 900.68,
+      "native_audio": true,
+      "audio_wav_only": false,
+      "log_prefix": "native-20261013-061039",
+      "observed": "Graphics and audio remained active for 900 seconds; name rejected by the five-number rule",
+      "playable_validated": false,
+      "game_code_sha256": "484f5c8a30472f403f7958781801d81c5a9e99460b161ef5fc9b4102cc7ac0e0",
+      "audio_backend_sha256": "e4d549d181409704d5c6d4545ba22368ba72d4922492d22d15eb00929b01a77e",
+      "runtime_sha256": "67fec303da56a6210e1bd8541280a68780b0e27560830c876dd793dc1c6d553c"
     }
   ],
   "intermediate_render_targets": {
@@ -251,7 +301,7 @@
       "other targets include uniform color"
     ]
   },
-  "next_investigation": "Confirm birthday and character appearance; GPU stream/DMA stalls; implement real audio; island and save/reload; continue source reconstruction",
+  "next_investigation": "Complete registration and character appearance with the current DLL/audio; island, source recovery, GPU command integrity and save/reload",
   "gpu_composition_validation": "gpu-composition-validation.json",
   "manual_entry_count": 3,
   "manual_entry_modules": {
@@ -259,5 +309,22 @@
     "sdk": 1
   },
   "input_validation": "intro-input-validation.json",
-  "full_key_original_validation": "npad-full-key-validation.json"
+  "full_key_original_validation": "npad-full-key-validation.json",
+  "manual_partial_region_count": 1,
+  "partial_region_original_validation_cases": 3806,
+  "dispatch_validation_cases": 5170,
+  "native_audio_execution": "native-audio-execution.json",
+  "goal_scheduler_status": "blocked",
+  "scheduler_capacity_failure_observed": true,
+  "current_diagnostic": {
+    "log_prefix": "native-20261013-063158",
+    "pid": 26284,
+    "seconds_requested": 1800,
+    "status": "running",
+    "native_audio": true,
+    "game_code_sha256": "4e9d96da793ef1e2d056cb187aea79d8b16aaf06880b00b081d308336d21123a",
+    "observed": "Name and birthday confirmed; dialogue before character appearance",
+    "whole_game_decompiled": false,
+    "playable_validated": false
+  }
 }

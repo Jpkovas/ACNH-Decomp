@@ -145,14 +145,46 @@ def main():
                 full_key_checks += 1
     if init_calls[0] != full_key_checks:raise AssertionError('FullKey initializer delegation mismatch')
     guest_memory.close()
+    flag_entry = find_entry(module, 0x840b85c)
+    flag_checks = 0
+    pairs = [(value, border) for value in (0, 1, 2, 3, 31, 32, 0x7fffffff, 0x80000000, 0xfffffffe, 0xffffffff)
+             for border in (-2147483648, -1, 0, 1, 2, 31, 32, 33, 2147483647)]
+    pairs += [(rng.getrandbits(32), ct.c_int32(rng.getrandbits(32)).value) for _ in range(256)]
+    for value, border in pairs:
+        for mode in list(range(10))+[0xffffffff]:
+            memory = ct.create_string_buffer(0x3000)
+            object_address, stack = 0x800, 0x1800
+            ct.memmove(ct.addressof(memory)+object_address, b'\xa5'*0x200, 0x200)
+            struct.pack_into('<i', memory, object_address+0x100, border)
+            struct.pack_into('<I', memory, object_address+0x128, mode)
+            cpu = CPU(); cpu.mem = ct.addressof(memory)
+            cpu.x[0], cpu.x[19] = value | (rng.getrandbits(32) << 32), object_address
+            cpu.x[31], cpu.x[29] = stack, stack+0x140
+            restored = {register: rng.getrandbits(64) for register in range(19, 25)}
+            restored[28], restored[29], restored[30] = rng.getrandbits(64), rng.getrandbits(64), 0x1234567890
+            for offset, registers in ((0x100, [28]), (0x110, [24, 23]), (0x120, [22, 21]),
+                                      (0x130, [20, 19]), (0x140, [29, 30])):
+                for index, register in enumerate(registers): struct.pack_into('<Q', memory, stack+offset+index*8, restored[register])
+            before = memory.raw
+            limit = border & 0xffffffff
+            expected = int((value != limit, value == limit, value <= limit, value < limit,
+                            value >= limit, value > limit, value.bit_count() < border)[mode]) if mode < 7 else 0
+            flag_entry(ct.byref(cpu), 0x840b85c)
+            if cpu.x[0] != expected or cpu.pc != restored[30] or cpu.x[31] != stack+0x150:
+                raise AssertionError('EventFlagInt predicate or epilogue mismatch')
+            if any(cpu.x[register] != saved for register, saved in restored.items()):
+                raise AssertionError('EventFlagInt epilogue did not restore saved registers')
+            if memory.raw != before: raise AssertionError('Reconstructed EventFlagInt region wrote guest memory')
+            flag_checks += 1
     with path.open('rb') as source:
         checksum = hashlib.file_digest(source, 'sha256').hexdigest()
     report = dict(version_id='1.0.0', passed=True, snx_abi=module.abi,
                   dll_sha256=checksum, dll_size=path.stat().st_size,
                   hash_dispatch_cases=checks, zero_dispatch_cases=zero_checks,
                   full_key_dispatch_cases=full_key_checks,
+                  flag_int_partial_region_cases=flag_checks,
                   full_key_initializer='isolated callback; actual initializer remains original SDK',
-                  scope='Three reviewed entries through the actual DLL; interior fallback and whole gameplay unvalidated')
+                  scope='Three reviewed entries and the EventFlagInt terminal region through the actual DLL; query backends, interior fallback and whole gameplay unvalidated')
     target = ROOT/'metadata/windows/1.0.0/replacements-validation.json'
     target.write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8')
     print(json.dumps(report))

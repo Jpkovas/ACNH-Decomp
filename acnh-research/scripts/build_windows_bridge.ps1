@@ -15,6 +15,8 @@ if(-not((Get-Content -LiteralPath $main -Raw).Contains('getenv("SNX_DATA_DIR")')
  & git -c "safe.directory=$($source.Replace('\','/'))" -C $source apply --unidiff-zero $patch
  if($LASTEXITCODE -ne 0){throw 'Runtime data-root patch application failed'}
 }
+& git -c "safe.directory=$($source.Replace('\','/'))" -C $source apply --reverse --check --unidiff-zero $patch
+if($LASTEXITCODE -ne 0){throw 'Existing runtime source does not contain the complete current patch'}
 $vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools'
 $cmake=Join-Path $vs 'Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe'
 $ctest=Join-Path $vs 'Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe'
@@ -40,7 +42,7 @@ if($Backend -eq 'tools'){
 }else{
  $bin=Join-Path $root 'private/tools/llvm-mingw/llvm-mingw-20261006-ucrt-x86_64/bin'
  if(-not(Test-Path -LiteralPath (Join-Path $bin 'clang.exe'))){throw 'Install the pinned llvm-mingw toolchain first'}
- $options=@('-DSNX_DEPLOY=OFF','-DSNX_H264=OFF',"-DCPM_SOURCE_CACHE=$root/private/tools/cpm-cache")
+ $options=@('-DSNX_DEPLOY=OFF','-DSNX_H264=OFF',"-DCPM_SOURCE_CACHE=$root/private/tools/cpm-cache", "-DSNX_AUDIO_NATIVE_SOURCE=$root/windows_audio")
  if($Backend -eq 'headless'){$options+=@('-DSNX_BACKEND=headless','-DSNX_VULKAN=OFF')}
  else{$options+=@('-DSNX_BACKEND=sdl3','-DSNX_VULKAN=ON')}
  $captureSdk=Join-Path $root 'private/tools/renderdoc/RenderDoc_1.46_64'

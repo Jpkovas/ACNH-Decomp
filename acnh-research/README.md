@@ -1,8 +1,8 @@
 # ACNH Research
 
-Execução rastreável do [plano técnico](../docs/plano_tecnico_decompilacao_acnh_elysium_crossing.md).
+Goal atual: **decompilar ACNH e produzir uma build nativa jogável para Windows**. Continua incompleto; ainda não há gameplay na ilha nem save/reload validados. Critérios, evidências e estado do agendador em [windows_port.md](docs/windows_port.md).
 
-O escopo acordado cobre M0–M4 e M6. M5 e a integração com Elysium Crossing foram excluídos por solicitação do usuário, registrada em [scope.md](docs/scope.md). O plano prevê pesquisa incremental e pilotos; não prevê recompilar ACNH inteiro.
+O [plano técnico](../docs/plano_tecnico_decompilacao_acnh_elysium_crossing.md) originou a pesquisa incremental M0–M4 e M6. O pedido posterior ampliou o objetivo para a decompilação e a build Windows. M5 e a integração com Elysium Crossing continuam excluídos por solicitação do usuário, registrada em [scope.md](docs/scope.md).
 
 As versões efetivamente verificadas são 1.0.0 e 3.0.3. Já existem parsers e catálogos reais, round-trip EventFlow nas duas versões, cinco módulos C++ e três funções versionadas com diff ARM64. Consulte [progresso](docs/progress.md), [métricas](docs/metrics.md), [resultados e limites](docs/findings/pilots.md) e [reprodução](docs/reproduction.md).
 
