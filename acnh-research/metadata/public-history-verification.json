@@ -1,9 +1,9 @@
 {
   "passed": true,
-  "git_objects_checked": 413,
-  "historical_blobs_checked": 293,
-  "commits_checked": 11,
+  "git_objects_checked": 421,
+  "historical_blobs_checked": 296,
+  "commits_checked": 12,
   "errors": [],
-  "audited_head": "eb620ca5c4e62a571d98b990797cec07deed3a22",
+  "audited_head": "a850e293eede1198acc702180dea333a3407ae7d",
   "scope": "All local Git objects including unreachable blobs; path/binary/secret checks plus separate source/license review. No legal conclusion."
 }
