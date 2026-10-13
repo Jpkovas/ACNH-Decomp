@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "result": "One coordinator-controlled epoch-v2 candidate reached the initial dialogue with nonzero PCM and exited naturally.",
+  "private_run_report": "private/windows/logs/epoch-team-20261013-194828.json",
+  "run_report_sha256": "5f34955356eb84c38ad187d7d3ab4575ec88de79c476cd8269828f4c96b28604",
+  "process_id": 31320,
+  "requested_seconds": 180,
+  "process_elapsed_seconds": 181.019,
+  "harness_elapsed_seconds": 186.196,
+  "terminal_state": "natural-exit",
+  "process_exit_code": 0,
+  "process_absent_confirmed": true,
+  "runtime_sha256": "6455fa93bf1378e1edec2334d1bfa52d139d4e7545560f224bcbf8b077e820cd",
+  "module_sha256": "98de63ffcac31d91cdb94d2f147d70741fa320359d195cd7a0ad5bd4e804ff02",
+  "backend_hashes": {
+    "runtime": "6455fa93bf1378e1edec2334d1bfa52d139d4e7545560f224bcbf8b077e820cd",
+    "game_code": "98de63ffcac31d91cdb94d2f147d70741fa320359d195cd7a0ad5bd4e804ff02",
+    "audio": "e4d549d181409704d5c6d4545ba22368ba72d4922492d22d15eb00929b01a77e",
+    "vp9": "2cfcd4876b15f52f88fb69b9e35dba5d84e71cca3279e8dd901ecbc418286848",
+    "renderdoc": "809da38e3867d9fd09cc5c30dd5310500dee75e999166d7a14ad1ef6e9eca65d"
+  },
+  "audio": {
+    "private_report": "private/windows/logs/epoch-team-20261013-194828.audio.json",
+    "report_sha256": "b2d7d2c304c74495a558afa4d7009f8197302d43a36c10702e8c92ac1c288839",
+    "duration_seconds": 176.54,
+    "channels": 2,
+    "pcm_frames": 8473920,
+    "channel_metrics": [
+      {
+        "nonzero_samples": 6265608,
+        "peak": 13789,
+        "rms": 530.5942421316097,
+        "clipped_samples": 0
+      },
+      {
+        "nonzero_samples": 6262446,
+        "peak": 12346,
+        "rms": 523.997254867267,
+        "clipped_samples": 0
+      }
+    ],
+    "wav_sha256": "d282beb956efd3e6274c662984b417336d7ce3401a6233f799d6b97d13013e84",
+    "raw_wav_sha256": "438019408d7f21a5f9172530936fbfb61f3327cc675e9ddb1126974e996dcaa0"
+  },
+  "visual_observations": [
+    {
+      "kind": "introduction",
+      "private_capture": "private/windows/logs/epoch-team-20261013-194828_0041.ppm",
+      "sha256": "990aed5534389ed772e9f0833ed301b0a12ea71a73bd206121b2680b61bdb671",
+      "width": 1920,
+      "height": 1080,
+      "assessment": "Coordinator visually inspected a lossless PNG conversion of this PPM."
+    },
+    {
+      "kind": "dialogue",
+      "private_capture": "private/windows/logs/epoch-team-20261013-194828_0077.ppm",
+      "sha256": "846ef14c3c5b6631013ce0ef1b4a707d225959fb776cffb724efab0fe3c1ae29",
+      "width": 1920,
+      "height": 1080,
+      "assessment": "Coordinator visually inspected a lossless PNG conversion of this PPM."
+    }
+  ],
+  "preflight_sha256": "209a42b39d9476c7df251a0408d88f9c9ba884a017fe3c7478e0d9ce1b99f3d2",
+  "romfs_sha256": "652ed6443f81917a1ce9745a59259e017b9aece4f692f3f8eb297fbca48aa8ea",
+  "comparison": [
+    {
+      "run": "native-20261013-182810",
+      "entries": 9,
+      "private_report": "private/windows/logs/native-20261013-182810.json",
+      "report_sha256": "7511a51596ea7e49a778f66fb45f5b9d01635c80dd17614ea0503a44a20e4402",
+      "runtime_sha256": "dfe9256e44081bdeefa30c6b87e18442c0eade390cc919ff1d401be7c96c7f94",
+      "module_sha256": "c814c88f51f3d108cb7faef31612a602a4bf0b80b6f15a867339226e0291ea86",
+      "exit_code": 0,
+      "elapsed_seconds": 180.98,
+      "common_controls": {
+        "headless": true,
+        "docked": 1,
+        "input_script": "",
+        "press_length_ms": 1500,
+        "shot_every_frames": 25,
+        "native_audio": true,
+        "native_vp9": true,
+        "live_input": true,
+        "capture_filesystem": true,
+        "capture_gpu_fifo": true,
+        "capture_graphics": true
+      }
+    },
+    {
+      "run": "native-20261013-183257",
+      "entries": 14,
+      "private_report": "private/windows/logs/native-20261013-183257.json",
+      "report_sha256": "9ca6562f0fb2c7d8e7509393aa2b2447bccd3d7c0eef1e6469bfed5dcc6218f2",
+      "runtime_sha256": "dfe9256e44081bdeefa30c6b87e18442c0eade390cc919ff1d401be7c96c7f94",
+      "module_sha256": "2797747f4e69977388ff27cf9d04341b2b55a631a9c739f30351b7101a9a730d",
+      "exit_code": 0,
+      "elapsed_seconds": 180.74,
+      "common_controls": {
+        "headless": true,
+        "docked": 1,
+        "input_script": "",
+        "press_length_ms": 1500,
+        "shot_every_frames": 25,
+        "native_audio": true,
+        "native_vp9": true,
+        "live_input": true,
+        "capture_filesystem": true,
+        "capture_gpu_fifo": true,
+        "capture_graphics": true
+      }
+    }
+  ],
+  "candidate_run_count": 1,
+  "reconstructed_coverage": {
+    "entries": 14,
+    "bytes": 2212,
+    "denominator": 44815680,
+    "increment": 0
+  },
+  "default_promoted": false,
+  "playable_validated": false,
+  "gameplay_validated": false,
+  "save_reload_validated": false,
+  "limitations": [
+    "Single candidate run; repeated startup and affected gameplay remain pending.",
+    "Candidate changes runtime/API and module provider together; this does not isolate a performance cause.",
+    "Visual labels are explicit coordinator observations; hashes bind the inspected private captures.",
+    "No input was applied beyond an empty normal live-input file.",
+    "Nonzero PCM and zero clipping do not establish perceptual audio accuracy.",
+    "Hybrid execution still includes original/translated/interpreted dependencies.",
+    "Tutorial, real save/reload and completed native reconstruction remain unproved."
+  ]
+}
