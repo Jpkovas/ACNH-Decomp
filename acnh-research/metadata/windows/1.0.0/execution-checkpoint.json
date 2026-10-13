@@ -303,6 +303,46 @@
       "runtime_sha256": "051f2e553425708640ed3fdc92eafcbb8a94041598f1c0c2980c92d180fbbc4c",
       "game_code_sha256": "4e9d96da793ef1e2d056cb187aea79d8b16aaf06880b00b081d308336d21123a",
       "audio_backend_sha256": "e4d549d181409704d5c6d4545ba22368ba72d4922492d22d15eb00929b01a77e"
+    },
+    {
+      "log_prefix": "native-20261013-085514",
+      "exit_code": 0,
+      "elapsed_seconds": 1200.67,
+      "native_audio": true,
+      "audio_wav_only": false,
+      "observed": "Appearance confirmed; airport geometry present in HDR, final composition black",
+      "rendering_limitation": "Color LUT fully zero; Windows output device stopped consuming at 708.88 seconds; PCM capture continued",
+      "playable_validated": false,
+      "runtime_sha256": "932f028643620ce52d0ea4882c9e290af4c938bd6ecbd77856bb0cd5dc753d5b",
+      "game_code_sha256": "4e9d96da793ef1e2d056cb187aea79d8b16aaf06880b00b081d308336d21123a",
+      "audio_backend_sha256": "e4d549d181409704d5c6d4545ba22368ba72d4922492d22d15eb00929b01a77e"
+    },
+    {
+      "log_prefix": "native-20261013-091843",
+      "exit_code": 0,
+      "elapsed_seconds": 1200.74,
+      "native_audio": true,
+      "audio_wav_only": true,
+      "observed": "Name, birthday, appearance and island selection passed; island arrival cutscene and 3D terrain observed",
+      "rendering_limitation": "Movie presentation black with decoding disabled; subsequent run identified codec 9 VP9; controls not exercised in this run",
+      "playable_validated": false,
+      "runtime_sha256": "6a5ee416682749e82c0535c242c5e33474219d936ad00b49fbe0a0e70a7a97f7",
+      "game_code_sha256": "4e9d96da793ef1e2d056cb187aea79d8b16aaf06880b00b081d308336d21123a",
+      "audio_backend_sha256": "e4d549d181409704d5c6d4545ba22368ba72d4922492d22d15eb00929b01a77e"
+    },
+    {
+      "log_prefix": "native-20261013-101631",
+      "exit_code": 0,
+      "elapsed_seconds": 1800.73,
+      "native_audio": true,
+      "audio_wav_only": true,
+      "observed": "Long appearance interval passed; 3D airport/island rendered; analog walking and tree shaking with fruit drop observed",
+      "playable_validated": false,
+      "rendering_limitation": "Intro movie codec 9 (VP9) was skipped; H.264 fixture does not validate this movie",
+      "runtime_sha256": "72d5b85fd0f6ecaf397067092a886af7a6326ff1f131c15fd3980c5ef5b30acd",
+      "game_code_sha256": "a5e1ec181058a437baffd9a43b062a2a272b1c6157ef40aa0a16877b8ba69460",
+      "audio_backend_sha256": "e4d549d181409704d5c6d4545ba22368ba72d4922492d22d15eb00929b01a77e",
+      "game_dll_adapter_revision": "pre-whitelist; candidate ABI validation is recorded separately"
     }
   ],
   "intermediate_render_targets": {
@@ -314,7 +354,7 @@
       "other targets include uniform color"
     ]
   },
-  "next_investigation": "Trace 3D rendering and the terrain preview after appearance; continue from island confirmation; validate island gameplay/save/reload and source recovery",
+  "next_investigation": "Implement the observed VP9 NVDEC contract; validate NPC interaction, inventory and save/reload; continue manual source recovery",
   "gpu_composition_validation": "gpu-composition-validation.json",
   "manual_entry_count": 3,
   "manual_entry_modules": {
@@ -327,20 +367,33 @@
   "partial_region_original_validation_cases": 3806,
   "dispatch_validation_cases": 5170,
   "native_audio_execution": "native-audio-execution.json",
-  "goal_scheduler_status": "blocked",
+  "goal_scheduler_status": "active",
   "scheduler_capacity_failure_observed": true,
   "current_diagnostic": {
     "status": "finished",
-    "log_prefix": "native-20261013-063158",
+    "log_prefix": "native-20261013-101631",
     "exit_code": 0,
-    "elapsed_seconds": 1801.31,
+    "elapsed_seconds": 1800.73,
     "native_audio": true,
-    "audio_wav_only": false,
+    "audio_wav_only": true,
+    "observed": "Long appearance interval passed; 3D airport/island rendered; analog walking and tree shaking with fruit drop observed",
     "playable_validated": false,
-    "observed": "Name, birthday and appearance confirmed; hemisphere selection and island confirmation UI reached",
-    "rendering_limitation": "3D airport background absent after appearance; island preview has no visible terrain",
-    "runtime_sha256": "051f2e553425708640ed3fdc92eafcbb8a94041598f1c0c2980c92d180fbbc4c",
-    "game_code_sha256": "4e9d96da793ef1e2d056cb187aea79d8b16aaf06880b00b081d308336d21123a",
-    "audio_backend_sha256": "e4d549d181409704d5c6d4545ba22368ba72d4922492d22d15eb00929b01a77e"
-  }
+    "rendering_limitation": "Intro movie codec 9 (VP9) was skipped; H.264 fixture does not validate this movie",
+    "runtime_sha256": "72d5b85fd0f6ecaf397067092a886af7a6326ff1f131c15fd3980c5ef5b30acd",
+    "game_code_sha256": "a5e1ec181058a437baffd9a43b062a2a272b1c6157ef40aa0a16877b8ba69460",
+    "audio_backend_sha256": "e4d549d181409704d5c6d4545ba22368ba72d4922492d22d15eb00929b01a77e",
+    "game_dll_adapter_revision": "pre-whitelist; candidate ABI validation is recorded separately"
+  },
+  "guarded_entry_count": 1,
+  "access_key_validation": "access-key-bridge-validation.json",
+  "guarded_entry_abi_cases": {
+    "fast_path": 193,
+    "fallback_body": 9,
+    "guard_rejections": 4
+  },
+  "island_arrival_cutscene_observed": true,
+  "island_movement_validated": true,
+  "island_interaction_validated": true,
+  "guarded_entry_candidate_sha256": "aabcdb50ee1ce15a1a01cc87321c122329613891a1649abec804e626006a42be",
+  "island_interaction_scope": "Tree shaking and fruit drop only; NPC dialogue, inventory and persistent progress not validated"
 }

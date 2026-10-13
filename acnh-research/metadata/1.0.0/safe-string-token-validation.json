@@ -1,0 +1,54 @@
+{
+  "version_id": "1.0.0",
+  "module": "main",
+  "relative_address": "0x6b6c0",
+  "original_bytes": 708,
+  "cases": 3414,
+  "categories": {
+    "normal": 2640,
+    "exact_source_alias": 224,
+    "exact_empty_alias": 304,
+    "delimiter_alias": 228,
+    "source_scan_boundary": 12,
+    "delimiter_scan_boundary": 6
+  },
+  "original_arm64_vs_native_vs_independent_oracle": true,
+  "original_iterator_and_object_headers_preserved": true,
+  "original_callee_saved_registers_and_stack_preserved": true,
+  "all_buffer_bytes_and_canaries_checked": true,
+  "contract": {
+    "capacity_includes_nul": true,
+    "iterator_is_not_advanced": true,
+    "invalid_index_selects_empty_string": true,
+    "exact_source_alias_returns_zero": true,
+    "scan_last_offset": "0x80000",
+    "exhausted_length_scan_returns_zero": true,
+    "token_walk_has_no_equivalent_scan_limit": true
+  },
+  "limitations": [
+    "SafeString callbacks execute the original no-op; arbitrary mutation is excluded.",
+    "Capacities must be positive; original invalid-capacity behavior is not made safe.",
+    "Only exact source alias is covered; partial overlap of memcpy ranges is excluded.",
+    "Original C++ class declarations and a guest ABI adapter are not recovered here.",
+    "No full game DLL integration, deployment or gameplay validation is claimed."
+  ],
+  "implementation": "reconstructed/src/safe_string_token.cpp",
+  "interface": "reconstructed/include/acnh_research/safe_string_token.hpp",
+  "validator": "scripts/validate_safe_string_token.py",
+  "status": "isolated manual recovery validated; game ABI integration pending",
+  "private_evidence": "private/outputs/1.0.0/safe-string-token/validation.json",
+  "native_compile_flags": [
+    "-std=c++20",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "original_dependencies": {
+    "SafeString_callback": "original no-op main+0x19c0",
+    "imported_memcpy": "isolated by the existing AccessKey Unicorn fixture",
+    "terminator_anchor": "main+0x32d0660 -> main+0x2a3e3f1",
+    "empty_source_anchor": "main+0x32d07a8 -> main+0x31a6150; data -> main+0x29b9d8f"
+  },
+  "license_note": "Hand-recovered semantic implementation; original instructions and data remain private."
+}

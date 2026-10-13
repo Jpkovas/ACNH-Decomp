@@ -1,0 +1,151 @@
+{
+  "version_id": "1.0.0",
+  "module": "main",
+  "parser_relative_address": "0x216670",
+  "parser_size": 1324,
+  "original_token_helper": {
+    "relative_address": "0x6b6c0",
+    "size": 708
+  },
+  "namespace_region": {
+    "start": "0x406564",
+    "stop": "0x406624"
+  },
+  "parser_sha256": "b62c97ad3b5b0c395d4ef7681980ac65ffe546a724210abccfa83100a7bd79fe",
+  "token_helper_sha256": "98f2d8b2032c6929a934f97893ffb069f79ac2d707b1280393c637324474b63f",
+  "parser_cases": 1392,
+  "namespace_cases": 90,
+  "cpp_source_sha256": "5926a0dac9ccee905155f601d66f10a8909bdbb58f2ead6910acff46490a01ea",
+  "original_arm64_vs_native_vs_independent_oracle": true,
+  "original_argument_layout": {
+    "input": {
+      "register": "x0",
+      "vptr_offset": 0,
+      "data_offset": 8
+    },
+    "key": {
+      "register": "x1",
+      "vptr_offset": 0,
+      "data_offset": 8,
+      "signed_capacity_offset": 16
+    },
+    "namespace": {
+      "register": "x2",
+      "vptr_offset": 0,
+      "data_offset": 8,
+      "signed_capacity_offset": 16
+    },
+    "event_flag_int_input_member_offset": "0xd0",
+    "event_flag_int_input_vptr_relative": "0x301c1c0",
+    "event_flag_int_input_callback_relative": "0x19c0",
+    "input_callback_slot": "0x18"
+  },
+  "input_callback_body": {
+    "relative_address": "0x19c0",
+    "size": 4,
+    "sha256": "110f46b5b35c069160560c6ad6786f647dd44e8760a52a46fc22dbbcd7630b91"
+  },
+  "reviewed_direct_callers": [
+    {
+      "call_site": "0x309b60",
+      "parser_x0_consumed": false,
+      "discarded_by": "zero-initialized index enters no-argument namespace table getter, which overwrites x0"
+    },
+    {
+      "call_site": "0x30ad50",
+      "parser_x0_consumed": false,
+      "discarded_by": "zero-initialized index enters no-argument namespace table getter, which overwrites x0"
+    },
+    {
+      "call_site": "0x30bba0",
+      "parser_x0_consumed": false,
+      "discarded_by": "zero-initialized index enters no-argument namespace table getter, which overwrites x0"
+    },
+    {
+      "call_site": "0x30ca20",
+      "parser_x0_consumed": false,
+      "discarded_by": "explicit x0 assignment"
+    },
+    {
+      "call_site": "0x30cc2c",
+      "parser_x0_consumed": false,
+      "discarded_by": "zero-initialized index enters no-argument namespace table getter, which overwrites x0"
+    },
+    {
+      "call_site": "0x30ddd0",
+      "parser_x0_consumed": false,
+      "discarded_by": "zero-initialized index enters no-argument namespace table getter, which overwrites x0"
+    },
+    {
+      "call_site": "0x31c770",
+      "parser_x0_consumed": false,
+      "discarded_by": "zero-initialized index enters no-argument namespace table getter, which overwrites x0"
+    },
+    {
+      "call_site": "0x31ca30",
+      "parser_x0_consumed": false,
+      "discarded_by": "zero-initialized index enters no-argument namespace table getter, which overwrites x0"
+    },
+    {
+      "call_site": "0x3408ec",
+      "parser_x0_consumed": false,
+      "discarded_by": "explicit x0 assignment"
+    },
+    {
+      "call_site": "0x4055e0",
+      "parser_x0_consumed": false,
+      "discarded_by": "zero-initialized index enters no-argument namespace table getter, which overwrites x0"
+    },
+    {
+      "call_site": "0x406560",
+      "parser_x0_consumed": false,
+      "discarded_by": "zero-initialized index enters no-argument namespace table getter, which overwrites x0"
+    },
+    {
+      "call_site": "0x4075f0",
+      "parser_x0_consumed": false,
+      "discarded_by": "zero-initialized index enters no-argument namespace table getter, which overwrites x0"
+    }
+  ],
+  "parser_original_calls": {
+    "memcpy_isolated": 1918,
+    "safe_string_callbacks": "original 0x19c0 and 0x1990780"
+  },
+  "buffer_writes_and_guards_checked": true,
+  "parser_register_and_stack_preservation_checked": true,
+  "original_x0_exit_effects": {
+    "observed_cases": {
+      "key_buffer_pointer": 866,
+      "input_object_pointer": 15,
+      "temporary_delimiter_object_pointer": 511
+    },
+    "no_separator": "key data pointer",
+    "separator_is_last_input_byte": "input SafeString object pointer",
+    "separator_followed_by_non_nul": "entry SP - 0x70, temporary delimiter SafeString object",
+    "native_research_api_return": "void; these incidental ARM64 register effects need a separate bridge adapter"
+  },
+  "contract": {
+    "capacities_include_nul": true,
+    "absent_separator_preserves_namespace": true,
+    "fields_consumed": 2,
+    "separator": "colon",
+    "unmatched_namespace_index": 0,
+    "namespace_table_entries": 13
+  },
+  "limitations": [
+    "This is a semantic research interface; original C++ SafeString declarations and ABI are not recovered.",
+    "Input must be readable and NUL-terminated below 2^19 bytes; output capacities must be positive.",
+    "Input and output buffers must be distinct and non-overlapping; arbitrary mutable virtual callbacks are excluded.",
+    "The parser and original token helper run unchanged; imported memcpy is isolated.",
+    "Namespace selection executes its original region with an injected immutable table; lazy table initialization is excluded.",
+    "All 12 direct BL callers were reviewed and discard the incidental x0 return; indirect callers are not proved.",
+    "SaveIO backends, dispatch side effects and the full EventFlagInt handler remain unrecovered.",
+    "No Windows game DLL integration or gameplay validation is claimed by this isolated test."
+  ],
+  "proposed_bridge_fallback_conditions": [
+    "Input callback differs from the original no-op main+0x19c0.",
+    "Either output capacity is nonpositive.",
+    "Input or output byte intervals overlap.",
+    "Input has no NUL before 2^19 bytes."
+  ]
+}

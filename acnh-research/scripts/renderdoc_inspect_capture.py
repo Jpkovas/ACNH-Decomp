@@ -8,7 +8,13 @@ from pathlib import Path
 import renderdoc as rd
 
 root = Path(os.environ['ACNH_RESEARCH_ROOT'])
-output = root/'private/windows/renderdoc-analysis.json'
+artifact_dir = Path(os.environ.get('ACNH_RENDERDOC_ARTIFACT_DIR', str(root/'private/windows'))).resolve()
+try:
+    artifact_dir.relative_to((root/'private/windows').resolve())
+except ValueError:
+    raise ValueError('Capture analysis must remain private')
+artifact_dir.mkdir(parents=True, exist_ok=True)
+output = artifact_dir/'renderdoc-analysis.json'
 cap = None
 controller = None
 report = {}
@@ -25,6 +31,8 @@ try:
     def rgb_nonzero(texture, raw):
         if texture.format.Name() == 'R10G10B10A2_UNORM':
             return sum((word[0] & 0x3fffffff) != 0 for word in struct.iter_unpack('<I', raw))
+        if texture.format.Name() == 'R11G11B10_FLOAT':
+            return sum(word[0] != 0 for word in struct.iter_unpack('<I', raw))
         if not texture.format.Special() and texture.format.compCount == 4 and texture.format.compByteWidth == 1:
             return sum(any(raw[i:i+3]) for i in range(0, len(raw), 4))
         return None
@@ -45,6 +53,13 @@ try:
     report['api_docs'] = {name: getattr(rd.PipeState, name).__doc__ for name in
                           ('GetConstantBlocks', 'GetConstantBlock', 'GetReadOnlyResources')}
     report['fullsize_draws'] = []
+    report['draw_target_counts'] = {}
+    for action in actions:
+        if not (action.flags & rd.ActionFlags.Drawcall): continue
+        controller.SetFrameEvent(action.eventId, True)
+        ids = [str(t.resource) for t in controller.GetPipelineState().GetOutputTargets()]
+        key = ','.join(ids)
+        report['draw_target_counts'][key] = report['draw_target_counts'].get(key, 0) + 1
     for action in actions:
         if not (action.flags & rd.ActionFlags.Drawcall):
             continue
@@ -69,6 +84,7 @@ try:
         row = report['fullsize_draws'][-1]
         row['raw_first_vertex'] = list(struct.unpack_from('<'+'f'*(mesh.vertexByteStride//4), raw)) if raw else []
         row['resources'] = []
+        row['depth_target'] = str(pipe.GetDepthTarget().resource)
         for resource in pipe.GetReadOnlyResources(rd.ShaderStage.Fragment, True):
             descriptor = resource.descriptor
             row['resources'].append({name: str(getattr(descriptor, name)) for name in
@@ -93,7 +109,7 @@ try:
             save = rd.TextureSave()
             save.resourceId = texture.resourceId
             save.destType = rd.FileType.PNG
-            controller.SaveTexture(save, str(root/('private/windows/rdoc-event-'+str(event)+'-'+resource.replace('::','-')+'.png')))
+            controller.SaveTexture(save, str(artifact_dir/('rdoc-event-'+str(event)+'-'+resource.replace('::','-')+'.png')))
     controller.SetFrameEvent(max(a.eventId for a in actions), True)
     report['pixel_history'] = []
     for x, y in [(960, 540), (1750, 950), (1810, 1010)]:
@@ -120,7 +136,7 @@ try:
             save = rd.TextureSave()
             save.resourceId = texture.resourceId
             save.destType = rd.FileType.PNG
-            controller.SaveTexture(save, str(root/('private/windows/rdoc-image-'+str(texture.resourceId).replace('::','-')+'.png')))
+            controller.SaveTexture(save, str(artifact_dir/('rdoc-image-'+str(texture.resourceId).replace('::','-')+'.png')))
     report['debug_messages'] = [dict(description=m.description, event=m.eventId) for m in controller.GetDebugMessages()]
 except Exception:
     report['error'] = traceback.format_exc()

@@ -76,16 +76,27 @@
     }
   ],
   "remaining": [
-    "Rendering after appearance and island terrain preview",
-    "Island gameplay and input controls",
+    "VP9 intro movie decoding",
+    "NPC dialogue and inventory",
     "Intermittent GPU command/DMA stalls",
-    "Full audio validation beyond intro signal",
+    "Windows audio device stability beyond PCM capture",
     "Save/reload and full source recovery"
   ],
   "current_dll_name_birthday_appearance_confirmed": true,
-  "current_dll_sha256": "4e9d96da793ef1e2d056cb187aea79d8b16aaf06880b00b081d308336d21123a",
-  "current_run_prefix": "native-20261013-063158",
-  "post_appearance_3d_background_missing": true,
+  "current_dll_sha256": "a5e1ec181058a437baffd9a43b062a2a272b1c6157ef40aa0a16877b8ba69460",
+  "current_run_prefix": "native-20261013-101631",
+  "post_appearance_3d_background_missing": false,
   "island_confirmation_ui_observed": true,
-  "island_preview_terrain_visible": false
+  "island_preview_terrain_visible": false,
+  "island_arrival_cutscene_observed": true,
+  "island_terrain_observed_at_arrival": true,
+  "island_movement_validated": true,
+  "island_interaction_validated": true,
+  "island_interaction_scope": "Tree shaking and fruit drop",
+  "evidence_frames": {
+    "before_controls": "0144",
+    "walking_off_pier": "0157",
+    "on_grass": "0160",
+    "fruit_on_ground": "0163"
+  }
 }

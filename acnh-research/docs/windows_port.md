@@ -1,8 +1,16 @@
 # Goal: decompilação de ACNH e build Windows
 
-Solicitação explícita do usuário em 2026-10-13. O goal anterior concluiu o plano de pesquisa incremental. Este goal amplia o escopo para o jogo executável no Windows; está **incompleto**. A integração Elysium continua excluída. O agendador registrou `blocked` durante falhas de capacidade do modelo em tentativas anteriores; a execução técnica deste turno continuou com progresso. Esse estado do agendador não representa conclusão do projeto.
+Solicitação explícita do usuário em 2026-10-13. O goal anterior concluiu o plano de pesquisa incremental. Este goal amplia o escopo para o jogo executável no Windows; está **ativo e incompleto**. A integração Elysium continua excluída. As falhas anteriores de capacidade do modelo constam no histórico; a API do goal confirmou a retomada em estado `active`.
 
 O primeiro alvo de execução é 1.0.0, com a pesquisa 3.0.3 preservada. O trabalho existente recuperou apenas rotinas delimitadas. Não existe ainda uma build jogável validada, nem código-fonte recuperado para o jogo completo.
+
+Marco Windows: `native-20261013-101631` terminou normalmente em 1.800,73 segundos, mostrou a chegada à ilha, caminhada do píer até a grama e interação com uma árvore que derrubou suas frutas. NPCs, inventário e save/reload ainda não foram validados. Esse run usou a DLL anterior à guarda de callers v2; a candidata posterior tem validação ABI própria registrada em `access-key-bridge-validation.json`.
+
+A arquitetura atual é híbrida: a maior parte do ARM64 foi levantada para C e compilada em x64, serviços/GPU recebem implementação de compatibilidade e entradas internas podem usar interpretação ARM64. `-Mode native` seleciona a DLL x64; não significa que todo o jogo foi decompilado. A cobertura permanece em três entradas completas, uma região terminal parcial e uma entrada guardada. O objetivo final exige ampliar a recuperação de fonte e eliminar as dependências necessárias ao port.
+
+A runtime passou 13 testes. A fixture H.264 passou 11 casos próprios, mas o filme observado usa codec 9 (VP9) e foi ignorado: permanece pendente. A correção do cache de volume passou na GPU física e na cena após permanência longa no editor, com oito slices GPU preservados por 5.400 frames. O áudio do run foi PCM/WAV-only; uma falha anterior no dispositivo Windows ainda requer investigação.
+
+Publicação e exclusões em [publication.md](publication.md). Os resultados abaixo registram o histórico de investigação e devem ser lidos com o estado atual acima.
 
 ## Critérios de conclusão
 
@@ -23,7 +31,7 @@ ScarletNX fornece um carregador genérico de NSO, tradutor AArch64 para C, servi
 
 Os repositórios upstream permanecem em `vendor/`, os arquivos traduzidos e dados do jogo em `private/` ou `build/`, fora do Git. Chaves, firmware e assets não serão incluídos nos arquivos publicáveis. A dependência de cada ferramenta será registrada; nenhuma condição do plano antigo que limitava o objetivo a pilotos será usada para declarar este goal concluído.
 
-## Áudio nativo em validação
+## Histórico: áudio nativo em validação
 
 `windows_audio/` liga o protocolo IAudioRenderer ao AudioRenderer de `Ryujinx.Audio`, revisão `fec4f4ada9f28f897457033f9954c84cc15d0b02`, sob MIT. O módulo inclui DSP, ADPCM, resampling, efeitos, mixes e splitters dessa dependência. Seu único contrato com o antigo namespace de CPU é um relógio `ElapsedSeconds`; não compila o emulador de CPU. NativeAOT gera `ACNH_audio.dll`, carregada pelo runtime Windows. A memória do jogo permanece sob controle do runtime e cada acesso do DSP passa pela verificação de mapeamento/permissão. O evento de atualização pertence a cada renderer e segue seu processamento; Start/Stop e RequestUpdate usam os estados reais do DSP.
 
@@ -102,7 +110,7 @@ Usar os commits e o LLVM MinGW fixados em `config/windows-sources.lock.json`, al
 & acnh-research/scripts/run_windows_bridge.ps1 -Mode native -Seconds 45 -Headless
 ```
 
-Os testes de filesystem usam o temporário NTFS do Windows, pois o disco D: é exFAT e não suporta hard links. Execução dos drivers dentro do sandbox também pode falhar na canonicalização de caminhos; o resultado registrado foi obtido fora dessa restrição. A build conserva os objetos intermediários para retomar compilações. A opção `-Regenerate` refaz C privado a partir dos módulos e hints observados. O primeiro estágio H.264/Opus está desabilitado; não foi validado como desnecessário para todos os cenários do jogo. As flags `-march=native` exigem reproduzir ou ajustar o alvo de CPU antes de distribuir executáveis para outra máquina.
+Os testes de filesystem usam o temporário NTFS do Windows, pois o disco D: é exFAT e não suporta hard links. Execução dos drivers dentro do sandbox também pode falhar na canonicalização de caminhos; o resultado registrado foi obtido fora dessa restrição. A build conserva os objetos intermediários para retomar compilações. A opção `-Regenerate` refaz C privado a partir dos módulos e hints observados. O perfil atual habilita FFmpeg/H.264 por padrão; `-NoVideo` o desabilita explicitamente. O filme VP9 real ainda não é atendido por esse caminho. As flags `-march=native` exigem reproduzir ou ajustar o alvo de CPU antes de distribuir executáveis para outra máquina.
 
 Para repetir o teste de cadastro, usar `run_windows_bridge.ps1 -PressLength 1000 -ShotEvery 250` com a sequência A/Plus de `intro-input-validation.json` e dos logs privados referidos. O limite do harness é 1.800 segundos; o teste pode terminar antes com erro do jogo. `build_windows_game.ps1 -OutputDirectory <pasta em private/windows>` permite preparar outro módulo sem relinkar a DLL de uma sessão em execução. A emissão do módulo para outra pasta não altera os dados privados selecionados por `SNX_DATA_DIR`.
 

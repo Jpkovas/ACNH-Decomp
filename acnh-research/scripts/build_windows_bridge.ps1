@@ -1,8 +1,9 @@
 param(
  [ValidateSet('tools','headless','vulkan')][string]$Backend='tools',
- [int]$Jobs=4,
+ [ValidateRange(1,64)][int]$Jobs=4,
  [string]$Tests='',
- [switch]$GpuTest
+ [switch]$GpuTest,
+ [switch]$NoVideo
 )
 $ErrorActionPreference='Stop'
 $root=Split-Path $PSScriptRoot -Parent
@@ -42,7 +43,19 @@ if($Backend -eq 'tools'){
 }else{
  $bin=Join-Path $root 'private/tools/llvm-mingw/llvm-mingw-20261006-ucrt-x86_64/bin'
  if(-not(Test-Path -LiteralPath (Join-Path $bin 'clang.exe'))){throw 'Install the pinned llvm-mingw toolchain first'}
- $options=@('-DSNX_DEPLOY=OFF','-DSNX_H264=OFF',"-DCPM_SOURCE_CACHE=$root/private/tools/cpm-cache", "-DSNX_AUDIO_NATIVE_SOURCE=$root/windows_audio")
+ $options=@('-DSNX_DEPLOY=OFF',"-DCPM_SOURCE_CACHE=$root/private/tools/cpm-cache", "-DSNX_AUDIO_NATIVE_SOURCE=$root/windows_audio")
+ if($NoVideo){$options+='-DSNX_H264=OFF'}
+ else{
+  & (Join-Path $PSScriptRoot 'prepare_windows_video.ps1')
+  if($LASTEXITCODE -ne 0){throw 'Private video tool preparation failed'}
+  $shellBin=Join-Path (Split-Path $bin) 'busybox/bin'
+  $nasm=Join-Path $root 'private/tools/nasm/nasm-3.02/nasm.exe'
+  foreach($tool in @('sh.exe','make.exe')){
+   if(-not(Test-Path -LiteralPath (Join-Path $shellBin $tool))){throw "Pinned llvm-mingw POSIX tool missing: $tool"}
+  }
+  $env:PATH="$shellBin;$(Split-Path $nasm);$env:PATH"
+  $options+=@('-DSNX_H264=ON',"-DSNX_FFMPEG_SH=$shellBin/sh.exe","-DSNX_FFMPEG_MAKE=$shellBin/make.exe","-DSNX_NASM=$nasm","-DSNX_FFMPEG_JOBS=$Jobs")
+ }
  if($Backend -eq 'headless'){$options+=@('-DSNX_BACKEND=headless','-DSNX_VULKAN=OFF')}
  else{$options+=@('-DSNX_BACKEND=sdl3','-DSNX_VULKAN=ON')}
  $captureSdk=Join-Path $root 'private/tools/renderdoc/RenderDoc_1.46_64'

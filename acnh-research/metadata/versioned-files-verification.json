@@ -1,7 +1,8 @@
 {
   "passed": true,
-  "files_checked": 175,
+  "files_checked": 206,
   "required_ignores_checked": 5,
   "errors": [],
-  "scope": "intended Git paths and secret-assignment patterns; not a legal determination or whole-disk secret scan"
+  "content_source": "Git index",
+  "scope": "intended Git paths and binary/secret-assignment patterns; not a legal determination or whole-disk secret scan"
 }

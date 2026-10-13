@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "component": "GPU-only texture volume lifetime",
+  "decompilation_coverage_increment": 0,
+  "status": "physical GPU regression and affected long-appearance game scene passed",
+  "fixture": "vendor/ScarletNX/tests/vulkan_headless.c",
+  "device": "AMD Radeon RX 9070 XT",
+  "negative_control": "Original cache removed all eight valid slice candidates after three presents",
+  "positive_cases": [
+    "Immediate 8x8x8 volume assembled from eight 16x8 targets",
+    "Unchanged GPU-only slices retained across three presents",
+    "Unused sampled texture evicted and reconstructed from retained slices",
+    "A newer GPU write of unchanged zero RAM supersedes the GPU copy"
+  ],
+  "pixels_checked_per_volume": 512,
+  "existing_clear_cases_retained": 8,
+  "private_capture_observations": {
+    "before_appearance_lut_nonzero_bytes": 1880,
+    "after_long_appearance_lut_nonzero_bytes": 0,
+    "after_short_appearance_lut_nonzero_bytes": 1880,
+    "lut_raw_bytes": 2048,
+    "lut_size": [
+      8,
+      8,
+      8
+    ],
+    "format": "R11G11B10_FLOAT"
+  },
+  "limitations": [
+    "Valid GPU-only targets can retain memory longer; memory usage has not been profiled",
+    "Backing reuse detection uses the existing GPU write log, optional CPU write tracking and hash fallback"
+  ],
+  "affected_game_scene": {
+    "log_prefix": "native-20261013-101631",
+    "runtime_sha256": "72d5b85fd0f6ecaf397067092a886af7a6326ff1f131c15fd3980c5ef5b30acd",
+    "volume_gva": "0x541c71000",
+    "volume_shape": [
+      8,
+      8,
+      8
+    ],
+    "slice_count": 8,
+    "oldest_slice_age_frames": 5400,
+    "upload_elapsed_seconds": 610.97,
+    "fresh_gpu_slices_retained": true,
+    "airport_3d_rendered_after_appearance": true,
+    "island_3d_rendered": true,
+    "private_capture": "graphics-1",
+    "frame_after_appearance": "0075"
+  }
+}

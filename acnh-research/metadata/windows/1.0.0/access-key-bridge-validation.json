@@ -1,0 +1,73 @@
+{
+  "version_id": "1.0.0",
+  "passed": true,
+  "runtime_entry": "0x821b670",
+  "mode": "actual game DLL entry",
+  "library_sha256": "aabcdb50ee1ce15a1a01cc87321c122329613891a1649abec804e626006a42be",
+  "corresponding_manifest_sha256": "e67c505ac0e0c400133238dd483761aa81e111d2ad995784c3e7eb1f09b99a68",
+  "embedded_provenance_verified": {
+    "schema_version": 1,
+    "adapter_revision": "access-key-known-callers-v2",
+    "function": "F_821B670",
+    "runtime_address": "0x821b670",
+    "cpp_source_sha256": "5926a0dac9ccee905155f601d66f10a8909bdbb58f2ead6910acff46490a01ea",
+    "adapter_source_sha256": "7f3a57254a9401ace3cc9838c7a1b20a51f963305f2bb22a87d42d6c470e99de",
+    "generated_file": "code_017.c",
+    "generated_file_sha256": "9783bedde71cab0ecebd5736f995acd36b42759c60cb50a054b1e3ccf61f0442",
+    "reviewed_return_lrs": [
+      "0x830eb64",
+      "0x830fd54",
+      "0x8310ba4",
+      "0x8311a24",
+      "0x8311c30",
+      "0x8312dd4",
+      "0x8321774",
+      "0x8321a34",
+      "0x83458f0",
+      "0x840a5e4",
+      "0x840b564",
+      "0x840c5f4"
+    ]
+  },
+  "cases": {
+    "fast_path": 193,
+    "fallback_body": 9,
+    "guard_rejections": 4
+  },
+  "original_arm64_compared": true,
+  "cpp_source_sha256": "5926a0dac9ccee905155f601d66f10a8909bdbb58f2ead6910acff46490a01ea",
+  "adapter_source_sha256": "7f3a57254a9401ace3cc9838c7a1b20a51f963305f2bb22a87d42d6c470e99de",
+  "fast_path_by_reviewed_return_lr": {
+    "0x830eb64": 17,
+    "0x830fd54": 16,
+    "0x8310ba4": 16,
+    "0x8311a24": 16,
+    "0x8311c30": 16,
+    "0x8312dd4": 16,
+    "0x8321774": 16,
+    "0x8321a34": 16,
+    "0x83458f0": 16,
+    "0x840a5e4": 16,
+    "0x840b564": 16,
+    "0x840c5f4": 16
+  },
+  "unknown_caller_uses_original_fallback": true,
+  "preserved": [
+    "x19..x29",
+    "SP",
+    "LR",
+    "return PC",
+    "output canaries",
+    "headers",
+    "input"
+  ],
+  "imported_memcpy": "isolated native memory copy; original SafeString callbacks executed in full module mode",
+  "original_inactive_stack_writes_reproduced": false,
+  "incidental_x0_preserved": true,
+  "limitations": [
+    "Guard checks no page permissions; headers and readable buffers remain caller preconditions",
+    "Callee-saved ABI is checked; original caller-saved/NZCV state and dead stack bytes are excluded",
+    "Guard-only rejection does not prove execution of the original fallback",
+    "Entire parser, EventFlagInt backend and whole-game decompilation are not claimed"
+  ]
+}

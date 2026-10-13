@@ -41,7 +41,54 @@
       "cpp_source_sha256": "581dad932392af37d0c3ce53211fd8ee32c926aeb581c696b3d87892f9db8607",
       "evidence": "flag-int-validation.json: 3806 original ARM64/native/oracle cases",
       "whole_handler_reconstructed": false,
-      "remaining": "Access-key parsing and SaveIO backends remain translated"
+      "remaining": "SaveIO backends, namespace dispatch and parser contracts outside the guarded entry remain translated"
+    }
+  ],
+  "guarded_entries": [
+    {
+      "function": "F_821B670",
+      "module": "main",
+      "module_relative": "0x216670",
+      "runtime_address": "0x821b670",
+      "generated_file": "code_017.c",
+      "adapter_revision": "access-key-known-callers-v2",
+      "reviewed_return_lrs": [
+        "0x830eb64",
+        "0x830fd54",
+        "0x8310ba4",
+        "0x8311a24",
+        "0x8311c30",
+        "0x8312dd4",
+        "0x8321774",
+        "0x8321a34",
+        "0x83458f0",
+        "0x840a5e4",
+        "0x840b564",
+        "0x840c5f4"
+      ],
+      "generated_file_sha256": "9783bedde71cab0ecebd5736f995acd36b42759c60cb50a054b1e3ccf61f0442",
+      "cpp_source_sha256": "5926a0dac9ccee905155f601d66f10a8909bdbb58f2ead6910acff46490a01ea",
+      "adapter_source_sha256": "7f3a57254a9401ace3cc9838c7a1b20a51f963305f2bb22a87d42d6c470e99de",
+      "evidence": "access-key-validation.json: 1392 original parser and 90 namespace cases; bridge ABI validation separate",
+      "complete_entry_reconstructed": false,
+      "fallback": "Existing translated body, including interior entries",
+      "guard_conditions": [
+        "Return LR belongs to the twelve reviewed direct callers",
+        "Known no-op input callback",
+        "Positive output capacities",
+        "NUL before 2^19 bytes",
+        "Non-overlapping headers, input, outputs and original inactive stack frame"
+      ],
+      "limitations": [
+        "Guest memory mapping remains an original caller precondition; CPU.mem has no page validation API",
+        "Original inactive stack writes and caller-saved register/NZCV effects are not reproduced",
+        "Namespace region and SaveIO remain outside this guarded replacement"
+      ],
+      "compiled_provenance": {
+        "export": "acnh_bridge_access_key_provenance",
+        "generated_file": "acnh_access_key_provenance.c",
+        "generated_file_sha256": "a2bfcbeb37fb5f61229b444c5a52af231dd45fe93d4f618c04619aa21055b2e7"
+      }
     }
   ],
   "whole_game_decompiled": false

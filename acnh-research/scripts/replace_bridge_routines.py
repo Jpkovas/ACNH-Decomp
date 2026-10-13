@@ -10,6 +10,18 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+ACCESS_KEY_ADAPTER_REVISION = 'access-key-known-callers-v2'
+
+
+def access_key_compiled_provenance(record: dict) -> dict:
+    """Inputs stamped into a private TU, compiled with the module or adapter."""
+    return dict(schema_version=1, adapter_revision=record['adapter_revision'],
+                function=record['function'], runtime_address=record['runtime_address'],
+                cpp_source_sha256=record['cpp_source_sha256'],
+                adapter_source_sha256=record['adapter_source_sha256'],
+                generated_file=record['generated_file'],
+                generated_file_sha256=record['generated_file_sha256'],
+                reviewed_return_lrs=record['reviewed_return_lrs'])
 
 
 def function_end(text: str, brace: int) -> int:
@@ -132,13 +144,68 @@ void F_C50CA00(CPU* RESTRICT c,u64 e) {
         generated_file_sha256=hashlib.sha256(flag_path.read_bytes()).hexdigest(),
         cpp_source_sha256=hashlib.sha256((ROOT/'reconstructed/src/flag_int.cpp').read_bytes()).hexdigest(),
         evidence='flag-int-validation.json: 3806 original ARM64/native/oracle cases',
-        whole_handler_reconstructed=False, remaining='Access-key parsing and SaveIO backends remain translated')]
+        whole_handler_reconstructed=False, remaining='SaveIO backends, namespace dispatch and parser contracts outside the guarded entry remain translated')]
+    access_validation = json.loads((ROOT/'metadata/1.0.0/access-key-validation.json').read_text())
+    if access_validation['parser_cases'] < 1392 or not access_validation['original_arm64_vs_native_vs_independent_oracle']:
+        raise ValueError('AccessKey original parser validation missing')
+    if access_validation['cpp_source_sha256'] != hashlib.sha256((ROOT/'reconstructed/src/access_key.cpp').read_bytes()).hexdigest():
+        raise ValueError('AccessKey source changed after original validation')
+    access_matches = []
+    for candidate in sorted(generated.glob('code_*.c')):
+        candidate_text = candidate.read_text(encoding='utf-8')
+        definition = re.search(r'void F_821B670\(CPU\* RESTRICT c,u64 e\)\s*\{', candidate_text)
+        if definition: access_matches.append((candidate, candidate_text, definition))
+    if len(access_matches) != 1: raise ValueError('Expected exactly one reviewed AccessKey parser')
+    access_path, access_text, access_definition = access_matches[0]
+    marker = 'ACNH_RECONSTRUCTED_ACCESS_KEY_GUARDED'
+    if marker not in access_text[access_definition.start():function_end(access_text, access_definition.end()-1)]:
+        declaration = 'extern int acnh_bridge_access_key_try(CPU*,u64);\n'
+        insertion = '''
+ /* ACNH_RECONSTRUCTED_ACCESS_KEY_GUARDED: semantic fast path only; original body remains fallback. */
+ if(acnh_bridge_access_key_try(c,e)) return;
+'''
+        access_text = access_text[:access_definition.start()] + declaration + access_text[access_definition.start():access_definition.end()] + insertion + access_text[access_definition.end():]
+        access_path.write_text(access_text, encoding='utf-8', newline='\n')
+    guarded_entries = [dict(function='F_821B670', module='main', module_relative='0x216670',
+        runtime_address='0x821b670', generated_file=access_path.name,
+        adapter_revision=ACCESS_KEY_ADAPTER_REVISION,
+        reviewed_return_lrs=[hex(0x8005000 + int(caller['call_site'], 16) + 4)
+                             for caller in access_validation['reviewed_direct_callers']],
+        generated_file_sha256=hashlib.sha256(access_path.read_bytes()).hexdigest(),
+        cpp_source_sha256=hashlib.sha256((ROOT/'reconstructed/src/access_key.cpp').read_bytes()).hexdigest(),
+        adapter_source_sha256=hashlib.sha256((ROOT/'windows_bridge/access_key_adapter.c').read_bytes()).hexdigest(),
+        evidence='access-key-validation.json: 1392 original parser and 90 namespace cases; bridge ABI validation separate',
+        complete_entry_reconstructed=False, fallback='Existing translated body, including interior entries',
+        guard_conditions=['Return LR belongs to the twelve reviewed direct callers', 'Known no-op input callback',
+                          'Positive output capacities', 'NUL before 2^19 bytes',
+                          'Non-overlapping headers, input, outputs and original inactive stack frame'],
+        limitations=['Guest memory mapping remains an original caller precondition; CPU.mem has no page validation API',
+                     'Original inactive stack writes and caller-saved register/NZCV effects are not reproduced',
+                     'Namespace region and SaveIO remain outside this guarded replacement'])]
+    # Generated separately so hashes can describe the adapter source without a
+    # self-referential source hash. CMake already compiles every generated *.c.
+    # Never reuse a newer source manifest as evidence for an older loaded DLL.
+    provenance_record = guarded_entries[0]
+    provenance_payload = access_key_compiled_provenance(provenance_record)
+    provenance_literal = json.dumps(json.dumps(provenance_payload, sort_keys=True, separators=(',', ':')))
+    provenance_name = 'acnh_access_key_provenance.c'
+    provenance_text = ('#include "cpu.h"\n'
+                       'SNX_EXPORT const char* acnh_bridge_access_key_provenance(void) {\n'
+                       f' return {provenance_literal};\n'
+                       '}\n')
+    provenance_path = generated/provenance_name
+    if not provenance_path.exists() or provenance_path.read_text(encoding='utf-8') != provenance_text:
+        provenance_path.write_text(provenance_text, encoding='utf-8', newline='\n')
+    provenance_record['compiled_provenance'] = dict(export='acnh_bridge_access_key_provenance',
+        generated_file=provenance_name, generated_file_sha256=hashlib.sha256(provenance_path.read_bytes()).hexdigest())
     for record in records:
         record['generated_file_sha256'] = hashlib.sha256((generated/record['generated_file']).read_bytes()).hexdigest()
     target = ROOT/'metadata/windows/1.0.0/reconstructed-replacements.json'
     target.write_text(json.dumps(dict(version_id='1.0.0', replacements=records, partial_regions=partial_regions,
-                                     whole_game_decompiled=False), indent=2)+'\n', encoding='utf-8')
-    print(json.dumps(dict(replaced_entries=len(records), replaced_partial_regions=len(partial_regions), entire_game_decompiled=False)))
+                                     guarded_entries=guarded_entries,
+                                     whole_game_decompiled=False), indent=2)+'\n', encoding='utf-8', newline='\n')
+    print(json.dumps(dict(replaced_entries=len(records), replaced_partial_regions=len(partial_regions),
+                          guarded_entries=len(guarded_entries), entire_game_decompiled=False)))
 
 
 if __name__ == '__main__':

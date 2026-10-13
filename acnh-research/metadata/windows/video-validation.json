@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "component": "native Windows H.264 NVDEC/VIC bridge",
+  "decompilation_coverage_increment": 0,
+  "ffmpeg": {
+    "version": "9.0.2",
+    "source_url": "https://ffmpeg.org/releases/ffmpeg-9.0.2.tar.xz",
+    "archive_sha256": "8c3850283eb25fa026482078a04051e0be17347b09ef81a0849bec15a96e002e",
+    "license": "LGPL-2.1-or-later",
+    "gpl_enabled": false,
+    "nonfree_enabled": false,
+    "static_linked": true,
+    "decoders_compiled": [
+      "h264",
+      "vp8",
+      "vp9",
+      "opus"
+    ],
+    "nvdec_implemented_codec": "H.264 only",
+    "licenses": [
+      {
+        "path": "COPYING.LGPLv2.1",
+        "sha256": "246041b6ecf9bc32d718a62c57877c78b5eb397b6467e74ed7ae2626ab189c30"
+      },
+      {
+        "path": "LICENSE.md",
+        "sha256": "2e1d16c72fd74e12063776371da757322f8b77589386532f4fd8634bde7de1af"
+      }
+    ]
+  },
+  "toolchain": {
+    "llvm_mingw": "20261006",
+    "clang": "23.1.3",
+    "nasm": "3.02",
+    "ffmpeg_parallel_jobs": 4
+  },
+  "synthetic_validation": {
+    "native_windows": true,
+    "cases": 11,
+    "h264_ipcm_frames": 3,
+    "decoder_channels": 2,
+    "input_framing": [
+      "Annex B",
+      "MP4 length-prefixed with ambiguous 00 00 01 86 prefix",
+      "raw NAL"
+    ],
+    "exact_nv12_samples": 1152,
+    "exact_rgba_bgra_pixels": 1536,
+    "vic_surfaces": 6,
+    "failure_statuses": [
+      "unsupported codec",
+      "unmapped picture setup"
+    ],
+    "padding_bytes_per_packet": 64,
+    "zero_padding_verified": true,
+    "baseline_exit_code": 1,
+    "baseline_failed_assertions": 901,
+    "corrected_exit_code": 0,
+    "corrected_failed_assertions": 0,
+    "guest_cpu_executed": false,
+    "game_assets_used": false
+  },
+  "upstream_runtime_tests_passed": 13,
+  "real_game_movie_validation": {
+    "run": "native-20261013-101631",
+    "observed_codec_id": 9,
+    "codec": "VP9",
+    "codec_identity_source": "https://github.com/NVIDIA/open-gpu-doc/blob/master/classes/video/nvdec_drv.h",
+    "decoder_status": "unsupported VP9; jobs skipped by current H.264-only NVDEC implementation",
+    "movie_rendering_validated": false,
+    "log_elapsed_seconds": 1074.9,
+    "native_h264_fixture_scope": "H.264 support fixture passed; does not validate the ACNH VP9 movie",
+    "next_work": "VP9 NVDEC contract with actual entropy probabilities, backward counts and motion vectors"
+  },
+  "limitations": [
+    "16x16 progressive 8-bit YUV420 I_PCM fixtures only",
+    "CABAC and interframe ordering not yet verified independently",
+    "VIC scaling and other formats not covered",
+    "Not bit-exact validated against Switch hardware",
+    "Host service emulation does not recover game source",
+    "Actual ACNH boarding movie uses VP9 (codec9), unsupported by current NVDEC bridge"
+  ],
+  "changes": [
+    "Enable SNX_H264 by default in Windows runtime builds; explicit NoVideo diagnostic switch",
+    "Allocate and clear required AV_INPUT_BUFFER_PADDING_SIZE bytes",
+    "Validate complete MP4 lengths before Annex B prefix detection"
+  ]
+}

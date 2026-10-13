@@ -12,6 +12,7 @@ param(
  [switch]$CaptureShaders,
  [switch]$CaptureTargets,
  [switch]$CaptureGpuFifo,
+ [switch]$CaptureGraphics,
  [ValidateSet(0,1)][int]$Docked=1
 )
 $ErrorActionPreference='Stop'
@@ -25,6 +26,18 @@ $env:SNX_DATA_DIR=$data
 $logs=Join-Path $root 'private/windows/logs'
 New-Item -ItemType Directory -Force -Path $logs | Out-Null
 $prefix=Join-Path $logs ("{0}-{1}" -f $Mode,(Get-Date -Format 'yyyyMMdd-HHmmss'))
+if($CaptureGraphics){
+ $captureSdk=Join-Path $root 'private/tools/renderdoc/RenderDoc_1.46_64'
+ if(-not(Test-Path -LiteralPath (Join-Path $captureSdk 'renderdoc.dll'))){throw 'Missing pinned RenderDoc SDK'}
+ $env:VK_LAYER_PATH=$captureSdk
+ $env:VK_INSTANCE_LAYERS='VK_LAYER_RENDERDOC_Capture'
+ $env:ENABLE_VULKAN_RENDERDOC_CAPTURE='1'
+ $env:SNX_RENDERDOC_OUTPUT=$prefix+'-graphics'
+ $env:SNX_RENDERDOC_TRIGGER=$prefix+'.capture.txt'
+ Remove-Item Env:SNX_RENDERDOC_FRAME -ErrorAction SilentlyContinue
+ Set-Content -LiteralPath $env:SNX_RENDERDOC_TRIGGER -Value '0' -Encoding ascii
+ Write-Output "GPU capture trigger: $env:SNX_RENDERDOC_TRIGGER"
+}else{Remove-Item Env:SNX_RENDERDOC_TRIGGER,Env:SNX_RENDERDOC_OUTPUT,Env:SNX_RENDERDOC_FRAME -ErrorAction SilentlyContinue}
 if($CaptureGpuFifo){
  $env:SNX_FIFO_TRACE_DIR=$prefix+'-fifo'
  New-Item -ItemType Directory -Force -Path $env:SNX_FIFO_TRACE_DIR | Out-Null
@@ -79,6 +92,7 @@ $result['native_audio']=[bool]$NativeAudio
 $result['audio_wav']=$audioOutput
 $result['audio_wav_only']=[bool]$AudioWavOnly
 $result['gpu_fifo_capture']=if($CaptureGpuFifo){$env:SNX_FIFO_TRACE_DIR}else{$null}
+$result['graphics_capture_trigger']=if($CaptureGraphics){$env:SNX_RENDERDOC_TRIGGER}else{$null}
 $result['runtime_sha256']=$runtimeHash
 $result['game_code_sha256']=$codeHash
 $result['audio_backend_sha256']=$audioHash
