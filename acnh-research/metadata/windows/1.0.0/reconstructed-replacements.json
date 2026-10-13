@@ -1,0 +1,22 @@
+{
+  "version_id": "1.0.0",
+  "replacements": [
+    {
+      "function": "F_8006BF0",
+      "module_relative": "0x1bf0",
+      "generated_file": "code_000.c",
+      "evidence": "Existing original ARM64 differential validation",
+      "interior_entries": "interpreter fallback",
+      "generated_file_sha256": "30d74d77f2f0a1bbd2709952f6007d6961eb097b9f2b62eac0c5d39feaa884bb"
+    },
+    {
+      "function": "F_800FC10",
+      "module_relative": "0xac10",
+      "generated_file": "code_000.c",
+      "evidence": "Existing original ARM64 differential validation",
+      "interior_entries": "interpreter fallback",
+      "generated_file_sha256": "30d74d77f2f0a1bbd2709952f6007d6961eb097b9f2b62eac0c5d39feaa884bb"
+    }
+  ],
+  "whole_game_decompiled": false
+}

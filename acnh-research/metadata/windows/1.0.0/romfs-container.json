@@ -1,0 +1,9 @@
+{
+  "version_id": "1.0.0",
+  "source_nca": "cce24c0eab15dfd44568b8015ce7995b.nca",
+  "tool": "hactool 1.4.0",
+  "romfs_size": 6645818048,
+  "romfs_sha256": "652ed6443f81917a1ce9745a59259e017b9aece4f692f3f8eb297fbca48aa8ea",
+  "metadata_extents_in_bounds": true,
+  "note": "Header and extents verified; runtime content reads still require validation"
+}

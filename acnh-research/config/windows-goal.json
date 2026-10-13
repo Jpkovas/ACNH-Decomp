@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "requested_on": "2026-10-13",
+  "status": "active",
+  "objective": "ACNH decompilation and playable native Windows build",
+  "initial_runtime_version": "1.0.0",
+  "preserved_research_version": "3.0.3",
+  "excluded": [
+    "Elysium Crossing integration",
+    "proprietary input redistribution"
+  ],
+  "completion_requires": [
+    "reproducible Windows x64 executable from local source and user supplied assets",
+    "validated startup, character creation and island gameplay",
+    "working input, rendering, audio and save/reload",
+    "documented source coverage and remaining dependencies",
+    "reconstructed source replaces required original guest code; automatic lifting alone is insufficient"
+  ],
+  "current_evidence": {
+    "playable_build_validated": false,
+    "whole_game_source_reconstructed": false,
+    "automatic_translation_counts_as_decompilation": false,
+    "native_x64_module_loads": true,
+    "native_x64_module_bytes": 292099584,
+    "reviewed_entries_replaced": 2,
+    "dispatch_validation_cases": 1092,
+    "upstream_unit_tests_passed": 11,
+    "vulkan_offscreen_test_passed": true,
+    "shader_corpus_compiled": 68,
+    "presented_frame_black": true,
+    "intermediate_3d_terrain_observed": true,
+    "first_character_creation_validated": false,
+    "audio_validated": false,
+    "save_reload_validated": false
+  }
+}

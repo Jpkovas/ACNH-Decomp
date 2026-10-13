@@ -1,0 +1,146 @@
+{
+  "status": "active",
+  "playable_validated": false,
+  "whole_game_decompiled": false,
+  "translated_module_bytes": 292099584,
+  "translated_module_sha256": "94a5a70154f95981d73de0565a5359958692c99d1c8caea94d67a10e38d11115",
+  "runtime_sha256": "200167d83c802da3723373cdcfc6a078b99493c60b6acba2a94ebeeccb177ee9",
+  "patch_sha256": "2d0c5d16d19f9a11a56974336199c9bc2e2ca9eb88b79fcd94be09060fec211a",
+  "runs": [
+    {
+      "mode": "native",
+      "headless": true,
+      "exit_code": 1,
+      "elapsed_seconds": 0.04,
+      "playable_validated": false,
+      "log_prefix": "native-20261013-013941"
+    },
+    {
+      "mode": "native",
+      "headless": true,
+      "exit_code": 0,
+      "elapsed_seconds": 45.55,
+      "playable_validated": false,
+      "frames": 874,
+      "frame_hash": "009b538b2455c383",
+      "log_prefix": "native-20261013-014952",
+      "frame_analysis": {
+        "width": 1280,
+        "height": 720,
+        "rgb_sha256": "822e3a311bc34185394aeb709bb83310f1243089b95cdadc218eee179b1d6f78",
+        "nonblack_pixels": 0,
+        "completely_black": true,
+        "note": "Nonblack pixels do not by themselves establish correct rendering or gameplay"
+      }
+    },
+    {
+      "mode": "native",
+      "headless": true,
+      "input_script": "15000:400,25000:1,35000:1,45000:1,55000:1,65000:1,75000:1",
+      "exit_code": 0,
+      "elapsed_seconds": 90.55,
+      "playable_validated": false,
+      "frames": 1065,
+      "frame_hash": "009b538b2455c383",
+      "log_prefix": "native-20261013-015323",
+      "frame_analysis": {
+        "width": 1280,
+        "height": 720,
+        "rgb_sha256": "822e3a311bc34185394aeb709bb83310f1243089b95cdadc218eee179b1d6f78",
+        "nonblack_pixels": 0,
+        "completely_black": true,
+        "note": "Nonblack pixels do not by themselves establish correct rendering or gameplay"
+      }
+    },
+    {
+      "mode": "native",
+      "headless": true,
+      "input_script": "",
+      "exit_code": 0,
+      "elapsed_seconds": 35.51,
+      "playable_validated": false,
+      "frames": 730,
+      "frame_hash": "009b538b2455c383",
+      "log_prefix": "native-20261013-015549"
+    },
+    {
+      "mode": "native",
+      "headless": true,
+      "input_script": "",
+      "exit_code": 0,
+      "elapsed_seconds": 40.83,
+      "playable_validated": false,
+      "frames": 829,
+      "frame_hash": "009b538b2455c383",
+      "log_prefix": "native-20261013-020012"
+    },
+    {
+      "mode": "native",
+      "headless": true,
+      "input_script": "",
+      "exit_code": 0,
+      "elapsed_seconds": 35.8,
+      "playable_validated": false,
+      "frames": 745,
+      "frame_hash": "009b538b2455c383",
+      "log_prefix": "native-20261013-020435"
+    },
+    {
+      "mode": "native",
+      "headless": true,
+      "input_script": "10000:400,20000:1,28000:1",
+      "exit_code": 0,
+      "elapsed_seconds": 35.54,
+      "playable_validated": false,
+      "frames": 718,
+      "frame_hash": "009b538b2455c383",
+      "log_prefix": "native-20261013-020653",
+      "frame_analysis": {
+        "width": 1280,
+        "height": 720,
+        "rgb_sha256": "822e3a311bc34185394aeb709bb83310f1243089b95cdadc218eee179b1d6f78",
+        "nonblack_pixels": 0,
+        "completely_black": true,
+        "note": "Nonblack pixels do not by themselves establish correct rendering or gameplay"
+      }
+    },
+    {
+      "mode": "probe",
+      "headless": true,
+      "exit_code": 0,
+      "elapsed_seconds": 30.54,
+      "playable_validated": false,
+      "frames": 279,
+      "frame_hash": "009b538b2455c383",
+      "log_prefix": "probe-20261013-013958"
+    },
+    {
+      "mode": "probe",
+      "headless": true,
+      "exit_code": 0,
+      "elapsed_seconds": 90.68,
+      "playable_validated": false,
+      "frames": 520,
+      "frame_hash": "009b538b2455c383",
+      "log_prefix": "probe-20261013-014407",
+      "frame_analysis": {
+        "width": 1280,
+        "height": 720,
+        "rgb_sha256": "822e3a311bc34185394aeb709bb83310f1243089b95cdadc218eee179b1d6f78",
+        "nonblack_pixels": 0,
+        "completely_black": true,
+        "note": "Nonblack pixels do not by themselves establish correct rendering or gameplay"
+      }
+    }
+  ],
+  "intermediate_render_targets": {
+    "captured": 24,
+    "nonblack": 8,
+    "visual_observations": [
+      "3D grass and cliffs",
+      "loading palm icon",
+      "other targets include uniform color"
+    ]
+  },
+  "next_investigation": "Final compositor shader, resource bindings and GPU synchronization; stale-alias selection not confirmed"
+}

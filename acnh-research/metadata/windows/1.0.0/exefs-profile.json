@@ -1,0 +1,457 @@
+{
+  "version_id": "1.0.0",
+  "module_order": [
+    "rtld",
+    "main",
+    "subsdk0",
+    "sdk"
+  ],
+  "npdm_sha256": "06823e10ea105c36c92b26d7763415d4ca53deb68acd70f05d6a883f0c4139dd",
+  "modules": [
+    {
+      "module": "rtld",
+      "input_sha256": "a71c5118f08ec8707a6c68754607ad069f5be50fa60cea6d805e0bc2ad4655a5",
+      "module_id": "31a2773ea6928ffe3d32b17b3ad08f54826da39f000000000000000000000000",
+      "segments": [
+        {
+          "name": ".text",
+          "file_offset": 257,
+          "memory_offset": 0,
+          "memory_size": 5728,
+          "stored_size": 4661,
+          "compressed": true,
+          "sha256": "d87463d3fec1e568a80b86ed835e29a078e781644fd8a6802228e773aedd6820",
+          "hash_verified": true
+        },
+        {
+          "name": ".rodata",
+          "file_offset": 4918,
+          "memory_offset": 8192,
+          "memory_size": 3208,
+          "stored_size": 1675,
+          "compressed": true,
+          "sha256": "d8d3cca9eaeb22c1db03faa5a1bfb85c99c0da5754d7ea12759b21389af6cc6a",
+          "hash_verified": true
+        },
+        {
+          "name": ".data",
+          "file_offset": 6593,
+          "memory_offset": 12288,
+          "memory_size": 640,
+          "stored_size": 197,
+          "compressed": true,
+          "sha256": "201374e7b85fe5b94d5546eca4a00262e3901130fda80f32aad3c56008b01411",
+          "hash_verified": true
+        }
+      ],
+      "bss_size": 3456,
+      "mod0": "0x2018",
+      "dynamic": "0x3008",
+      "symbols": 20,
+      "imports": 19,
+      "exports": 0,
+      "needed": [],
+      "relocations_by_type": {
+        "1027": 15,
+        "1025": 17,
+        "1026": 2
+      },
+      "relr_relocations": 0,
+      "initializer_slots": 0,
+      "init_offset": "0x100",
+      "addresses_relative_to_module": true
+    },
+    {
+      "module": "main",
+      "input_sha256": "f8d248109ff72999b4600ae3749f8c7397fb960f7ad3ab8dee3018ae9e14e900",
+      "module_id": "7fc1baff976aeca414520cb89f4616cb00000000000000000000000000000000",
+      "segments": [
+        {
+          "name": ".text",
+          "file_offset": 257,
+          "memory_offset": 0,
+          "memory_size": 35723872,
+          "stored_size": 18439584,
+          "compressed": true,
+          "sha256": "9c9b45d8e7a58706ca59e7244b3aebac2325ef98faa205e007974eeeb2f758e9",
+          "hash_verified": true
+        },
+        {
+          "name": ".rodata",
+          "file_offset": 18439841,
+          "memory_offset": 35725312,
+          "memory_size": 14718844,
+          "stored_size": 6441643,
+          "compressed": true,
+          "sha256": "ed2a3e8fff6192db71f758150488cde6581c8963ddd355e9f0f10041e469c6ef",
+          "hash_verified": true
+        },
+        {
+          "name": ".data",
+          "file_offset": 24881484,
+          "memory_offset": 50446336,
+          "memory_size": 3284680,
+          "stored_size": 109047,
+          "compressed": true,
+          "sha256": "8fd7755d02c36e78f54bf777bfe0b5b523d469c84b39a40f7be27b5f1062e2d5",
+          "hash_verified": true
+        }
+      ],
+      "bss_size": 7835960,
+      "mod0": "0x8",
+      "dynamic": "0x32ce610",
+      "symbols": 941,
+      "imports": 910,
+      "exports": 30,
+      "needed": [
+        "D:/home/Project/Park/App/Lib/NintendoSDK/Libraries/NX-NXFP2-a64/Release//multimedia.nss",
+        "nnSdk.nss"
+      ],
+      "relocations_by_type": {
+        "1027": 298521,
+        "1025": 34,
+        "257": 5614,
+        "1026": 874
+      },
+      "relr_relocations": 0,
+      "initializer_slots": 6022,
+      "init_offset": "0x30",
+      "addresses_relative_to_module": true
+    },
+    {
+      "module": "subsdk0",
+      "input_sha256": "16f53a607b788aadb95019914a2754206771f74991458bf06a0cff69d53ad83a",
+      "module_id": "5a7ada8dd7447c10aa244944f64d0aff17c50539000000000000000000000000",
+      "segments": [
+        {
+          "name": ".text",
+          "file_offset": 257,
+          "memory_offset": 0,
+          "memory_size": 3582656,
+          "stored_size": 2434902,
+          "compressed": true,
+          "sha256": "48d136465dc1a9e38f967b87d812c37bc1170afb637271aeab27dcb57f59ff0a",
+          "hash_verified": true
+        },
+        {
+          "name": ".rodata",
+          "file_offset": 2435159,
+          "memory_offset": 3584000,
+          "memory_size": 2447056,
+          "stored_size": 1070658,
+          "compressed": true,
+          "sha256": "adc282cd320d9656caed09ceb7a16c45b52d16af0566529ba2e535a50c411773",
+          "hash_verified": true
+        },
+        {
+          "name": ".data",
+          "file_offset": 3505817,
+          "memory_offset": 6033408,
+          "memory_size": 198344,
+          "stored_size": 16507,
+          "compressed": true,
+          "sha256": "a71b7eb7fdbaa71206f489b19a34cba95df20297ab17278d89aad3d234800596",
+          "hash_verified": true
+        }
+      ],
+      "bss_size": 1161528,
+      "mod0": "0x8",
+      "dynamic": "0x5e74d0",
+      "symbols": 11514,
+      "imports": 650,
+      "exports": 10863,
+      "needed": [],
+      "relocations_by_type": {
+        "1027": 1673,
+        "1025": 1028,
+        "257": 12697,
+        "1026": 3779
+      },
+      "relr_relocations": 0,
+      "initializer_slots": 44,
+      "init_offset": "0x30",
+      "addresses_relative_to_module": true
+    },
+    {
+      "module": "sdk",
+      "input_sha256": "31ce67e8701584ba812dceeae9b590d7a6ad642bcb5aa74d2fe3ea5c5474250d",
+      "module_id": "ad3fdfbd62a5f4b082d385ffe420d4400abb831d000000000000000000000000",
+      "segments": [
+        {
+          "name": ".text",
+          "file_offset": 257,
+          "memory_offset": 0,
+          "memory_size": 5503424,
+          "stored_size": 3063679,
+          "compressed": true,
+          "sha256": "6bdef3d1e640f5d75e01c00453940a65bd61db747c8e6026cf95916e0f9d4169",
+          "hash_verified": true
+        },
+        {
+          "name": ".rodata",
+          "file_offset": 3063936,
+          "memory_offset": 5505024,
+          "memory_size": 6595816,
+          "stored_size": 2263283,
+          "compressed": true,
+          "sha256": "dbc780baa941306bd3f5713b05bce38e177daccfd50363beb34cb18ac05bfef8",
+          "hash_verified": true
+        },
+        {
+          "name": ".data",
+          "file_offset": 5327219,
+          "memory_offset": 12103680,
+          "memory_size": 6684912,
+          "stored_size": 45340,
+          "compressed": true,
+          "sha256": "ea0033fd6a223cbff67c347a484f6ca81aa1ddc49c693d080b9971c690c7a5c7",
+          "hash_verified": true
+        }
+      ],
+      "bss_size": 700176,
+      "mod0": "0x8",
+      "dynamic": "0x11d85d0",
+      "symbols": 25042,
+      "imports": 13,
+      "exports": 25028,
+      "needed": [],
+      "relocations_by_type": {
+        "1027": 9558,
+        "1025": 1091,
+        "257": 12589,
+        "1026": 7986
+      },
+      "relr_relocations": 0,
+      "initializer_slots": 109,
+      "init_offset": "0x30",
+      "addresses_relative_to_module": true
+    }
+  ],
+  "import_edges": 1592,
+  "resolved_import_edges": 1555,
+  "unresolved_imports": [
+    {
+      "importer": "rtld",
+      "symbol": "__EX_end",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "rtld",
+      "symbol": "__EX_start",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "rtld",
+      "symbol": "__got_end",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "rtld",
+      "symbol": "__got_start",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "rtld",
+      "symbol": "__rel_dyn_end",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "rtld",
+      "symbol": "__rel_dyn_start",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "rtld",
+      "symbol": "__rel_plt_end",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "rtld",
+      "symbol": "__rel_plt_start",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "rtld",
+      "symbol": "__rela_dyn_end",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "rtld",
+      "symbol": "__rela_dyn_start",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "rtld",
+      "symbol": "__rela_plt_end",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "rtld",
+      "symbol": "__rela_plt_start",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "rtld",
+      "symbol": "__tbss_align_abs",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "rtld",
+      "symbol": "__tbss_align_rel",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "rtld",
+      "symbol": "__tdata_align_abs",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "rtld",
+      "symbol": "__tdata_align_rel",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "main",
+      "symbol": "__rel_dyn_end",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "main",
+      "symbol": "__rel_dyn_start",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "main",
+      "symbol": "__rel_plt_end",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "main",
+      "symbol": "__rel_plt_start",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "main",
+      "symbol": "glslcCompile",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "main",
+      "symbol": "glslcCompilePreSpecialized",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "main",
+      "symbol": "glslcCompileSpecialized",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "main",
+      "symbol": "glslcFinalize",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "main",
+      "symbol": "glslcGetDefaultOptions",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "main",
+      "symbol": "glslcGetVersion",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "main",
+      "symbol": "glslcInitialize",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "main",
+      "symbol": "glslcSetAllocator",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "subsdk0",
+      "symbol": "__rel_dyn_end",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "subsdk0",
+      "symbol": "__rel_dyn_start",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "subsdk0",
+      "symbol": "__rel_plt_end",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "subsdk0",
+      "symbol": "__rel_plt_start",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "sdk",
+      "symbol": "__rel_dyn_end",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "sdk",
+      "symbol": "__rel_dyn_start",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "sdk",
+      "symbol": "__rel_plt_end",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "sdk",
+      "symbol": "__rel_plt_start",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "sdk",
+      "symbol": "nnosGetDefaultUserExceptionStackForApplication",
+      "weak": true,
+      "providers": []
+    }
+  ],
+  "note": "Export candidates are static; runtime symbol precedence has not been validated"
+}

@@ -1,0 +1,69 @@
+diff --git a/runtime/core/main.c b/runtime/core/main.c
+index 7fdf7d1..60eaf9f 100644
+--- a/runtime/core/main.c
++++ b/runtime/core/main.c
+@@ -223,0 +224,10 @@ int snx_main(int argc, char** argv) {
++    /* ACNH research bridge: reuse a verified local extraction without copying
++       its RomFS for every diagnostic build. No input bytes are modified here. */
++    const char* data_override = getenv("SNX_DATA_DIR");
++    if (data_override && *data_override) {
++        size_t len = strlen(data_override);
++        if (len > sizeof g_datadir - 2) fatal("SNX_DATA_DIR is too long.");
++        memcpy(g_datadir, data_override, len);
++        if (data_override[len - 1] != '/' && data_override[len - 1] != '\\') g_datadir[len++] = '/';
++        g_datadir[len] = 0;
++    }
+diff --git a/runtime/gpu/vk/renderer.c b/runtime/gpu/vk/renderer.c
+index e69ff4c..dd80626 100644
+--- a/runtime/gpu/vk/renderer.c
++++ b/runtime/gpu/vk/renderer.c
+@@ -190,0 +191,7 @@ static void vkr_present_buffer(u64 cpu_addr, u32 w, u32 h, u32 pitch, u32 layout
++        if (getenv("SNX_PRESENT_TRACE")) {
++            static unsigned samples;
++            if (samples++ < 12 || g_vk_present % 600 == 0)
++                LOG("ACNH present trace: cpu=%llx size=%ux%u pitch=%u fmt=%x source=%s gva=%llx\n",
++                    (unsigned long long)cpu_addr, w, h, pitch, fmt, src ? "render-target" : "cpu",
++                    (unsigned long long)(src ? src->gva : 0));
++        }
+@@ -376,0 +384,15 @@ static u64 vkr_screenshot(const char* path) {
++    const char* rt_dir = getenv("SNX_RT_DUMP_DIR");
++    if (rt_dir && *rt_dir) {
++        Surf* surfaces[24];
++        int count = vk_rt_debug_list(surfaces, 24);
++        for (int i = 0; i < count; i++) {
++            Surf* s = surfaces[i];
++            char output[1200];
++            int length = snprintf(output, sizeof output, "%s/%016llx_%ux%u", rt_dir,
++                                  (unsigned long long)s->gva, s->w, s->h);
++            if (length < 0 || (size_t)length >= sizeof output) continue;
++            u64 rt_hash = surf_save(s, 0, 0, s->w, s->h, output);
++            LOG("ACNH render target trace: %llx %ux%u hash=%llx\n",
++                (unsigned long long)s->gva, s->w, s->h, (unsigned long long)rt_hash);
++        }
++    }
+diff --git a/runtime/gpu/vk/surface.c b/runtime/gpu/vk/surface.c
+index 81756d3..8d46be7 100644
+--- a/runtime/gpu/vk/surface.c
++++ b/runtime/gpu/vk/surface.c
+@@ -433,0 +434,4 @@ Surf* vk_rt_for_cpu(u64 cpu_addr, u32 w, u32 h) {
++            if (getenv("SNX_PRESENT_TRACE") && g_vk_present % 600 == 0)
++                LOG("ACNH candidate trace: cpu=%llx gva=%llx size=%ux%u exact=%d used=%llu drawn=%u writes=%u\n",
++                    (unsigned long long)cpu_addr, (unsigned long long)s->gva, s->w, s->h, exact,
++                    (unsigned long long)s->last_used, s->drawn_at, s->wgen);
+@@ -442,0 +447,10 @@ Surf* vk_rt_for_cpu(u64 cpu_addr, u32 w, u32 h) {
++int vk_rt_debug_list(Surf** out, int capacity) {
++    int count = 0;
++    for (int k = 0; k < SURFH && count < capacity; k++)
++        for (Surf* s = g_surfh[k]; s && count < capacity; s = s->next)
++            if (s->is_rt && !s->f.depth && !s->f.is_int && !(s->gva >> 63) &&
++                s->layout != VK_IMAGE_LAYOUT_UNDEFINED && s->w && s->h && s->w <= 1920 && s->h <= 1080)
++                out[count++] = s;
++    return count;
++}
++
+diff --git a/runtime/gpu/vk/vk.h b/runtime/gpu/vk/vk.h
+index f8978c6..5323d22 100644
+--- a/runtime/gpu/vk/vk.h
++++ b/runtime/gpu/vk/vk.h
+@@ -189,0 +190 @@ Surf* vk_rt_for_cpu(u64 cpu_addr, u32 w, u32 h); /* the render target the guest
++int vk_rt_debug_list(Surf** out, int capacity); /* bounded diagnostic readback candidates */

@@ -1,0 +1,283 @@
+{
+  "version_id": "3.0.3",
+  "module_order": [
+    "rtld",
+    "main",
+    "subsdk0",
+    "sdk"
+  ],
+  "npdm_sha256": "0fc17cae37a3ff9337301b30cc2dc8a785248b0a0011503ca197f46d996e6a94",
+  "modules": [
+    {
+      "module": "rtld",
+      "input_sha256": "ff7ca6f5d242a79d31aa9d271c177169aa2a19e8a70ec2dac27102585b663c71",
+      "module_id": "283033deea3fc0b60104a4790098b9ccdb62d006000000000000000000000000",
+      "segments": [
+        {
+          "name": ".text",
+          "file_offset": 263,
+          "memory_offset": 0,
+          "memory_size": 9536,
+          "stored_size": 7720,
+          "compressed": true,
+          "sha256": "cec59e4c23b7490a575ade3f4d6666998ecbfa6e548245a8757b02a75e178c51",
+          "hash_verified": true
+        },
+        {
+          "name": ".rodata",
+          "file_offset": 7983,
+          "memory_offset": 12288,
+          "memory_size": 2604,
+          "stored_size": 1768,
+          "compressed": true,
+          "sha256": "91be7b0838fc289dcdfbad38520447227f2f55f6c3daab2af65a85850b151e2c",
+          "hash_verified": true
+        },
+        {
+          "name": ".data",
+          "file_offset": 9751,
+          "memory_offset": 16384,
+          "memory_size": 4104,
+          "stored_size": 357,
+          "compressed": true,
+          "sha256": "117b69186eb8e145396cb2dbaeeeb643cb12c39a2a845b6b0c793131bcdcdaa8",
+          "hash_verified": true
+        }
+      ],
+      "bss_size": 4088,
+      "mod0": "0x301c",
+      "dynamic": "0x4008",
+      "symbols": 3,
+      "symbol_count_basis": "DT_GNU_HASH terminal chain",
+      "imports": 2,
+      "exports": 0,
+      "needed": [],
+      "relocations_by_type": {
+        "1025": 1,
+        "1026": 1
+      },
+      "relr_relocations": 39,
+      "initializer_slots": 0,
+      "init_offset": "0x1d40",
+      "addresses_relative_to_module": true
+    },
+    {
+      "module": "main",
+      "input_sha256": "68c7fbeda353f8e4a283eac6a9b99e713e72a327048214bf6a4e7214616b87c1",
+      "module_id": "ff1d1c05670db6021c85b624a710b96300000000000000000000000000000000",
+      "segments": [
+        {
+          "name": ".text",
+          "file_offset": 261,
+          "memory_offset": 0,
+          "memory_size": 66088432,
+          "stored_size": 35718445,
+          "compressed": true,
+          "sha256": "cd63b484750f5467b0ae0f504cc251831b653c2aea37ab5692741360d5b73606",
+          "hash_verified": true
+        },
+        {
+          "name": ".rodata",
+          "file_offset": 35718706,
+          "memory_offset": 66088960,
+          "memory_size": 8507900,
+          "stored_size": 4838139,
+          "compressed": true,
+          "sha256": "7f0f069d2b3d9a201115d2dc1cdcf4fa293e456a7198ce61a698e57c89e0f41e",
+          "hash_verified": true
+        },
+        {
+          "name": ".data",
+          "file_offset": 40556845,
+          "memory_offset": 74600448,
+          "memory_size": 4401456,
+          "stored_size": 1395479,
+          "compressed": true,
+          "sha256": "50358262bf86f8e20d48e64caf27eaae741c9516f8f69063fed9e9af124d898c",
+          "hash_verified": true
+        }
+      ],
+      "bss_size": 15394512,
+      "mod0": "0x3f0704c",
+      "dynamic": "0x4ab1bb8",
+      "symbols": 1068,
+      "symbol_count_basis": "DT_HASH nchain",
+      "imports": 1015,
+      "exports": 52,
+      "needed": [
+        "multimedia.nss",
+        "nnSdk.nss"
+      ],
+      "relocations_by_type": {
+        "257": 6556,
+        "1025": 30,
+        "1026": 982
+      },
+      "relr_relocations": 373225,
+      "initializer_slots": 8748,
+      "init_offset": "0x10",
+      "addresses_relative_to_module": true
+    },
+    {
+      "module": "subsdk0",
+      "input_sha256": "3cdbe2b9d49dc072ea8e0d84b490210472237d6749e7aab8b80fd735e551710b",
+      "module_id": "6c6ceace7be94107a8bd440bc2d6070469bc90ce000000000000000000000000",
+      "segments": [
+        {
+          "name": ".text",
+          "file_offset": 267,
+          "memory_offset": 0,
+          "memory_size": 3501008,
+          "stored_size": 2429712,
+          "compressed": true,
+          "sha256": "13e77810a12e6d9e11575e0ca78d98860cd919f6a65b2aeab9693331bf4e1d3d",
+          "hash_verified": true
+        },
+        {
+          "name": ".rodata",
+          "file_offset": 2429979,
+          "memory_offset": 3502080,
+          "memory_size": 1876516,
+          "stored_size": 906278,
+          "compressed": true,
+          "sha256": "6a832568edb885c6d72af37bd4e196cefb6713f2f009856ad1e88def31fb938e",
+          "hash_verified": true
+        },
+        {
+          "name": ".data",
+          "file_offset": 3336257,
+          "memory_offset": 5382144,
+          "memory_size": 199560,
+          "stored_size": 30804,
+          "compressed": true,
+          "sha256": "e135107e48205f81a28ea89f176b0e38473860d21b4e37d7049bad77dd0d58c2",
+          "hash_verified": true
+        }
+      ],
+      "bss_size": 1152120,
+      "mod0": "0x357020",
+      "dynamic": "0x543530",
+      "symbols": 10110,
+      "symbol_count_basis": "DT_GNU_HASH terminal chain",
+      "imports": 663,
+      "exports": 9446,
+      "needed": [],
+      "relocations_by_type": {
+        "257": 10927,
+        "1025": 905,
+        "1026": 3816
+      },
+      "relr_relocations": 3424,
+      "initializer_slots": 45,
+      "init_offset": "0x20",
+      "addresses_relative_to_module": true
+    },
+    {
+      "module": "sdk",
+      "input_sha256": "ba21e47098e046eb1a74c6498a10bb996566e41abfce796f2dff1aa59c8aef21",
+      "module_id": "a226048605d3597f90cb1067d141cd36647b90cd000000000000000000000000",
+      "segments": [
+        {
+          "name": ".text",
+          "file_offset": 262,
+          "memory_offset": 0,
+          "memory_size": 6692912,
+          "stored_size": 3934654,
+          "compressed": true,
+          "sha256": "457c72caa9c21a4828d09dccfad02284a0574f29104173ba4897fb3367b87b18",
+          "hash_verified": true
+        },
+        {
+          "name": ".rodata",
+          "file_offset": 3934916,
+          "memory_offset": 6696960,
+          "memory_size": 5024308,
+          "stored_size": 2182567,
+          "compressed": true,
+          "sha256": "8f515d3a41f3d745c88f661426e47bf71876b66778d6bfda7e24e91c5f5f9d5d",
+          "hash_verified": true
+        },
+        {
+          "name": ".data",
+          "file_offset": 6117483,
+          "memory_offset": 11722752,
+          "memory_size": 349416,
+          "stored_size": 80588,
+          "compressed": true,
+          "sha256": "7d8478e5ac9ccb6b510086134177704bb62363044030fac444318448c4381a45",
+          "hash_verified": true
+        }
+      ],
+      "bss_size": 850712,
+      "mod0": "0x66301c",
+      "dynamic": "0xb67318",
+      "symbols": 23034,
+      "symbol_count_basis": "DT_GNU_HASH terminal chain",
+      "imports": 8,
+      "exports": 23025,
+      "needed": [],
+      "relocations_by_type": {
+        "1025": 1079,
+        "257": 10135,
+        "1026": 7811
+      },
+      "relr_relocations": 15005,
+      "initializer_slots": 83,
+      "init_offset": "0x400",
+      "addresses_relative_to_module": true
+    }
+  ],
+  "import_edges": 1688,
+  "resolved_import_edges": 1680,
+  "unresolved_imports": [
+    {
+      "importer": "main",
+      "symbol": "glslcCompilePreSpecialized",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "main",
+      "symbol": "glslcCompileSpecialized",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "main",
+      "symbol": "glslcInitialize",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "main",
+      "symbol": "glslcFinalize",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "main",
+      "symbol": "glslcCompile",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "main",
+      "symbol": "glslcGetVersion",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "main",
+      "symbol": "glslcSetAllocator",
+      "weak": true,
+      "providers": []
+    },
+    {
+      "importer": "main",
+      "symbol": "glslcGetDefaultOptions",
+      "weak": true,
+      "providers": []
+    }
+  ],
+  "note": "Export candidates are static; runtime symbol precedence has not been validated"
+}
