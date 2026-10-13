@@ -1,5 +1,6 @@
 """Check every local Git blob for binary/private material before publication."""
 from __future__ import annotations
+import argparse
 import json
 import re
 import subprocess
@@ -15,6 +16,11 @@ def run(*args, input=None):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--report', type=Path, default=ROOT/'metadata/public-history-verification.json')
+    args = parser.parse_args()
+    destination = args.report.resolve()
+    destination.relative_to(ROOT)
     objects = [row.split() for row in run('cat-file', '--batch-all-objects',
                '--batch-check=%(objectname) %(objecttype) %(objectsize)').decode().splitlines()]
     blobs = [row for row in objects if row[1] == 'blob']
@@ -52,8 +58,9 @@ def main():
             errors.append(dict(object=sha, paths=paths.get(sha, []), reasons=reasons))
     report = dict(passed=not errors, git_objects_checked=len(objects), historical_blobs_checked=len(blobs),
         commits_checked=sum(row[1] == 'commit' for row in objects), errors=errors,
+        audited_head=run('rev-parse', 'HEAD').decode().strip(),
         scope='All local Git objects including unreachable blobs; path/binary/secret checks plus separate source/license review. No legal conclusion.')
-    destination = ROOT/'metadata/public-history-verification.json'
+    destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8', newline='\n')
     print(json.dumps(report))
     if errors:
