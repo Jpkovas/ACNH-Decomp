@@ -1,0 +1,28 @@
+{
+  "version_id": "1.0.0",
+  "module": "main",
+  "sha256": "f8d248109ff72999b4600ae3749f8c7397fb960f7ad3ab8dee3018ae9e14e900",
+  "module_id": "7fc1baff976aeca414520cb89f4616cb00000000000000000000000000000000",
+  "verified_utc": "2026-10-13T03:41:07.833187+00:00",
+  "fresh_import_matches_initial": true,
+  "architecture": "AARCH64:LE:64:v8A",
+  "image_base": "7100000000",
+  "initialized_segments_fully_covered": true,
+  "mod0_bss": {
+    "start": "0x333df00",
+    "end": "0x3ab6a50",
+    "size": 7834448
+  },
+  "nso_header_bss_size": 7835960,
+  "bss_note": "NSO header reservation includes alignment/padding; loader BSS follows the independently checked MOD0 range",
+  "relative_relocations_verified": {
+    "version_id": "1.0.0",
+    "relative_relocations_checked": 298521,
+    "mismatches": 0,
+    "failures": []
+  },
+  "limitations": [
+    "3.0.3 loader does not label a separate GOT block; original data ranges and relative relocation values are verified",
+    "Autoanalysis signatures and discovered function boundaries remain provisional"
+  ]
+}

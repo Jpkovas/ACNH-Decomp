@@ -1,0 +1,13 @@
+{
+  "version_id": "3.0.3",
+  "flow": "AI_NPC_Doc_Airport.bfevfl",
+  "input_sha256": "a4a0ee217e1af447ac0e12fed50edb1d03909b27526511e9e1b092e50c88e8f0",
+  "rebuilt_sha256": "89f0b88094a3e33fd17f2296896f83ac72a95fc42e1726878111c6e54e3c4903",
+  "input_size": 3472,
+  "rebuilt_size": 3464,
+  "same_bytes": false,
+  "rooted_graph_equivalent": true,
+  "reachable_nodes": 11,
+  "entries": 1,
+  "equivalence_scope": "serialized actions, queries, parameters, branches, entry variables, rooted graph; engine handlers not emulated"
+}

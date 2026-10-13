@@ -1,0 +1,12 @@
+{
+  "version_id": "1.0.0",
+  "message_language_sample": "USen",
+  "msbt_files": 1967,
+  "messages_indexed": 68959,
+  "msbt_roundtrips": 1967,
+  "pbc_files": 783,
+  "pbc_grids_validated": 783,
+  "save_schema_files": 0,
+  "eventflow_info_files": 2,
+  "errors": 0
+}

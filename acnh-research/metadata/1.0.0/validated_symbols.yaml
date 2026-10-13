@@ -1,0 +1,79 @@
+version_id: 1.0.0
+symbols:
+- address: '0x710000ac10'
+  size: 8
+  name: RE_constant_zero
+  name_status: inferred
+  confidence: high
+  reviewed: true
+  signature_status: chosen C++ interface; original parameters and signedness unknown
+  evidence:
+  - R_AARCH64_RELATIVE pointer at 0x710301ca30
+  - assembly checked
+  - 131 differential cases
+  - 8/8 matching bytes
+  notes: No proven EventFlow or class membership
+  version_id: 1.0.0
+  module: main
+  kind: function
+  reviewer: Codex technical review; independent human review not recorded
+- address: '0x7100001bf0'
+  size: 300
+  name: RE_murmur3_cstr
+  name_status: inferred
+  confidence: high
+  reviewed: true
+  signature_status: observed x0 C string, w1 seed, w0 result; const and noexcept are
+    reconstruction choices
+  evidence:
+  - assembly constants and control flow
+  - MurmurHash3 primary-source comparison
+  - 322 synthetic cases at 3 alignments
+  - 959 same-version identifiers
+  - null-pointer fault comparison
+  notes: Behavior verified under stated NUL-terminated-input contract; not binary
+    matching
+  version_id: 1.0.0
+  module: main
+  kind: function
+  reviewer: Codex technical review; independent human review not recorded
+- address: '0x7100406390'
+  size: null
+  name: RE_EventFlagInt_candidate
+  name_status: inferred
+  confidence: medium
+  reviewed: partial
+  signature_status: x0 points to query object; full backend contract not reconstructed
+  evidence:
+  - constructor 0x7100406280 labels AccessKey, Border and FlagCheckType
+  - vtable 0x7103056660 slot 0x30
+  - 3806 terminal-region differential cases
+  - same-version Murmur3 key 0x1bb353cb -> factory 0x7100456bb0 -> constructor ->
+    vtable -> handler
+  notes: Logical binding identity supported by factory chain; original C++ class declaration
+    and full backend remain unknown
+  binding_identity_confidence: high
+  version_id: 1.0.0
+  module: main
+  kind: function
+  reviewer: Codex technical review; independent human review not recorded
+- address: '0x7100406280'
+  size: 208
+  name: RE_EventFlagInt_ctor_candidate
+  name_status: inferred
+  confidence: medium
+  reviewed: partial
+  signature_status: x0 self; constructor calls and parameter registrations reviewed
+  evidence:
+  - same-version string xrefs
+  - vptr assignment
+  - default parameter stores
+  - same-version Murmur3 key 0x1bb353cb -> factory 0x7100456bb0 -> constructor ->
+    vtable -> handler
+  notes: Logical binding identity supported by factory chain; original C++ class declaration
+    and full backend remain unknown
+  binding_identity_confidence: high
+  version_id: 1.0.0
+  module: main
+  kind: function
+  reviewer: Codex technical review; independent human review not recorded

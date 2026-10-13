@@ -1,0 +1,11 @@
+{
+  "version_id": "1.0.0",
+  "elf_symbols": 941,
+  "relative_relocations": 298521,
+  "itanium_rtti_classes": 1467,
+  "inheritance_edges": 1372,
+  "vtable_candidates": 1325,
+  "object_layouts_validated": 0,
+  "relr_present": false,
+  "address_basis": "Ghidra image base 0x7100000000, offsets independently parsed from same NSO"
+}

@@ -1,0 +1,57 @@
+{
+  "version_id": "1.0.0",
+  "module": "main",
+  "handler_address": "0x7100406390",
+  "constructor_address": "0x7100406280",
+  "vtable_address": "0x7103056660",
+  "handler_slot": "0x30",
+  "validated_region": "0x710040685c..0x7100406a2c",
+  "terminal_region_sha256": "57902b894d14ab025c3419a9474fe95e5699db79d09254db4525ebe0b9f363d4",
+  "differential_cases": 3806,
+  "input_pairs": 346,
+  "check_types": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    4294967295
+  ],
+  "object_write_divergences": 0,
+  "original_arm64_vs_native_vs_independent_oracle": true,
+  "comparison_modes": [
+    "not_equal",
+    "equal",
+    "unsigned_less_equal",
+    "unsigned_less",
+    "unsigned_greater_equal",
+    "unsigned_greater",
+    "popcount_less_than_signed_border"
+  ],
+  "parameters_validated": {
+    "border": {
+      "offset": "0x100",
+      "size": 4
+    },
+    "check_type": {
+      "offset": "0x128",
+      "size": 4
+    }
+  },
+  "name_status": "inferred",
+  "name_confidence": "high for logical binding identity; original C++ class name unknown",
+  "behavior_confidence": "high",
+  "inferred_binding": "EventFlagInt; same-version constructor labels AccessKey, Border, FlagCheckType and BindInfo maps NpcInt/SystemInt aliases to EventFlagInt",
+  "limitations": [
+    "Only terminal comparison region validated against original ARM64; full handler includes access-key parsing and multiple SaveIO backends",
+    "C++ query uses an injected value reader; backend effects and original C++ declaration are not proved",
+    "Base Ghidra initially omitted the virtual handler and some indirect-switch blocks; target addresses were independently located through its own relocation/data/assembly chain",
+    "Only the terminal contract is compared between versions; backend behavior is not transferred"
+  ],
+  "binding_chain_evidence": "metadata/1.0.0/factory-bindings-summary.json"
+}

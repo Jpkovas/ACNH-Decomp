@@ -1,0 +1,58 @@
+version_id: 3.0.3
+symbols:
+- address: '0x71005bd550'
+  size: 260
+  name: RE_murmur3_cstr
+  name_status: inferred
+  confidence: high
+  reviewed: true
+  signature_status: observed x0 NUL-terminated bytes, w1 seed, w0 result; const/noexcept
+    are reconstruction choices
+  evidence:
+  - independent target constant-load search and full assembly review
+  - 322 synthetic cases at three alignments
+  - 2087 target serialized identifiers
+  - two null-pointer faults verified
+  - objdiff 22.476923 percent; not exact matching
+  notes: Behavior verified under same delimited contract as reference; original C++
+    name unknown
+  version_id: 3.0.3
+  module: main
+  kind: function
+  reviewer: Codex technical review; independent human review not recorded
+- address: '0x7100f183d0'
+  size: null
+  name: RE_EventFlagInt_query
+  name_status: inferred
+  confidence: high
+  reviewed: partial
+  signature_status: x0 query object; terminal predicate reviewed, full backend unproved
+  evidence:
+  - table key 0x1bb353cb independently located at 0x710487fe70
+  - factory 0x7101049734 stores AccessKey, Border, FlagCheckType labels
+  - derived vptr 0x71048718f0 slot 0x30
+  - 3806 target-original ARM64/oracle/native terminal cases
+  notes: Logical binding and terminal behavior checked independently in target; original
+    C++ class and full backend unknown
+  version_id: 3.0.3
+  module: main
+  kind: function
+  reviewer: Codex technical review; independent human review not recorded
+- address: '0x7101049734'
+  size: null
+  name: RE_EventFlagInt_factory
+  name_status: inferred
+  confidence: high
+  reviewed: partial
+  signature_status: Factory allocates 0x138 bytes with alignment 8; construction inlined
+  evidence:
+  - same-version factory table relocation at 0x710487fe78
+  - allocation constants
+  - direct vptr assignment and parameter stores
+  - same-version BindInfo aliases
+  notes: Base separate constructor is folded into this target factory. Allocator selection
+    paths have not been behaviorally reconstructed
+  version_id: 3.0.3
+  module: main
+  kind: function
+  reviewer: Codex technical review; independent human review not recorded

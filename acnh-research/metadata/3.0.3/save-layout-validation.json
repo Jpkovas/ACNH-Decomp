@@ -1,0 +1,13 @@
+{
+  "version_id": "3.0.3",
+  "files_checked": 80,
+  "layout_occurrences": 6688,
+  "field_occurrences": 23644,
+  "nested_layout_checks": 11543,
+  "overlapping_ranges": 0,
+  "padding_gaps": 2712,
+  "structural_roundtrips": 80,
+  "errors": 0,
+  "hash_names": "preserved as numeric identifiers; historical names not promoted",
+  "coverage": "all System/Smmh BYML files in this RomFS; schema offsets only, no real save instance or executable consumer validated"
+}

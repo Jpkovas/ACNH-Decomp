@@ -1,0 +1,43 @@
+{
+  "format": "NSO0",
+  "version_id": "1.0.0",
+  "module": "main",
+  "input_sha256": "f8d248109ff72999b4600ae3749f8c7397fb960f7ad3ab8dee3018ae9e14e900",
+  "file_size": 24990531,
+  "module_id": "7fc1baff976aeca414520cb89f4616cb00000000000000000000000000000000",
+  "header_flags": 63,
+  "segments": [
+    {
+      "name": ".text",
+      "file_offset": 257,
+      "memory_offset": 0,
+      "memory_size": 35723872,
+      "stored_size": 18439584,
+      "compressed": true,
+      "sha256": "9c9b45d8e7a58706ca59e7244b3aebac2325ef98faa205e007974eeeb2f758e9",
+      "hash_verified": true
+    },
+    {
+      "name": ".rodata",
+      "file_offset": 18439841,
+      "memory_offset": 35725312,
+      "memory_size": 14718844,
+      "stored_size": 6441643,
+      "compressed": true,
+      "sha256": "ed2a3e8fff6192db71f758150488cde6581c8963ddd355e9f0f10041e469c6ef",
+      "hash_verified": true
+    },
+    {
+      "name": ".data",
+      "file_offset": 24881484,
+      "memory_offset": 50446336,
+      "memory_size": 3284680,
+      "stored_size": 109047,
+      "compressed": true,
+      "sha256": "8fd7755d02c36e78f54bf777bfe0b5b523d469c84b39a40f7be27b5f1062e2d5",
+      "hash_verified": true
+    }
+  ],
+  "bss_size": 7835960,
+  "address_basis": "relative to image base; Ghidra base recorded separately"
+}

@@ -1,0 +1,8 @@
+{
+  "version_id": "1.0.0",
+  "functions_annotated": 4,
+  "annotations_sha256": "b68b1f5c3d45541dbc20f0024000e0a33b0337e63c1df163e5cf7dc0fd00d77d",
+  "partial_parameter_slices_added": 1,
+  "function_signatures_overridden": 0,
+  "whole_object_layouts_asserted": 0
+}

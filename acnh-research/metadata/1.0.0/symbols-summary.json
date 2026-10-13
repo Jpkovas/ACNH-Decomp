@@ -1,0 +1,11 @@
+{
+  "version_id": "1.0.0",
+  "functions": 60728,
+  "external_functions": 876,
+  "rtti_classes": 1467,
+  "functions_reviewed_in_full": 2,
+  "partially_reviewed_functions": 2,
+  "unresolved_call_graph_addresses": 0,
+  "raw_inventory": "private/outputs/1.0.0/symbols/symbols.yaml",
+  "unresolved_addresses_are_research_items": true
+}

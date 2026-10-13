@@ -1,0 +1,8 @@
+{
+  "usage": "base extraction; modern fork used for target",
+  "tool": "SciresM/hactool",
+  "version": "1.4.0",
+  "binary_sha256": "01e6ccb916c74071645df84f13e05d0185c9b2f5d748e469c84a157a53395cf9",
+  "source": "https://github.com/SciresM/hactool/releases/tag/1.4.0",
+  "upstream_digest_verified": false
+}

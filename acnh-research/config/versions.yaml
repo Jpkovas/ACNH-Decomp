@@ -1,0 +1,19 @@
+# Display versions confirmed from extracted NACP controls.
+schema_version: 1
+reference:
+  version_id: '1.0.0'
+  filename_claim: base v0
+  display_version: '1.0.0'
+  status: extracted_and_verified
+  display_version_evidence: 'control.nacp offset 0x3060'
+  preferred_historical_reference: '1.1.4'
+target:
+  version_id: '3.0.3'
+  filename_claim: '3.0.3'
+  package_version_claim: 2228224
+  display_version: '3.0.3'
+  status: extracted_and_verified
+  display_version_evidence: 'control.nacp offset 0x3060'
+historical_offsets:
+  version_id: '1.1.4'
+  may_apply_to_current_inputs: false

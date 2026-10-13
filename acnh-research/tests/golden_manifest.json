@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "versions": {
+    "1.0.0": {
+      "executable_sha256": "f8d248109ff72999b4600ae3749f8c7397fb960f7ad3ab8dee3018ae9e14e900",
+      "reports": {
+        "bcsv-differential.json": {
+          "tables_verified": 164,
+          "fields_verified": 2048,
+          "cells_verified": 1116909,
+          "failures": []
+        },
+        "eventflow-summary.json": {
+          "parsed": 456,
+          "actions": 542,
+          "queries": 417,
+          "errors": 0
+        },
+        "resources-summary.json": {
+          "msbt_files": 1967,
+          "messages_indexed": 68959,
+          "msbt_roundtrips": 1967,
+          "pbc_grids_validated": 783,
+          "save_schema_files": 0,
+          "errors": 0
+        },
+        "roundtrip.json": {
+          "rooted_graph_equivalent": true,
+          "reachable_nodes": 3,
+          "entries": 1
+        },
+        "save-layout-validation.json": {
+          "files_checked": 0,
+          "field_occurrences": 0,
+          "structural_roundtrips": 0,
+          "errors": 0
+        },
+        "flag-int-validation.json": {
+          "differential_cases": 3806,
+          "object_write_divergences": 0,
+          "original_arm64_vs_native_vs_independent_oracle": true
+        },
+        "factory-bindings-summary.json": {
+          "table_entries": 463,
+          "bindings_matched": 391,
+          "binding_names_original_hash_checked": 444,
+          "collisions_in_tested_names": []
+        }
+      }
+    },
+    "3.0.3": {
+      "executable_sha256": "68c7fbeda353f8e4a283eac6a9b99e713e72a327048214bf6a4e7214616b87c1",
+      "reports": {
+        "bcsv-differential.json": {
+          "tables_verified": 234,
+          "fields_verified": 2898,
+          "cells_verified": 2300008,
+          "failures": []
+        },
+        "eventflow-summary.json": {
+          "parsed": 875,
+          "actions": 1201,
+          "queries": 886,
+          "errors": 0
+        },
+        "resources-summary.json": {
+          "msbt_files": 3086,
+          "messages_indexed": 120498,
+          "msbt_roundtrips": 3086,
+          "pbc_grids_validated": 1012,
+          "save_schema_files": 80,
+          "errors": 0
+        },
+        "roundtrip.json": {
+          "rooted_graph_equivalent": true,
+          "reachable_nodes": 11,
+          "entries": 1
+        },
+        "save-layout-validation.json": {
+          "files_checked": 80,
+          "field_occurrences": 23644,
+          "structural_roundtrips": 80,
+          "errors": 0
+        },
+        "flag-int-validation.json": {
+          "differential_cases": 3806,
+          "object_write_divergences": 0,
+          "original_arm64_vs_native_vs_independent_oracle": true
+        },
+        "identifier-hash-validation.json": {
+          "synthetic_cases": 322,
+          "observed_identifiers_checked": 2087,
+          "invalid_pointer_faults_verified": 2,
+          "original_arm64_vs_python_vs_native_vs_recompiled_arm64": true,
+          "exact_instruction_bytes": false
+        },
+        "factory-bindings-summary.json": {
+          "table_entries": 959,
+          "bindings_matched": 846,
+          "collisions_in_tested_names": []
+        }
+      }
+    }
+  }
+}

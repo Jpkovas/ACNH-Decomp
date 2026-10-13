@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "milestones_in_scope": ["M0", "M1", "M2", "M3", "M4", "M6"],
+  "excluded": [{"milestone": "M5", "item": "Elysium Crossing integration", "reason": "Explicit user instruction on 2026-10-12"}],
+  "whole_game_matching_promised": false,
+  "publish_proprietary_inputs": false,
+  "reference_version": "1.0.0",
+  "target_version": "3.0.3"
+}

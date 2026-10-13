@@ -1,0 +1,10 @@
+{
+  "version_id": "1.0.0",
+  "files": 456,
+  "parsed": 456,
+  "errors": 0,
+  "actions": 542,
+  "queries": 417,
+  "parameter_conflicts": 10,
+  "functions_csv_scope": "observed signatures; return domains unverified"
+}

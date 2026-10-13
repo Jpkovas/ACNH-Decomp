@@ -1,0 +1,147 @@
+{
+  "sources": [
+    {
+      "url": "https://github.com/Treeki/CylindricalEarth.git",
+      "name": "CylindricalEarth",
+      "commit": "bb09c0ee71a4aa6011de088b88ea55fdee0bf6e9",
+      "licenses": [
+        {
+          "path": "LICENSE",
+          "sha256": "bfde1fd94c3b17b89fbbfa6321660c8284f631bf126db1e0a32c897944a842db"
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/asteriation/acnh-eventflow-decompiler.git",
+      "name": "acnh-eventflow-decompiler",
+      "commit": "95f33afe29572649d94b820128d54b5026e1b191",
+      "licenses": [
+        {
+          "path": "LICENSE",
+          "sha256": "90c4573a023a80867b8896500dcf37f671afe6e80de03495241f1dafc0644517"
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/asteriation/acnh-eventflow-compiler.git",
+      "name": "acnh-eventflow-compiler",
+      "commit": "821b2b5f4e7c31ccdf46a7743ccfcd0e3219a4f8",
+      "licenses": [
+        {
+          "path": "LICENSE",
+          "sha256": "90c4573a023a80867b8896500dcf37f671afe6e80de03495241f1dafc0644517"
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/Adubbz/Ghidra-Switch-Loader.git",
+      "name": "Ghidra-Switch-Loader",
+      "commit": "5d80d195bf284f8ad5f2f9b66c3bdd5c67dd66a6",
+      "licenses": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "e1646cd7362ff322f7840af1841e0229c4e0840e593ca01ab00d5e47cc112af4"
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/zeldamods/evfl.git",
+      "name": "evfl",
+      "commit": "e996fb18b389d584811f7653ca0646074b404d59",
+      "licenses": [
+        {
+          "path": "LICENSE",
+          "sha256": "f763a6b20270761e1bef610e67ddbf575602703def2e7a721cccd7a09e8f676e"
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/zeldamods/sarc.git",
+      "name": "sarc",
+      "commit": "0d05c4c4f93e80c9013a501edd2910b4af10d342",
+      "licenses": [
+        {
+          "path": "LICENSE",
+          "sha256": "f763a6b20270761e1bef610e67ddbf575602703def2e7a721cccd7a09e8f676e"
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/encounter/objdiff.git",
+      "name": "objdiff",
+      "commit": "eed74b99c4e94dd154882259931201badc6fdbd1",
+      "licenses": [
+        {
+          "path": "LICENSE-APACHE",
+          "sha256": "cb78f33f16335f1c895cdf0a4995afcd4d17d405e69b40d11255d041215b6e90"
+        },
+        {
+          "path": "LICENSE-MIT",
+          "sha256": "16656b331e8f5e7b91221941d04c0a9ac61c004cb94d2e493e64c8b7941b1c21"
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/ACreTeam/ac-decomp.git",
+      "name": "ac-decomp",
+      "commit": "09ca8e8b5b24e6ab44047ee980cf0088ad7ecb4c",
+      "licenses": [
+        {
+          "path": "LICENSE",
+          "sha256": "4d2eef679d5faf924534bcc132646322e9a852ce50ae5616694e0b95f7b8275d"
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/KillzXGaming/Switch-Toolbox.git",
+      "name": "Switch-Toolbox",
+      "commit": "9fe41401d246d31c99fcbfdd0a7fe4253a95b31f",
+      "licenses": [
+        {
+          "path": "LICENSE",
+          "sha256": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809"
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/decompals/decompedia.git",
+      "name": "decompedia",
+      "commit": "4122af08b2050e1c5eea648541686f3afdc2c04f",
+      "licenses": []
+    },
+    {
+      "url": "https://github.com/encounter/dtk-template.git",
+      "name": "dtk-template",
+      "commit": "95a941f755919ebe50c1725a4ce73524470e7a02",
+      "licenses": [
+        {
+          "path": "LICENSE",
+          "sha256": "4d2eef679d5faf924534bcc132646322e9a852ce50ae5616694e0b95f7b8275d"
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/SciresM/hactool.git",
+      "name": "hactool",
+      "commit": "1d64a83450e025622f3468c28fc4164dad2c5ef6",
+      "licenses": [
+        {
+          "path": "LICENSE",
+          "sha256": "d4e3211d485d6e0d41d758ab134c9c617279515aa47434a15fe146aaf0c5e6b6"
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/borntohonk/hactool.git",
+      "name": "hactool-modern",
+      "commit": "cbce7e4ba6098b3cd851e7be40c0098ebda15837",
+      "licenses": [
+        {
+          "path": "LICENSE",
+          "sha256": "d4e3211d485d6e0d41d758ab134c9c617279515aa47434a15fe146aaf0c5e6b6"
+        }
+      ]
+    }
+  ],
+  "schema_version": 1
+}

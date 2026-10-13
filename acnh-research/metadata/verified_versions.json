@@ -1,0 +1,12 @@
+[
+  {
+    "package": "base",
+    "display_version": "1.0.0",
+    "evidence": "NACP display_version at 0x3060"
+  },
+  {
+    "package": "update",
+    "display_version": "3.0.3",
+    "evidence": "NACP display_version at 0x3060"
+  }
+]

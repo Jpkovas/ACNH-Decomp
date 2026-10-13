@@ -1,0 +1,9 @@
+{
+  "version_id": "3.0.3",
+  "tables_verified": 234,
+  "fields_verified": 2898,
+  "cells_verified": 2300008,
+  "failures": [],
+  "oracle": "CylindricalEarth bcsv.File(bcsv.Row)",
+  "scope": "every field byte slice in every row; semantic field types not inferred"
+}

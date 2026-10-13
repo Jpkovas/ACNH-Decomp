@@ -1,0 +1,18 @@
+{
+  "version_id": "3.0.3",
+  "tables_with_historical_same_version_specs": 0,
+  "fields_with_decoders_checked": 0,
+  "enum_cells_checked": 0,
+  "unknown_enum_cells": 0,
+  "decoder_conflict_fields": 0,
+  "message_reference_counts": {
+    "resolved": 15438,
+    "unresolved": 78,
+    "empty": 807,
+    "dynamic": 2
+  },
+  "message_language_sample": "USen",
+  "target_schema_policy": "no 1.0.0 decoder or enum transferred to 3.0.3",
+  "unresolved_messages": "retained for investigation; dynamic/random selection and archive naming can require further resolution",
+  "type_confidence": "decoder compatibility is observed; upstream field names and intended semantic types remain inferred"
+}

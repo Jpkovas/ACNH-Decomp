@@ -1,0 +1,32 @@
+{
+  "version_id": "3.0.3",
+  "module": "main",
+  "address": "0x71005bd550",
+  "relative_address": "0x5bd550",
+  "original_size": 260,
+  "compiled_size": 248,
+  "name": "acnh_murmur3_cstr",
+  "name_status": "inferred",
+  "confidence_behavior": "high",
+  "confidence_original_name": "unknown",
+  "original_sha256": "db2efc5788ce86b9f2f661441d2b8f9bc4b8189e45436b37f1ca2ccba36320c4",
+  "equivalent_to": "MurmurHash3 x86_32 over NUL-terminated bytes and uint32 seed",
+  "synthetic_cases": 322,
+  "alignments": 3,
+  "observed_identifiers_checked": 2087,
+  "invalid_pointer_faults_verified": 2,
+  "original_arm64_vs_python_vs_native_vs_recompiled_arm64": true,
+  "exact_instruction_bytes": false,
+  "objdiff_text_match_percent": 22.476923,
+  "flags": [
+    "--target=aarch64-none-elf",
+    "-O2",
+    "-ffreestanding",
+    "-fno-exceptions",
+    "-fno-rtti",
+    "-fno-stack-protector"
+  ],
+  "anchor": "Independent target constant-load search; entry after padding at 0x71005bd550; control flow and avalanche reviewed through ret at 0x71005bd650",
+  "precondition": "readable NUL-terminated byte string, length < 2^32; null pointer faults in original and reconstruction",
+  "objdiff_report": "private/outputs/3.0.3/identifier-hash/objdiff.json"
+}

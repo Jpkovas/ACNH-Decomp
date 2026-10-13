@@ -1,0 +1,77 @@
+{
+  "generated_utc": "2026-10-13T03:43:38.516847+00:00",
+  "versions": [
+    {
+      "version_id": "1.0.0",
+      "functions_discovered": 60728,
+      "functions_reviewed_in_full": 2,
+      "functions_reviewed_partially": 2,
+      "external_functions": 876,
+      "itanium_rtti_type_identities": 1467,
+      "executable_class_layouts_validated": 0,
+      "parameter_slices_validated": 1,
+      "bcsv_tables": 164,
+      "bcsv_cells_differential": 1116909,
+      "eventflows": 456,
+      "actions": 542,
+      "queries": 417,
+      "msbt_roundtrips": 1967,
+      "pbc_grids_validated": 783,
+      "save_schema_layout_occurrences": 0,
+      "save_schema_roundtrips": 0,
+      "eventflow_roundtrip_passed": true,
+      "relative_relocations_verified": 298521
+    },
+    {
+      "version_id": "3.0.3",
+      "functions_discovered": 95989,
+      "functions_reviewed_in_full": 1,
+      "functions_reviewed_partially": 2,
+      "external_functions": 985,
+      "itanium_rtti_type_identities": 1685,
+      "executable_class_layouts_validated": 0,
+      "parameter_slices_validated": 1,
+      "bcsv_tables": 234,
+      "bcsv_cells_differential": 2300008,
+      "eventflows": 875,
+      "actions": 1201,
+      "queries": 886,
+      "msbt_roundtrips": 3086,
+      "pbc_grids_validated": 1012,
+      "save_schema_layout_occurrences": 6688,
+      "save_schema_roundtrips": 80,
+      "eventflow_roundtrip_passed": true,
+      "relative_relocations_verified": 373225
+    }
+  ],
+  "reconstructed_modules": [
+    "bounds-checked BCSV reader",
+    "1.0.0 airport flow with injected services",
+    "constant zero",
+    "Murmur3 C string",
+    "flag-int terminal predicate with injected reader"
+  ],
+  "l3_functions_measured": 3,
+  "l3_functions_exact": 1,
+  "function_diff_percentages": {
+    "constant_zero_bytes": 100,
+    "murmur3_reference_objdiff_text": 19.36,
+    "murmur3_target_objdiff_text": 22.476923
+  },
+  "eventflow_factory_bindings_matched": {
+    "1.0.0": 391,
+    "3.0.3": 846
+  },
+  "eventflow_handlers_individually_linked": 2,
+  "behavior_targets_validated": {
+    "constant_zero": 131,
+    "murmur3_synthetic": 322,
+    "murmur3_reference_identifiers": 959,
+    "murmur3_target_identifiers": 2087,
+    "flag_int_terminal_reference": 3806,
+    "flag_int_terminal_target": 3806
+  },
+  "whole_game_percentage": null,
+  "m5": "excluded by user",
+  "independent_human_review": "not recorded; no publication performed"
+}

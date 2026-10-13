@@ -1,0 +1,47 @@
+{
+  "version_id": "3.0.3",
+  "table_start": "0x710487f920",
+  "table_end_exclusive": "0x7104883510",
+  "entry_stride": 16,
+  "table_entries": 959,
+  "bindings_matched": 846,
+  "binding_names_original_hash_checked": 921,
+  "collisions_in_tested_names": [],
+  "pilot": {
+    "version_id": "3.0.3",
+    "key_address": "0x710487fe70",
+    "hash": "1bb353cb",
+    "factory": "0x7101049734",
+    "binding_name": "EventFlowQueryEventFlagInt",
+    "name_status": "inferred",
+    "confidence": "high",
+    "aliases": [
+      "EventFlowQueryEventFlagNpcInt",
+      "EventFlowQueryEventFlagSystemInt"
+    ],
+    "direct_calls": [
+      "0x7103f033a0",
+      "0x71002478c0"
+    ],
+    "notes": "Factory-table hash identity; constructor/handler link requires per-entry assembly review",
+    "constructor": "inlined in factory",
+    "vtable": "0x71048718f0",
+    "handler": "0x7100f183d0",
+    "handler_slot": "0x30",
+    "allocation_bytes": 312,
+    "allocation_alignment": 8,
+    "evidence": [
+      "same-version BindInfo alias targets",
+      "original ARM64 Murmur3 over binding names",
+      "sorted hash/factory table relocation",
+      "factory BL to constructor",
+      "constructor vptr",
+      "vtable handler relocation"
+    ]
+  },
+  "limits": [
+    "Boundary inferred from monotonic contiguous hash/factory pairs; consumer array count not independently proved",
+    "Matched names are logical binding identities, not recovered original C++ class declarations",
+    "Only pilot constructor/vtable/handler chain individually validated; table and hash-function addresses independently reviewed per build"
+  ]
+}

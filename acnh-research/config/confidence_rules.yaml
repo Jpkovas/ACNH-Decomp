@@ -1,0 +1,7 @@
+schema_version: 1
+name_status: [original, demangled, inferred, provisional]
+confidence: [high, medium, low]
+evidence_required: true
+cross_version_transfer_requires_review: true
+synthetic_tests_prove_game_equivalence: false
+address_basis_required: true

@@ -1,0 +1,32 @@
+{
+  "version_id": "1.0.0",
+  "module": "main",
+  "address": "0x7100001bf0",
+  "relative_address": "0x1bf0",
+  "original_size": 300,
+  "compiled_size": 248,
+  "name": "acnh_murmur3_cstr",
+  "name_status": "inferred",
+  "confidence_behavior": "high",
+  "confidence_original_name": "unknown",
+  "original_sha256": "777e6f098aa5bf804a99ff496ef97be03b4b29e267ccfacee159e81294d29147",
+  "equivalent_to": "MurmurHash3 x86_32 over NUL-terminated bytes and uint32 seed",
+  "synthetic_cases": 322,
+  "alignments": 3,
+  "observed_identifiers_checked": 959,
+  "invalid_pointer_faults_verified": 2,
+  "original_arm64_vs_python_vs_native_vs_recompiled_arm64": true,
+  "exact_instruction_bytes": false,
+  "objdiff_text_match_percent": 19.36,
+  "flags": [
+    "--target=aarch64-none-elf",
+    "-O2",
+    "-ffreestanding",
+    "-fno-exceptions",
+    "-fno-rtti",
+    "-fno-stack-protector"
+  ],
+  "anchor": "Same-version initializer at 0x71004645e0 calls this function with seed zero and stores its result at region-relative 0x154 near the EventFlowQueryDummy label",
+  "precondition": "readable NUL-terminated byte string, length < 2^32; null pointer faults in original and reconstruction",
+  "objdiff_report": "private/outputs/1.0.0/identifier-hash/objdiff.json"
+}

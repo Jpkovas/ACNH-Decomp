@@ -1,0 +1,60 @@
+{
+  "reference": "1.0.0",
+  "target": "3.0.3",
+  "reviewer": "Codex assembly and differential technical review; independent human review not recorded",
+  "functions": [
+    {
+      "reference_address": "0x7100406390",
+      "target_address": "0x7100f183d0",
+      "status": "uncertain",
+      "scope": "Logical EventFlagInt binding and terminal predicate verified; full backend equivalence unproved",
+      "evidence": [
+        "independently located same binding hash/factory/parameter/vtable chain in each build",
+        "3806 terminal differential cases in each version"
+      ],
+      "name_transfer": "target annotation applied only after independent target checks"
+    },
+    {
+      "reference_address": "0x7100406280",
+      "target_address": "0x7101049734",
+      "status": "merged",
+      "scope": "Base constructor is inlined into target factory, with independently checked vptr, labels, defaults, allocation size/alignment",
+      "evidence": [
+        "base factory BL to separate constructor",
+        "target factory initializes same fields directly"
+      ],
+      "full_factory_behavior_verified": false
+    },
+    {
+      "reference_address": "0x7100001bf0",
+      "target_address": "0x71005bd550",
+      "status": "mapped",
+      "scope": "Full Murmur3 C-string routine under readable NUL-terminated length < 2^32 contract; original declaration unknown",
+      "evidence": [
+        "independent target constant search and full assembly review",
+        "322 synthetic cases at three alignments against both originals, native, recompiled ARM64 and mmh3",
+        "959 reference and 2087 target identifiers",
+        "null pointer faults in originals and reconstructions"
+      ],
+      "exact_binary_equivalence": false
+    }
+  ],
+  "regions": [
+    {
+      "reference_start": "0x710040685c",
+      "reference_stop": "0x7100406a2c",
+      "target_start": "0x7100f188d4",
+      "target_stop": "0x7100f18a6c",
+      "status": "mapped",
+      "scope": "terminal flag-int comparison including invalid check types; original code differs",
+      "cases_per_version": 3806,
+      "flags_backend_transferred": false
+    }
+  ],
+  "evidence_reports": [
+    "metadata/1.0.0/flag-int-validation.json",
+    "metadata/3.0.3/flag-int-validation.json",
+    "metadata/1.0.0/factory-bindings-summary.json",
+    "metadata/3.0.3/reviewed-annotations.json"
+  ]
+}

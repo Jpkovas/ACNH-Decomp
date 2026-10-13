@@ -1,0 +1,66 @@
+[
+  {
+    "package": "base",
+    "nca": "439bfcba6757531c5887d0b61addbf12.nca",
+    "content_type": "Manual",
+    "title_id": "01006f8002326000",
+    "sdk": "9.3.1.0",
+    "master_key_revision": "0x9 (9.0.0-9.0.1)"
+  },
+  {
+    "package": "base",
+    "nca": "800b70ef9e975720d8fd8c7d2469c411.cnmt.nca",
+    "content_type": "Meta",
+    "title_id": "01006f8002326000",
+    "sdk": "10.0.0.0",
+    "master_key_revision": "0x9 (9.0.0-9.0.1)"
+  },
+  {
+    "package": "base",
+    "nca": "af40a035f97af7463593bf372bb7dc22.nca",
+    "content_type": "Control",
+    "title_id": "01006f8002326000",
+    "sdk": "9.3.1.0",
+    "master_key_revision": "0x9 (9.0.0-9.0.1)"
+  },
+  {
+    "package": "base",
+    "nca": "cce24c0eab15dfd44568b8015ce7995b.nca",
+    "content_type": "Program",
+    "title_id": "01006f8002326000",
+    "sdk": "9.3.1.0",
+    "master_key_revision": "0x9 (9.0.0-9.0.1)"
+  },
+  {
+    "package": "update",
+    "nca": "29a8ce65e45b800cbc73214b7b818f68.cnmt.nca",
+    "content_type": "Meta",
+    "title_id": "01006f8002326800",
+    "sdk": "22.2.0.0",
+    "master_key_revision": "0xA (9.1.0-12.0.3)"
+  },
+  {
+    "package": "update",
+    "nca": "746d4fcccfb33679fa3906d81e6455a0.nca",
+    "content_type": "Manual",
+    "title_id": "01006f8002326000",
+    "sdk": "20.5.17.0",
+    "master_key_revision": "0xA (9.1.0-12.0.3)"
+  },
+  {
+    "package": "update",
+    "nca": "d1fca45b1f0e04ad7337c70c1372beb7.nca",
+    "content_type": "Control",
+    "title_id": "01006f8002326000",
+    "sdk": "20.5.17.0",
+    "master_key_revision": "0xA (9.1.0-12.0.3)"
+  },
+  {
+    "package": "update",
+    "nca": "e10617820db06889e1638499478da0de.nca",
+    "content_type": "Program",
+    "title_id": "01006f8002326000",
+    "sdk": "20.5.17.0",
+    "master_key_revision": "0xA (9.1.0-12.0.3)"
+  }
+]

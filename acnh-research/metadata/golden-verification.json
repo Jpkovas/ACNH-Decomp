@@ -1,0 +1,5 @@
+{
+  "passed": true,
+  "assertions": 66,
+  "scope": "exact-input regression of recorded reports plus all six current decompressed segment hashes; does not rerun all experiments"
+}

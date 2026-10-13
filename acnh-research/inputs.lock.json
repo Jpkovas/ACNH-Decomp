@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "analysis_utc": "2026-10-13T01:51:28.830619+00:00",
+  "secret_values_included": false,
+  "artifacts": [
+    {
+      "filename": "Animal Crossing New Horizons [01006F8002326000][v0](eShop).nsp",
+      "title": "Animal Crossing: New Horizons",
+      "size": 6694761920,
+      "sha256": "187fba2ccb56a13757fc8d9ac012f2b012eeb442098a212288772febe2f1aabf",
+      "format": "PFS0",
+      "origin": "user_supplied_origin_unverified",
+      "package_version_filename_claim": 0,
+      "display_version_filename_claim": null,
+      "verified_display_version": "1.0.0",
+      "module_id": "7fc1baff976aeca414520cb89f4616cb00000000000000000000000000000000",
+      "entries": [
+        {
+          "name": "01006f8002326000000000000000000a.cert",
+          "offset": 32768,
+          "size": 1792
+        },
+        {
+          "name": "01006f8002326000000000000000000a.tik",
+          "offset": 34560,
+          "size": 704
+        },
+        {
+          "name": "cce24c0eab15dfd44568b8015ce7995b.nca",
+          "offset": 35264,
+          "size": 6692945920,
+          "plaintext_header": false
+        },
+        {
+          "name": "439bfcba6757531c5887d0b61addbf12.nca",
+          "offset": 6692981184,
+          "size": 264704,
+          "plaintext_header": false
+        },
+        {
+          "name": "800b70ef9e975720d8fd8c7d2469c411.cnmt.nca",
+          "offset": 6693245888,
+          "size": 3584,
+          "plaintext_header": false
+        },
+        {
+          "name": "af40a035f97af7463593bf372bb7dc22.nca",
+          "offset": 6693249472,
+          "size": 1512448,
+          "plaintext_header": false
+        }
+      ],
+      "module": "main",
+      "internal_path": "cce24c0eab15dfd44568b8015ce7995b.nca::ExeFS/main",
+      "executable_sha256": "f8d248109ff72999b4600ae3749f8c7397fb960f7ad3ab8dee3018ae9e14e900",
+      "executable_size": 24990531,
+      "sdk_version_header": "9.3.1.0",
+      "extraction_tool": "SciresM/hactool 1.4.0",
+      "analysis_tool": "Ghidra 12.1.4",
+      "loader_revision": "5d80d195bf284f8ad5f2f9b66c3bdd5c67dd66a6"
+    },
+    {
+      "filename": "Animal Crossing New Horizons [01006F8002326800][v2228224][Up v3.0.3].nsp",
+      "title": "Animal Crossing: New Horizons",
+      "size": 4650239771,
+      "sha256": "4fa965fc69e0267c6e47397a7dd2c81c78647fa8a08addfbbaee2d745814e114",
+      "format": "PFS0",
+      "origin": "user_supplied_origin_unverified",
+      "package_version_filename_claim": 2228224,
+      "display_version_filename_claim": "3.0.3",
+      "verified_display_version": "3.0.3",
+      "module_id": "ff1d1c05670db6021c85b624a710b96300000000000000000000000000000000",
+      "entries": [
+        {
+          "name": "01006f8002326800000000000000000b.cert",
+          "offset": 464,
+          "size": 1792
+        },
+        {
+          "name": "01006f8002326800000000000000000b.tik",
+          "offset": 2256,
+          "size": 704
+        },
+        {
+          "name": "29a8ce65e45b800cbc73214b7b818f68.cnmt.nca",
+          "offset": 2960,
+          "size": 10752,
+          "plaintext_header": false
+        },
+        {
+          "name": "29a8ce65e45b800cbc73214b7b818f68.cnmt.xml",
+          "offset": 13712,
+          "size": 1419
+        },
+        {
+          "name": "746d4fcccfb33679fa3906d81e6455a0.nca",
+          "offset": 15131,
+          "size": 195584,
+          "plaintext_header": false
+        },
+        {
+          "name": "d1fca45b1f0e04ad7337c70c1372beb7.nca",
+          "offset": 210715,
+          "size": 2921472,
+          "plaintext_header": false
+        },
+        {
+          "name": "e10617820db06889e1638499478da0de.nca",
+          "offset": 3132187,
+          "size": 4647107584,
+          "plaintext_header": false
+        }
+      ],
+      "module": "main",
+      "internal_path": "e10617820db06889e1638499478da0de.nca::ExeFS/main",
+      "executable_sha256": "68c7fbeda353f8e4a283eac6a9b99e713e72a327048214bf6a4e7214616b87c1",
+      "executable_size": 41952324,
+      "sdk_version_header": "20.5.17.0",
+      "extraction_tool": "borntohonk/hactool 1.5.4",
+      "analysis_tool": "Ghidra 12.1.4",
+      "loader_revision": "5d80d195bf284f8ad5f2f9b66c3bdd5c67dd66a6",
+      "depends_on_base_package_sha256": "187fba2ccb56a13757fc8d9ac012f2b012eeb442098a212288772febe2f1aabf"
+    },
+    {
+      "filename": "Animal Crossing New Horizons [Happy Home Paradise DLC][01006F80023273E8].nsp",
+      "title": "Animal Crossing: New Horizons",
+      "size": 624384208,
+      "sha256": "f8a6df31091a9b363290fa3a8375ce4bbd5001790058e72064fe0e73b7073f62",
+      "format": "PFS0",
+      "origin": "user_supplied_origin_unverified",
+      "package_version_filename_claim": null,
+      "display_version_filename_claim": null,
+      "verified_display_version": null,
+      "module_id": null,
+      "entries": [
+        {
+          "name": "99add1b06c965c114c8cc5d1105d8264.nca",
+          "offset": 272,
+          "size": 624377856,
+          "plaintext_header": false
+        },
+        {
+          "name": "a2236fe3b468da86f8e5aa8756156b0a.cnmt.nca",
+          "offset": 624378128,
+          "size": 3584,
+          "plaintext_header": false
+        },
+        {
+          "name": "01006f80023273e8000000000000000d.tik",
+          "offset": 624381712,
+          "size": 704
+        },
+        {
+          "name": "01006f80023273e8000000000000000d.cert",
+          "offset": 624382416,
+          "size": 1792
+        }
+      ]
+    },
+    {
+      "filename": "Animal Crossing New Horizons [Nook Inc silk rug][01006F800232712D][US][v0].nsp",
+      "title": "Animal Crossing: New Horizons",
+      "size": 153536,
+      "sha256": "246ba7fbda4ff15599e8214336ecaea2344223adc19caf44052a5602d918f8c0",
+      "format": "PFS0",
+      "origin": "user_supplied_origin_unverified",
+      "package_version_filename_claim": 0,
+      "display_version_filename_claim": null,
+      "verified_display_version": null,
+      "module_id": null,
+      "entries": [
+        {
+          "name": "01006f800232712d000000000000000b.cert",
+          "offset": 32768,
+          "size": 1792
+        },
+        {
+          "name": "01006f800232712d000000000000000b.tik",
+          "offset": 34560,
+          "size": 704
+        },
+        {
+          "name": "73c867636032fd8ee1d960aea109f157.nca",
+          "offset": 35264,
+          "size": 114688,
+          "plaintext_header": false
+        },
+        {
+          "name": "1e588107a7d852f560e818e0140ba720.cnmt.nca",
+          "offset": 149952,
+          "size": 3584,
+          "plaintext_header": false
+        }
+      ]
+    },
+    {
+      "filename": "Animal Crossing New Horizons [Special Order Ticket Animal Crossing Pocket Camp tie-in campaign ] [01006F800232712C][NO][v0].nsp",
+      "title": "Animal Crossing: New Horizons",
+      "size": 153536,
+      "sha256": "afb7b103d59d3b0b46553ae93c990ce10beb4817a7f750e930f484cbd3d8c212",
+      "format": "PFS0",
+      "origin": "user_supplied_origin_unverified",
+      "package_version_filename_claim": 0,
+      "display_version_filename_claim": null,
+      "verified_display_version": null,
+      "module_id": null,
+      "entries": [
+        {
+          "name": "358658feb66f260129fddb7e57386204.nca",
+          "offset": 32768,
+          "size": 114688,
+          "plaintext_header": false
+        },
+        {
+          "name": "48ebf6badcb30639f91d106a4be6b5de.cnmt.nca",
+          "offset": 147456,
+          "size": 3584,
+          "plaintext_header": false
+        },
+        {
+          "name": "01006f800232712c000000000000000b.tik",
+          "offset": 151040,
+          "size": 704
+        },
+        {
+          "name": "01006f800232712c000000000000000b.cert",
+          "offset": 151744,
+          "size": 1792
+        }
+      ]
+    }
+  ],
+  "provenance_finalized_utc": "2026-10-13T03:41:07.833187+00:00",
+  "scope": "base and update main/RomFS analyzed; DLC packages audited, not separately reconstructed; firmware unused"
+}

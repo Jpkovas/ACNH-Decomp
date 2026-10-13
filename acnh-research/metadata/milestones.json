@@ -1,0 +1,15 @@
+{
+  "completed_date":"2026-10-13",
+  "scope":"technical incremental milestones M0-M4 and M6; M5 integration explicitly excluded by user",
+  "milestones":{
+    "M0":{"status":"complete","evidence":["inputs.lock.json","metadata/1.0.0/import-verification.json","metadata/3.0.3/import-verification.json"]},
+    "M1":{"status":"complete","evidence":["metadata/1.0.0/symbols-summary.json","metadata/3.0.3/symbols-summary.json","metadata/metrics.json"],"limits":"Automatic names/prototypes provisional; complete object layouts not claimed"},
+    "M2":{"status":"complete","evidence":["metadata/1.0.0/roundtrip.json","metadata/3.0.3/roundtrip.json"],"scope":"One real flow per version; rooted graph equivalence, engine handlers not emulated"},
+    "M3":{"status":"complete","evidence":["reconstructed/CMakeLists.txt","metadata/1.0.0/flag-int-validation.json","metadata/3.0.3/flag-int-validation.json","metadata/1.0.0/bcsv-differential.json","metadata/3.0.3/bcsv-differential.json"],"scope":"Five independent modules, injected external services"},
+    "M4":{"status":"complete","evidence":["metadata/1.0.0/matching-pilot.json","metadata/1.0.0/identifier-hash-validation.json","metadata/3.0.3/identifier-hash-validation.json"],"scope":"Three versioned functions measured; one 8-byte exact match; original toolchain unknown"},
+    "M5":{"status":"excluded","evidence":["docs/scope.md","config/scope.json"]},
+    "M6":{"status":"complete","evidence":["metadata/pipeline-verification.json","metadata/golden-verification.json","docs/technical_review.md","metadata/version-map.json"],"independent_human_review":"not recorded","external_pr":"not opened; no remote configured"}
+  },
+  "whole_game_recompilation_claimed":false,
+  "proprietary_data_committed":false
+}
