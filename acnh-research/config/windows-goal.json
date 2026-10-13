@@ -50,7 +50,11 @@
     "graphics_long_run_stable": false,
     "reviewed_partial_regions_replaced": 1,
     "partial_region_original_cases": 3806,
-    "native_audio_long_run_pcm_seconds": 897.67
+    "native_audio_long_run_pcm_seconds": 1797.14,
+    "hemisphere_dialogue_observed": true,
+    "island_confirmation_ui_observed": true,
+    "island_preview_terrain_visible": false,
+    "post_appearance_3d_background_missing": true
   },
   "scheduler_status_note": "Goal API reports blocked after prior selected-model capacity failures. Current authorized turn is making technical progress; source reconstruction and playability remain incomplete."
 }

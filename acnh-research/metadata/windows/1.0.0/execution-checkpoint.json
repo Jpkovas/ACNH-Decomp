@@ -290,6 +290,19 @@
       "game_code_sha256": "484f5c8a30472f403f7958781801d81c5a9e99460b161ef5fc9b4102cc7ac0e0",
       "audio_backend_sha256": "e4d549d181409704d5c6d4545ba22368ba72d4922492d22d15eb00929b01a77e",
       "runtime_sha256": "67fec303da56a6210e1bd8541280a68780b0e27560830c876dd793dc1c6d553c"
+    },
+    {
+      "log_prefix": "native-20261013-063158",
+      "exit_code": 0,
+      "elapsed_seconds": 1801.31,
+      "native_audio": true,
+      "audio_wav_only": false,
+      "playable_validated": false,
+      "observed": "Name, birthday and appearance confirmed; hemisphere selection and island confirmation UI reached",
+      "rendering_limitation": "3D airport background absent after appearance; island preview has no visible terrain",
+      "runtime_sha256": "051f2e553425708640ed3fdc92eafcbb8a94041598f1c0c2980c92d180fbbc4c",
+      "game_code_sha256": "4e9d96da793ef1e2d056cb187aea79d8b16aaf06880b00b081d308336d21123a",
+      "audio_backend_sha256": "e4d549d181409704d5c6d4545ba22368ba72d4922492d22d15eb00929b01a77e"
     }
   ],
   "intermediate_render_targets": {
@@ -301,7 +314,7 @@
       "other targets include uniform color"
     ]
   },
-  "next_investigation": "Complete registration and character appearance with the current DLL/audio; island, source recovery, GPU command integrity and save/reload",
+  "next_investigation": "Trace 3D rendering and the terrain preview after appearance; continue from island confirmation; validate island gameplay/save/reload and source recovery",
   "gpu_composition_validation": "gpu-composition-validation.json",
   "manual_entry_count": 3,
   "manual_entry_modules": {
@@ -317,14 +330,17 @@
   "goal_scheduler_status": "blocked",
   "scheduler_capacity_failure_observed": true,
   "current_diagnostic": {
+    "status": "finished",
     "log_prefix": "native-20261013-063158",
-    "pid": 26284,
-    "seconds_requested": 1800,
-    "status": "running",
+    "exit_code": 0,
+    "elapsed_seconds": 1801.31,
     "native_audio": true,
+    "audio_wav_only": false,
+    "playable_validated": false,
+    "observed": "Name, birthday and appearance confirmed; hemisphere selection and island confirmation UI reached",
+    "rendering_limitation": "3D airport background absent after appearance; island preview has no visible terrain",
+    "runtime_sha256": "051f2e553425708640ed3fdc92eafcbb8a94041598f1c0c2980c92d180fbbc4c",
     "game_code_sha256": "4e9d96da793ef1e2d056cb187aea79d8b16aaf06880b00b081d308336d21123a",
-    "observed": "Name and birthday confirmed; dialogue before character appearance",
-    "whole_game_decompiled": false,
-    "playable_validated": false
+    "audio_backend_sha256": "e4d549d181409704d5c6d4545ba22368ba72d4922492d22d15eb00929b01a77e"
   }
 }

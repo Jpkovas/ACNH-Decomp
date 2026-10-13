@@ -62,12 +62,30 @@
       "live_input_file_reloaded": true,
       "script_reloaded_elapsed_seconds": 468.13,
       "frame_rgb_sha256": "9def57d8715c503a3c98bfe8b38fb0a4d9548545e5e4246c9584f7807c8eefa6"
+    },
+    {
+      "log_prefix": "native-20261013-063158",
+      "exit_code": 0,
+      "elapsed_seconds": 1801.31,
+      "native_audio": true,
+      "audio_wav_only": false,
+      "playable_validated": false,
+      "observed": "Name, birthday and appearance confirmed; hemisphere selection and island confirmation UI reached",
+      "rendering_limitation": "3D airport background absent after appearance; island preview has no visible terrain",
+      "game_code_sha256": "4e9d96da793ef1e2d056cb187aea79d8b16aaf06880b00b081d308336d21123a"
     }
   ],
   "remaining": [
-    "island gameplay and island input controls",
-    "GPU command stream and long DMA stalls",
-    "complete audio validation beyond intro PCM signal",
-    "save/reload and remaining source reconstruction"
-  ]
+    "Rendering after appearance and island terrain preview",
+    "Island gameplay and input controls",
+    "Intermittent GPU command/DMA stalls",
+    "Full audio validation beyond intro signal",
+    "Save/reload and full source recovery"
+  ],
+  "current_dll_name_birthday_appearance_confirmed": true,
+  "current_dll_sha256": "4e9d96da793ef1e2d056cb187aea79d8b16aaf06880b00b081d308336d21123a",
+  "current_run_prefix": "native-20261013-063158",
+  "post_appearance_3d_background_missing": true,
+  "island_confirmation_ui_observed": true,
+  "island_preview_terrain_visible": false
 }
