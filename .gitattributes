@@ -1,0 +1,4 @@
+# Research provenance binds exact file bytes; preserve them across checkouts.
+* -text
+# A patch's blank context line deliberately contains one space.
+*.patch -whitespace

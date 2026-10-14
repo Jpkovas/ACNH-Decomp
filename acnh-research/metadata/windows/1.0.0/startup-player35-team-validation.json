@@ -1,0 +1,1520 @@
+{
+  "schema_version": 1,
+  "component": "Coordinator player35 real-startup technical milestone",
+  "passed": true,
+  "technical_acceptance_recommended": true,
+  "coordinator_acceptance_pending": true,
+  "result": "The integrated35 candidate reached the initial Timmy/Tommy dialogue with nonzero PCM in one naturally completed Windows startup run.",
+  "execution_kind": "Hybrid native module with reconstructed entries and retained original translated/interpreted dependencies",
+  "terminal": {
+    "private_report": "private/windows/logs/player35-team-20261013-203659.json",
+    "report_sha256": "61cd19ff0523f807e8930ed105b9da956c96d1c451a8f0b5446e9fd73ab2f454",
+    "process_id": 13736,
+    "requested_seconds": 180,
+    "process_elapsed_seconds": 180.984,
+    "harness_elapsed_seconds": 186.212,
+    "terminal_state": "natural-exit",
+    "process_exit_code": 0,
+    "harness_exit_code": 0,
+    "process_absent_confirmed": true,
+    "auxiliary_process_absent_confirmed": true,
+    "forced_termination": false,
+    "cleanup_confirmed": true
+  },
+  "runtime_sha256": "df489bdd58d0304bd0f924cd9a753ec67d52ca0e28a47562251b2fa695083658",
+  "module_sha256": "5829252d9988715a4727ed015f216675b0b0b3ac06c8a639caac65afeb09cd9b",
+  "backend_hashes": {
+    "runtime": "df489bdd58d0304bd0f924cd9a753ec67d52ca0e28a47562251b2fa695083658",
+    "game_code": "5829252d9988715a4727ed015f216675b0b0b3ac06c8a639caac65afeb09cd9b",
+    "audio": "e4d549d181409704d5c6d4545ba22368ba72d4922492d22d15eb00929b01a77e",
+    "vp9": "2cfcd4876b15f52f88fb69b9e35dba5d84e71cca3279e8dd901ecbc418286848",
+    "renderdoc": "809da38e3867d9fd09cc5c30dd5310500dee75e999166d7a14ad1ef6e9eca65d"
+  },
+  "logs": {
+    "stdout": {
+      "private_path": "private/windows/logs/player35-team-20261013-203659.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "stderr": {
+      "private_path": "private/windows/logs/player35-team-20261013-203659.stderr.log",
+      "sha256": "bfabb1dc32878ed9e03e5d09d82072a6c7b796add6496c32ead96bc3099292a3",
+      "bytes": 14184
+    },
+    "game_log": {
+      "private_path": "private/windows/logs/player35-team-20261013-203659.game.log",
+      "sha256": "d39da5cca6eabafd8321216cea72661038636cf50e0997faf067f50891c03b04",
+      "bytes": 17092
+    },
+    "live_input_file": {
+      "private_path": "private/windows/logs/player35-team-20261013-203659.inputs.csv",
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+      "bytes": 2
+    },
+    "rendered_frames": 1980,
+    "runtime_frame_hash": "86027761510aba45",
+    "live_input_has_commands": false,
+    "stderr_contains_warnings": true
+  },
+  "audio": {
+    "analysis": {
+      "private_path": "private/windows/logs/player35-team-20261013-203659.audio.json",
+      "sha256": "2076ba339c684f6cf65abb126a531b9ad46d4f53b1546e93b27914d5eb90cc7b",
+      "bytes": 720
+    },
+    "final_wav": {
+      "private_path": "private/windows/logs/player35-team-20261013-203659.wav",
+      "sha256": "ec93a779d592489d4eb11cbcfdb3a2750647d29084b1076e051ecd82c0c0359c",
+      "bytes": 34067564
+    },
+    "sample_rate": 48000,
+    "channels": 2,
+    "bits": 16,
+    "pcm_frames": 8516880,
+    "duration_seconds": 177.435,
+    "channel_metrics": [
+      {
+        "nonzero_samples": 6293723,
+        "peak": 13000,
+        "rms": 532.9383567065554,
+        "clipped_samples": 0
+      },
+      {
+        "nonzero_samples": 6290810,
+        "peak": 11993,
+        "rms": 526.6479372366158,
+        "clipped_samples": 0
+      }
+    ],
+    "pcm_payload_sha256": "f22aaea56dccac70d8cb423c6dcfb224f07ddcf2ea76490ef3350741ee19df3a",
+    "metrics_independently_recomputed": true,
+    "raw_wav": {
+      "private_path": "private/windows/logs/player35-team-20261013-203659.raw.wav",
+      "sha256": "b0d33abe536c9ffa9044e27088a542edbf6d0ff894a8131f2678457453f9cf51",
+      "bytes": 34067564
+    },
+    "only_riff_data_lengths_finalized": true,
+    "nonzero_samples": 12584533,
+    "clipped_samples": 0
+  },
+  "visual_observation": {
+    "private_path": "private/windows/logs/player35-team-20261013-203659_0072.ppm",
+    "sha256": "e895652c2f6368980b198ce09025a6385b961a88e0823f1a1f55b73492810ff9",
+    "bytes": 6220817,
+    "width": 1920,
+    "height": 1080,
+    "inspected_png": {
+      "private_path": "private/team/player35-startup/player35-team-20261013-203659_0072.png",
+      "sha256": "f0774b51c12c7f5c388d45393a7db1764857f980ded9e11a6b57a863c1de7a86",
+      "bytes": 1934031
+    },
+    "png_rgb_equals_ppm": true,
+    "observation": "Both AI observers inspected the private PNG: Timmy initial dialogue, two reception characters, complete dialogue overlay and continuation arrow are visible. No plane, terrain, tutorial completion or gameplay is established.",
+    "observer": "Root coordinator and memory_pin reviewer (AI agents)",
+    "semantic_label_source": "Explicit visual inspection by attributed AI coordinator/reviewer; not automatic RGB/frame classification"
+  },
+  "captures": [
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0001.ppm",
+      "sha256": "a8aaf2a0a91b2ff218775a0d2b6a229c9c4488dce4f835689a24559f9f414490",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0002.ppm",
+      "sha256": "a8aaf2a0a91b2ff218775a0d2b6a229c9c4488dce4f835689a24559f9f414490",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0003.ppm",
+      "sha256": "a8aaf2a0a91b2ff218775a0d2b6a229c9c4488dce4f835689a24559f9f414490",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0004.ppm",
+      "sha256": "a8aaf2a0a91b2ff218775a0d2b6a229c9c4488dce4f835689a24559f9f414490",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0005.ppm",
+      "sha256": "a8aaf2a0a91b2ff218775a0d2b6a229c9c4488dce4f835689a24559f9f414490",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0006.ppm",
+      "sha256": "7e37b90d5ec095791421563a905078c68f99d04dae2cf77f9791b254931ea659",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0007.ppm",
+      "sha256": "3bb46fe5448e7ada9f0828f54357ef2a186b2bf4b6fe8e7bd92e11bb870b1270",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0008.ppm",
+      "sha256": "2343e2fcbd8f2b668c0c6a6a1eb46f35456a9a9161be9e0b86fd18ac3917f969",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0009.ppm",
+      "sha256": "474a6ecebc6a78c4204eb2d2b4dcb00f6d59b1bb8396115418257fa2d6120dfb",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0010.ppm",
+      "sha256": "1938d5031717ee381e5a0a1518faf9a085f5280fc5eab27f1a94c4df27931994",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0011.ppm",
+      "sha256": "8271a5367bf176db96c7ee20c8c60ad00f60a814ba49cbb95fb57b609fd6da6c",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0012.ppm",
+      "sha256": "eda93acb656096261a8b82e979709a0b57a0ef270d76c4fda64958cf88172914",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0013.ppm",
+      "sha256": "cf957a724a7f3e9d29ff59e8177401e62e2841bcd9fd4cff294345505bdf50ff",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0014.ppm",
+      "sha256": "85bd50f91e2dab52806e63dac43a886684d448620167451a0d3e0ea31892bd48",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0015.ppm",
+      "sha256": "10a68ac0e29cdcf11b31fb471bd2136b7413e8828b38ef06ad59e01fe6f5a86a",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0016.ppm",
+      "sha256": "be16364da18bb4df5b2b83ac674d07fc7bdce77b2784fc39a76b08d25e69ea5f",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0017.ppm",
+      "sha256": "48b3e1939fa4a8c812f0a097c435c458930d5a2f59d6730520cfc42ae678de45",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0018.ppm",
+      "sha256": "1938d5031717ee381e5a0a1518faf9a085f5280fc5eab27f1a94c4df27931994",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0019.ppm",
+      "sha256": "8271a5367bf176db96c7ee20c8c60ad00f60a814ba49cbb95fb57b609fd6da6c",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0020.ppm",
+      "sha256": "eda93acb656096261a8b82e979709a0b57a0ef270d76c4fda64958cf88172914",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0021.ppm",
+      "sha256": "cf957a724a7f3e9d29ff59e8177401e62e2841bcd9fd4cff294345505bdf50ff",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0022.ppm",
+      "sha256": "85bd50f91e2dab52806e63dac43a886684d448620167451a0d3e0ea31892bd48",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0023.ppm",
+      "sha256": "10a68ac0e29cdcf11b31fb471bd2136b7413e8828b38ef06ad59e01fe6f5a86a",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0024.ppm",
+      "sha256": "be16364da18bb4df5b2b83ac674d07fc7bdce77b2784fc39a76b08d25e69ea5f",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0025.ppm",
+      "sha256": "48b3e1939fa4a8c812f0a097c435c458930d5a2f59d6730520cfc42ae678de45",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0026.ppm",
+      "sha256": "c2fcda7a5abd8389ee8ca848cd6e34d28ebfb73574af0025b0f731d8001ad680",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0027.ppm",
+      "sha256": "8271a5367bf176db96c7ee20c8c60ad00f60a814ba49cbb95fb57b609fd6da6c",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0028.ppm",
+      "sha256": "2708a159a9057d0280492ca2283b7a357d7fafc67b64e8299066b0bbec83c554",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0029.ppm",
+      "sha256": "cf957a724a7f3e9d29ff59e8177401e62e2841bcd9fd4cff294345505bdf50ff",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0030.ppm",
+      "sha256": "ed110d849b7a27af7f6c9378af9a65f8e2e87095bea278774346122582596dcb",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0031.ppm",
+      "sha256": "10a68ac0e29cdcf11b31fb471bd2136b7413e8828b38ef06ad59e01fe6f5a86a",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0032.ppm",
+      "sha256": "112a5bc9d944f95e57c9574988d93248e0fdd5430ac4c09f4570beffb6eb8581",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0033.ppm",
+      "sha256": "48b3e1939fa4a8c812f0a097c435c458930d5a2f59d6730520cfc42ae678de45",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0034.ppm",
+      "sha256": "c2fcda7a5abd8389ee8ca848cd6e34d28ebfb73574af0025b0f731d8001ad680",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0035.ppm",
+      "sha256": "72201526f4622c04b2061400a8c736c84fdd10b38551a107df12dbc646cb27ed",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0036.ppm",
+      "sha256": "66dace31c290c76d00859fe6f16656aee4e2691abf7a0488625b276a7a217645",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0037.ppm",
+      "sha256": "07b9b81ad1c666e6ed2907ee5b4e58021fdff8a6bca6df214f32553cb2edd09e",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0038.ppm",
+      "sha256": "7e37b90d5ec095791421563a905078c68f99d04dae2cf77f9791b254931ea659",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0039.ppm",
+      "sha256": "3bb46fe5448e7ada9f0828f54357ef2a186b2bf4b6fe8e7bd92e11bb870b1270",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0040.ppm",
+      "sha256": "2343e2fcbd8f2b668c0c6a6a1eb46f35456a9a9161be9e0b86fd18ac3917f969",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0041.ppm",
+      "sha256": "9c7c9dc0caf0fedc167b3df030a081b4df7c39d0b24f9fac3586b824f5af6a08",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0042.ppm",
+      "sha256": "41f04309010d2e4e9f06c0d4d946f2eedaf9ecbe4bbf9046d5a34f300ffdc673",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0043.ppm",
+      "sha256": "cabcbe15ff412a6907e78813841d694eca87025876fdacab09dcb4d1b8034f69",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0044.ppm",
+      "sha256": "c83a63501ccd85d472c073d7f0ea12f2b08420f1b648b3d09fe68246140ab890",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0045.ppm",
+      "sha256": "ecbbf04aa81c4b8b1850d6bdc4eb78a576e465301fbeb0ed01c11cfd23f97aae",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0046.ppm",
+      "sha256": "4ad67b7e8f92efedf8798eec590154fc9f303c864958ff23872cdaed6daf3551",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0047.ppm",
+      "sha256": "8d55bc90eca36348e8e3c4e152cb1e96851cf06010ebba8567806e7e6e02be07",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0048.ppm",
+      "sha256": "063f862aae3fbe070025b355cddf263ad216b3bc1fff933f44ca170f421585bd",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0049.ppm",
+      "sha256": "95ecca0c9f727c708d1f94ba38e68e8641e2ad3069f2e787de9726e330219dad",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0050.ppm",
+      "sha256": "132186ff476c78d71303337aba2f2bd358bb5187fe78c5a3472b15753f010e1a",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0051.ppm",
+      "sha256": "37891f7f6431cc20e76d20d805455799d1e929a07a337241f533f6f10e6aff6c",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0052.ppm",
+      "sha256": "b2c2bc1fd03c1d3707a8e503218f0edef5e0a44c7833f17f5187a4e7716319cd",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0053.ppm",
+      "sha256": "ec635d958ee86c2d899a1b4a57d79bb6d3ae9200e5719fbae4cef8425b49198a",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0054.ppm",
+      "sha256": "53cc63a24662be8931820ed018a1621ee62cf21329bfe789ecd14e1f72271140",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0055.ppm",
+      "sha256": "ed9c005f31d9c8bd9326001b9b0186ec99341419fef55062bf679d00cb05be0d",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0056.ppm",
+      "sha256": "ed54f3a87c8a7ef8e884b920eb25c2c0b4529ba0aea796bdfa6ddc72ff1843cc",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0057.ppm",
+      "sha256": "47d26d719c9e56f8b9bdc833ac506495dc835863da7eef8b5a5e94b2125b561b",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0058.ppm",
+      "sha256": "1b193237229b405b741c8d3bdbbfaa0e200550f71f52430136b3beff009c86f5",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0059.ppm",
+      "sha256": "2b197d03a74c94dd6e7fb553f9cf13e688888d47e479b18134687b7627fe1c2c",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0060.ppm",
+      "sha256": "2fc1355eee58c26945fed23b9114aebc162ecb5c3fc25e9b7d8bd92dc61b6d6e",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0061.ppm",
+      "sha256": "2ffda36cf00b3c408cd980e2041b7743da1328b3d86f4d4d34f53540aa69d692",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0062.ppm",
+      "sha256": "c82d224cdec6fbdbcfa6455ceb7f3323b70e3ec1f4bb22151db96536e60dbb3c",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0063.ppm",
+      "sha256": "304fad4dc640143de0bf55e919def783a94c44af5e8d360da6f6dec7bd879c9b",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0064.ppm",
+      "sha256": "8012303f32f04dfc4ee897b6ae6b85dc07c11653eaf76b034437b8f0e63b552d",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0065.ppm",
+      "sha256": "f3e70f2a13de7f3e3cddf329e7381c5d3955b07fd820866728b8161e7c6da2d4",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0066.ppm",
+      "sha256": "baa6ed107aa5bb9380127f7d051fd882cadd7b336b87c38696b1d32abeddf1ab",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0067.ppm",
+      "sha256": "2f5b4d2d5ea29c87381e0fbafa84892e4efadfc26460238a247224186ebdd98f",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0068.ppm",
+      "sha256": "df8bb7d91e39ccea00ede7411b2ebebdcfc7c23c21cc06b2a9b17866c27f6925",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0069.ppm",
+      "sha256": "3a0b92c920f1b5f30a82786b40b3c960104a1bab919d1eeb620a4d3c9fd03dcb",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0070.ppm",
+      "sha256": "babb1353a2c1e41c34ca803cfea962ca1dbc0bfbbcdede133083e2259d1267d9",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0071.ppm",
+      "sha256": "456f95275ce9d8dce2a8726ef0b10facab7d3428d0f255d234b5b200e0d1b2df",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0072.ppm",
+      "sha256": "e895652c2f6368980b198ce09025a6385b961a88e0823f1a1f55b73492810ff9",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0073.ppm",
+      "sha256": "cb13af45d9cbdd6bf1252970dc580fda20d0812c05c7a6b0875dd0197101a1b1",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0074.ppm",
+      "sha256": "6a86bf895bacf6e67c733dcf92205a928716e98bb9f4074ad838133cd08dab66",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0075.ppm",
+      "sha256": "2fa013357885b12a4c0847358d99154ee29c2034a1b3281227717d903c2b2bc6",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0076.ppm",
+      "sha256": "0b1fc0505672f79796d271a571f4e2bf3bfed81663f530ab7b57111162632f00",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0077.ppm",
+      "sha256": "f0d03b728b12ae6e2b56044eb2d0bd4cfc16b15715124248ba5b480c2ace069e",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0078.ppm",
+      "sha256": "d29d952d6b868343050ece111e16dae2c0b8d1b2f641703119dd827cbe9e7176",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659_0079.ppm",
+      "sha256": "757fb5825883c8a3ddcf6dc916c8fcc939056b26e2cca89f8e5957c7c1e32a16",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "private_path": "private/windows/logs/player35-team-20261013-203659.ppm",
+      "sha256": "2fc1355eee58c26945fed23b9114aebc162ecb5c3fc25e9b7d8bd92dc61b6d6e",
+      "bytes": 6220817,
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "preflight": {
+    "private_path": "private/team/player35-startup/preflight.json",
+    "sha256": "eb4a106b6d45398da9fa62fa3bf8db97a629c8cfe3b5a837b1041f387160b2fd",
+    "bytes": 1888
+  },
+  "romfs": {
+    "sha256": "652ed6443f81917a1ce9745a59259e017b9aece4f692f3f8eb297fbca48aa8ea",
+    "fresh_hash_in_this_run": false,
+    "reused_from": "private/team/epoch-startup/preflight.json",
+    "size_and_mtime_unchanged": true
+  },
+  "integrated_candidate_proof": {
+    "snapshot": {
+      "private_path": "private/team/player35-integration/final-snapshot.json",
+      "sha256": "05d8258a85d0b7a77850fa6ef60a2aa65a84f5d2ef954fb38bbdc55d4b951004",
+      "bytes": 271853
+    },
+    "manifest": {
+      "private_path": "private/windows/bridge-player35-candidate/reconstructed-replacements.json",
+      "sha256": "a72b4aa84de92d854e0e857cdb5417ecb50fac68c689e0482feadc9d07784983",
+      "bytes": 57637
+    },
+    "private_coverage": {
+      "private_path": "private/team/player35-startup/coverage-coordinator.json",
+      "sha256": "aece9af37b2236111688c32fe4dccb62375511da9ec33464aee8a3d45f54a796",
+      "bytes": 13736
+    },
+    "actual_module_reports": {
+      "core": {
+        "private_path": "private/team/player35-integration/reports/core.json",
+        "sha256": "cfa5ad31b26576e6888795d14c8e394815e6cc7771f0f208c92b1bff69cc13c2",
+        "bytes": 581,
+        "passed": true
+      },
+      "context": {
+        "private_path": "private/team/player35-integration/reports/context.json",
+        "sha256": "c20562de404f14619d141c8ce7689d33e1f21db79694145d8ccd5d4d40241b93",
+        "bytes": 3602,
+        "passed": true
+      },
+      "flag-table": {
+        "private_path": "private/team/player35-integration/reports/flag-table.json",
+        "sha256": "92694864b479e07dec8f03530214a43b9cddf7ec617a6f65cde1eec4b9c678cc",
+        "bytes": 3567,
+        "passed": true
+      },
+      "access-key": {
+        "private_path": "private/team/player35-integration/reports/access-key.json",
+        "sha256": "3e2b002bd714f9d7059fc47d7cfd842a4e4f69c8df377b81c91db50da27cf0c9",
+        "bytes": 2446,
+        "passed": true
+      },
+      "npad": {
+        "private_path": "private/team/player35-integration/reports/npad.json",
+        "sha256": "60961315963ede6162ac3fea653aa0311f9989ef513702d75d2677e63ec4228c",
+        "bytes": 4286,
+        "passed": true
+      },
+      "saveio-api": {
+        "private_path": "private/team/player35-integration/reports/saveio-api.json",
+        "sha256": "d2188d5d1446551657b888059365413bc745053cf1d121fe7b6ebf0735b7da9d",
+        "bytes": 8746,
+        "passed": true
+      },
+      "saveio-no-api": {
+        "private_path": "private/team/player35-integration/reports/saveio-no-api.json",
+        "sha256": "7f13b9083a89ed26a62b09e20aa45d1c7c7f6b7ec658afa9e1ef90dc571c0313",
+        "bytes": 8481,
+        "passed": true
+      },
+      "player-api": {
+        "private_path": "private/team/player35-integration/reports/player-api.json",
+        "sha256": "a7caa95405c13879af4ed4621e736ccdf528134d9b50c10181865aa43942b4af",
+        "bytes": 321259,
+        "passed": true
+      },
+      "player-no-api": {
+        "private_path": "private/team/player35-integration/reports/player-no-api.json",
+        "sha256": "61bb9fc66783eb1523f40a472a0500ba7e0daa563653f8965e50214bc083826a",
+        "bytes": 321258,
+        "passed": true
+      }
+    },
+    "historical_source_bindings": 33,
+    "source_status": [
+      {
+        "path": "vendor/ScarletNX/runtime/core/main.c",
+        "historical_sha256": "bd4b24e7e19f0377b72aacc598c9130bcffa2f02cf681b94003fe7353d0955f7",
+        "current_sha256": "bd4b24e7e19f0377b72aacc598c9130bcffa2f02cf681b94003fe7353d0955f7",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T23:16:16+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "windows_bridge/CMakeLists.txt",
+        "historical_sha256": "57adf28144793105ca274698f48156f3cfd58b8c675ad85d31229ba188a63864",
+        "current_sha256": "18df28b8e1cc03753d26a5a7591840dbc092ae27f4db0106b31e8bfcfc6aa0b6",
+        "changed_after_run": true,
+        "current_mtime_utc": "2026-10-14T00:13:06+00:00",
+        "authority": "Coordinator authorized post-run Clean/CPU orchestration review by pin_review",
+        "claim": "Historical before-copy governs the finished run; current build route has no new build/runtime proof here",
+        "historical_before_copy": {
+          "private_path": "private/team/publication35-review/pre-change/windows_bridge/CMakeLists.txt",
+          "sha256": "57adf28144793105ca274698f48156f3cfd58b8c675ad85d31229ba188a63864",
+          "bytes": 3711
+        }
+      },
+      {
+        "path": "scripts/build_windows_game.ps1",
+        "historical_sha256": "521189a61dfa4d209b5fae8a889d09f8404b12e9a533d9bdb5143cd37bb11b61",
+        "current_sha256": "32e3382fe1a36812205a4dc44c99f928cdcf5b5ae5838a53fab50ae748c9f38e",
+        "changed_after_run": true,
+        "current_mtime_utc": "2026-10-14T00:13:06+00:00",
+        "authority": "Coordinator authorized post-run Clean/CPU orchestration review by pin_review",
+        "claim": "Historical before-copy governs the finished run; current build route has no new build/runtime proof here",
+        "historical_before_copy": {
+          "private_path": "private/team/publication35-review/pre-change/scripts/build_windows_game.ps1",
+          "sha256": "521189a61dfa4d209b5fae8a889d09f8404b12e9a533d9bdb5143cd37bb11b61",
+          "bytes": 4493
+        }
+      },
+      {
+        "path": "scripts/build_windows_bridge.ps1",
+        "historical_sha256": "1beb610eb60b70c993f2cdcadaf9b2835efa7d42754e78b4264e1de76c532906",
+        "current_sha256": "1beb610eb60b70c993f2cdcadaf9b2835efa7d42754e78b4264e1de76c532906",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T23:18:50+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "scripts/replace_bridge_routines.py",
+        "historical_sha256": "c6d526a5de174fcb846d65c113d3aba618d5f0e100b22d1c97d11ec1edd28954",
+        "current_sha256": "c6d526a5de174fcb846d65c113d3aba618d5f0e100b22d1c97d11ec1edd28954",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T23:16:16+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "scripts/report_decompilation_byte_coverage.py",
+        "historical_sha256": "093614b8499d1b3a866ced2cbd7460e3a701115dfa0c3055b6a37e71785e95f9",
+        "current_sha256": "093614b8499d1b3a866ced2cbd7460e3a701115dfa0c3055b6a37e71785e95f9",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T23:30:14+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "scripts/validate_bridge_replacements.py",
+        "historical_sha256": "0b727a5657b056ea95835f0877caea1cca13c28adf1931ffdb67d2fc7536412a",
+        "current_sha256": "0b727a5657b056ea95835f0877caea1cca13c28adf1931ffdb67d2fc7536412a",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T23:21:06+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "scripts/validate_bridge_event_context.py",
+        "historical_sha256": "c2b9dde11738ea2cce9b82c676f971487ba8eddac83c7d1ae41657fa4261d160",
+        "current_sha256": "c2b9dde11738ea2cce9b82c676f971487ba8eddac83c7d1ae41657fa4261d160",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T23:21:06+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "scripts/validate_bridge_flag_table.py",
+        "historical_sha256": "f5dc291f5bc10f81e528be367523caff99f0219859f4bf2deefb2a61d4235669",
+        "current_sha256": "f5dc291f5bc10f81e528be367523caff99f0219859f4bf2deefb2a61d4235669",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T23:21:06+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "scripts/validate_bridge_access_key.py",
+        "historical_sha256": "a960031764ad77b498ca27032880d2d4e40835c9f3eab25d42f94b18f948be3e",
+        "current_sha256": "a960031764ad77b498ca27032880d2d4e40835c9f3eab25d42f94b18f948be3e",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T23:21:06+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "scripts/validate_npad_initialization_adapter.py",
+        "historical_sha256": "6828886bf66999225592fada7cd39999179e1078b80655b915713ee30b319ede",
+        "current_sha256": "6828886bf66999225592fada7cd39999179e1078b80655b915713ee30b319ede",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T23:21:06+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "scripts/validate_bridge_save_io_access.py",
+        "historical_sha256": "092c76ef8c04cbe7faddc4a16da53cc1fad664e9beb3de19774737c746697635",
+        "current_sha256": "092c76ef8c04cbe7faddc4a16da53cc1fad664e9beb3de19774737c746697635",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T23:21:06+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "vendor/ScarletNX/runtime/abi/cpu.h",
+        "historical_sha256": "f59d908a0baa7e7b7a5a3e84ef104ea6a84beaaa5ce318c943ffc77f1d5523f1",
+        "current_sha256": "f59d908a0baa7e7b7a5a3e84ef104ea6a84beaaa5ce318c943ffc77f1d5523f1",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T04:14:22+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "vendor/ScarletNX/runtime/kernel/mem.c",
+        "historical_sha256": "d5b5e4a736a159a958b3c212fe30ec190b4bbd8fcc44212e26432235b2e68710",
+        "current_sha256": "d5b5e4a736a159a958b3c212fe30ec190b4bbd8fcc44212e26432235b2e68710",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T22:31:10+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "scripts/integrate_player_connected_candidate.py",
+        "historical_sha256": "87048375d275fcbf15271d235d876a4ce373cb0bc4c5370be5c49a299f5b5474",
+        "current_sha256": "87048375d275fcbf15271d235d876a4ce373cb0bc4c5370be5c49a299f5b5474",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T22:31:12+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "scripts/player_connected_candidate_validate.py",
+        "historical_sha256": "3156f8f4378a47f8e386a0f5983c6a83505f4f6988d439ae6f7c1234756944ad",
+        "current_sha256": "3156f8f4378a47f8e386a0f5983c6a83505f4f6988d439ae6f7c1234756944ad",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T23:07:26+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "scripts/player_connected_candidate_build.py",
+        "historical_sha256": "6c1f652086461c6dc47089a526ecf0062e1a47a7eea847124ba768f8507bfaee",
+        "current_sha256": "6c1f652086461c6dc47089a526ecf0062e1a47a7eea847124ba768f8507bfaee",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T23:01:36+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "scripts/player_connected_candidate_fixture.c",
+        "historical_sha256": "1b84fdbb30975466a9b511a7e20bee6a99cfc4994563c3b5839aafc34fa10b09",
+        "current_sha256": "1b84fdbb30975466a9b511a7e20bee6a99cfc4994563c3b5839aafc34fa10b09",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T22:53:00+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "windows_bridge/player_resolution_module.c",
+        "historical_sha256": "46617d34bfc2c181cc78adc8e77120048eedc99e0afb4bd1a76841967aac3a0f",
+        "current_sha256": "46617d34bfc2c181cc78adc8e77120048eedc99e0afb4bd1a76841967aac3a0f",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T22:23:04+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "windows_bridge/player_resolution_module.h",
+        "historical_sha256": "701d3b52c50cf3d786384a8177906e6f4741b65b37f4ff6c88a7587ecdf5fc17",
+        "current_sha256": "701d3b52c50cf3d786384a8177906e6f4741b65b37f4ff6c88a7587ecdf5fc17",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T22:18:56+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "windows_bridge/player_bank_adapter.cpp",
+        "historical_sha256": "e472ecd1039ae4288c66828c12abfbb07a7ed3a32b50c659533f866606a50cc5",
+        "current_sha256": "e472ecd1039ae4288c66828c12abfbb07a7ed3a32b50c659533f866606a50cc5",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T20:08:58+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "windows_bridge/player_resolution_adapter.cpp",
+        "historical_sha256": "12c1170cf7034dcb14403d68bcc9f26e309641c9fcf5daa8b23aa605f468ae06",
+        "current_sha256": "12c1170cf7034dcb14403d68bcc9f26e309641c9fcf5daa8b23aa605f468ae06",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T21:52:18+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "reconstructed/src/player_bank.cpp",
+        "historical_sha256": "fd96cbbfc2670f7f80a208c53f116589ca3bca7c3657ecdaf9d5534c5e9b62a4",
+        "current_sha256": "fd96cbbfc2670f7f80a208c53f116589ca3bca7c3657ecdaf9d5534c5e9b62a4",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T18:35:06+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "reconstructed/src/player_resolution_tree.cpp",
+        "historical_sha256": "830c877a4232aad3ce960aebea91f60aceab84be1a63262e2be70f2bad829238",
+        "current_sha256": "830c877a4232aad3ce960aebea91f60aceab84be1a63262e2be70f2bad829238",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T21:31:08+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "windows_bridge/windows_range_epoch_candidate.h",
+        "historical_sha256": "4601dbc060ba121e445394e511b06df84dc827c9181a1197e32bcc75a3df12f4",
+        "current_sha256": "4601dbc060ba121e445394e511b06df84dc827c9181a1197e32bcc75a3df12f4",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T22:01:10+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "windows_bridge/windows_range_epoch_candidate.c",
+        "historical_sha256": "5ca49a3a451bbefef47bfa2e713c9b0361cf1382ee1a6d62e821cb0fde06be8b",
+        "current_sha256": "5ca49a3a451bbefef47bfa2e713c9b0361cf1382ee1a6d62e821cb0fde06be8b",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T22:01:10+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "windows_bridge/windows_range_epoch_candidate_saveio.c",
+        "historical_sha256": "aa93b60ff08f65af354cc1d56052f48419d57f7a8fc6349be9f6468f788cea56",
+        "current_sha256": "aa93b60ff08f65af354cc1d56052f48419d57f7a8fc6349be9f6468f788cea56",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T22:02:14+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "windows_bridge/windows_range_epoch_candidate_runtime.inc",
+        "historical_sha256": "6e32d164fa902e3f232f0941cde90386bb864fce2896146bace9f5d981152e9d",
+        "current_sha256": "6e32d164fa902e3f232f0941cde90386bb864fce2896146bace9f5d981152e9d",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T22:01:10+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "scripts/prepare_player35_cache.py",
+        "historical_sha256": "e900c9292a515b2e2e6f753c0a2ab8d8c49d8d691da068388141eaa439c411db",
+        "current_sha256": "e900c9292a515b2e2e6f753c0a2ab8d8c49d8d691da068388141eaa439c411db",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T23:17:50+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "scripts/verify_player35_runtime_patch.py",
+        "historical_sha256": "06b75f85f1f8aef15b63117b336b2a2762dda3800a12846439f2ed564670f839",
+        "current_sha256": "06b75f85f1f8aef15b63117b336b2a2762dda3800a12846439f2ed564670f839",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T23:18:32+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "scripts/validate_player35_module.py",
+        "historical_sha256": "9a4fd0509ce02585edfe0b89f4c265f28f3070ed420763d113dd2d1940cb49ea",
+        "current_sha256": "9a4fd0509ce02585edfe0b89f4c265f28f3070ed420763d113dd2d1940cb49ea",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T23:27:40+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "scripts/report_player35_candidate_coverage.py",
+        "historical_sha256": "9a730a1cae20f8def1b23ea30fdaf4d455899580624f5c1c6f5e3ae94ed54bfb",
+        "current_sha256": "9a730a1cae20f8def1b23ea30fdaf4d455899580624f5c1c6f5e3ae94ed54bfb",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T23:30:14+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      },
+      {
+        "path": "patches/scarletnx-player-connected-epoch.patch",
+        "historical_sha256": "fb426fcd7ab7e816bd443fc0c2a0dc8938e5ae857ed2f8b75a4413a191515685",
+        "current_sha256": "fb426fcd7ab7e816bd443fc0c2a0dc8938e5ae857ed2f8b75a4413a191515685",
+        "changed_after_run": false,
+        "current_mtime_utc": "2026-10-13T23:17:50+00:00",
+        "authority": null,
+        "claim": "Current hash matches historical source snapshot"
+      }
+    ],
+    "post_run_orchestration_changes": [
+      {
+        "path": "windows_bridge/CMakeLists.txt",
+        "historical_sha256": "57adf28144793105ca274698f48156f3cfd58b8c675ad85d31229ba188a63864",
+        "current_sha256": "18df28b8e1cc03753d26a5a7591840dbc092ae27f4db0106b31e8bfcfc6aa0b6",
+        "changed_after_run": true,
+        "current_mtime_utc": "2026-10-14T00:13:06+00:00",
+        "authority": "Coordinator authorized post-run Clean/CPU orchestration review by pin_review",
+        "claim": "Historical before-copy governs the finished run; current build route has no new build/runtime proof here",
+        "historical_before_copy": {
+          "private_path": "private/team/publication35-review/pre-change/windows_bridge/CMakeLists.txt",
+          "sha256": "57adf28144793105ca274698f48156f3cfd58b8c675ad85d31229ba188a63864",
+          "bytes": 3711
+        }
+      },
+      {
+        "path": "scripts/build_windows_game.ps1",
+        "historical_sha256": "521189a61dfa4d209b5fae8a889d09f8404b12e9a533d9bdb5143cd37bb11b61",
+        "current_sha256": "32e3382fe1a36812205a4dc44c99f928cdcf5b5ae5838a53fab50ae748c9f38e",
+        "changed_after_run": true,
+        "current_mtime_utc": "2026-10-14T00:13:06+00:00",
+        "authority": "Coordinator authorized post-run Clean/CPU orchestration review by pin_review",
+        "claim": "Historical before-copy governs the finished run; current build route has no new build/runtime proof here",
+        "historical_before_copy": {
+          "private_path": "private/team/publication35-review/pre-change/scripts/build_windows_game.ps1",
+          "sha256": "521189a61dfa4d209b5fae8a889d09f8404b12e9a533d9bdb5143cd37bb11b61",
+          "bytes": 4493
+        }
+      }
+    ],
+    "post_run_orchestration_before_archive": {
+      "private_path": "private/team/publication35-review/pre-change/snapshot.json",
+      "sha256": "61d1ffcb1e6cfed858137caabfe63253aac75b536c0798d1e88606eecf9952b9",
+      "bytes": 537
+    },
+    "historical_runtime_gates": {
+      "ctest_tests": 13,
+      "ctest_record": {
+        "private_path": "private/team/player35-integration/runtime-ctest.json",
+        "sha256": "3a0129da47bd0d67b1f844d9329937598510cb2cec56a89a972e38da315f0cdd",
+        "bytes": 7423
+      },
+      "loader": {
+        "private_path": "private/team/player35-loader-gate/validation.json",
+        "sha256": "d589a28b581662d949141364c35883cf28293983190780f7b4f0bb9220d3e6d6",
+        "bytes": 24993
+      },
+      "loader_cases": 4,
+      "new_execution_performed_by_aggregator": false
+    },
+    "generated_bindings": 18,
+    "compiled_new_objects": 13,
+    "reused_objects": 376,
+    "clean_build": false,
+    "cross_machine_reproducibility_validated": false
+  },
+  "comparison": [
+    {
+      "run": "native-20261013-182810",
+      "entries": 9,
+      "evidence": {
+        "private_path": "private/windows/logs/native-20261013-182810.json",
+        "sha256": "7511a51596ea7e49a778f66fb45f5b9d01635c80dd17614ea0503a44a20e4402",
+        "bytes": 1837
+      },
+      "runtime_sha256": "dfe9256e44081bdeefa30c6b87e18442c0eade390cc919ff1d401be7c96c7f94",
+      "module_sha256": "c814c88f51f3d108cb7faef31612a602a4bf0b80b6f15a867339226e0291ea86",
+      "exit_code": 0,
+      "recorded_elapsed_seconds": 180.98,
+      "elapsed_field_source": "legacy elapsed_seconds",
+      "rich_terminal_handle_evidence": false,
+      "recorded_common_controls": {
+        "mode": "native",
+        "headless": true,
+        "docked": 1,
+        "input_script": "",
+        "press_length_ms": 1500,
+        "shot_every_frames": 25,
+        "native_audio": true,
+        "native_vp9": true,
+        "live_input": true,
+        "capture_filesystem": true,
+        "capture_gpu_fifo": true,
+        "capture_graphics": true,
+        "audio_wav_only": false
+      },
+      "logs": {
+        "stdout": {
+          "private_path": "private/windows/logs/native-20261013-182810.stdout.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        "stderr": {
+          "private_path": "private/windows/logs/native-20261013-182810.stderr.log",
+          "sha256": "5f1ea1f7b3aa32e1278124ec50cabcb7a7c668134cd802d2527fca535547ed1b",
+          "bytes": 14062
+        },
+        "game_log": {
+          "private_path": "private/windows/logs/native-20261013-182810.game.log",
+          "sha256": "a01db9d57055a10d38936f7f91cf5e66d828c8eabfd97f46b72b820246d9a98f",
+          "bytes": 16940
+        },
+        "live_input_file": {
+          "private_path": "private/windows/logs/native-20261013-182810.inputs.csv",
+          "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+          "bytes": 2
+        },
+        "rendered_frames": 2056,
+        "runtime_frame_hash": "68b27de9a6acea3b",
+        "live_input_has_commands": false,
+        "stderr_contains_warnings": true
+      },
+      "audio": {
+        "analysis": {
+          "private_path": "private/windows/logs/native-20261013-182810.audio.json",
+          "sha256": "b3a18bc714d9986ab38a87a803bfd858f79846e462142c47a3c431b93762024b",
+          "bytes": 720
+        },
+        "final_wav": {
+          "private_path": "private/windows/logs/native-20261013-182810.wav",
+          "sha256": "bc7c1d0f539cc22245df2951106844ea45a991302d094bcf9164e327706683a2",
+          "bytes": 34015724
+        },
+        "sample_rate": 48000,
+        "channels": 2,
+        "bits": 16,
+        "pcm_frames": 8503920,
+        "duration_seconds": 177.165,
+        "channel_metrics": [
+          {
+            "nonzero_samples": 6781473,
+            "peak": 14155,
+            "rms": 569.6173399969307,
+            "clipped_samples": 0
+          },
+          {
+            "nonzero_samples": 6780781,
+            "peak": 12417,
+            "rms": 562.5934625428857,
+            "clipped_samples": 0
+          }
+        ],
+        "pcm_payload_sha256": "b604aa5455801b826c6194cd4bbd6dbc76b3d12dc25d226ad8ce0976f76e6646",
+        "metrics_independently_recomputed": false,
+        "nonzero_samples": 13562254,
+        "clipped_samples": 0
+      },
+      "visual_result": "dialogue",
+      "visual_assessment": "Coordinator observation preserved in handoff; not inferred from frame counts.",
+      "limitations": [
+        "Legacy report records exit/elapsed rather than terminal handles, PID-absence and cleanup.",
+        "Legacy report omits requested seconds and RenderDoc binary hash; shared recorded controls are compared."
+      ]
+    },
+    {
+      "run": "native-20261013-183257",
+      "entries": 14,
+      "evidence": {
+        "private_path": "private/windows/logs/native-20261013-183257.json",
+        "sha256": "9ca6562f0fb2c7d8e7509393aa2b2447bccd3d7c0eef1e6469bfed5dcc6218f2",
+        "bytes": 1839
+      },
+      "runtime_sha256": "dfe9256e44081bdeefa30c6b87e18442c0eade390cc919ff1d401be7c96c7f94",
+      "module_sha256": "2797747f4e69977388ff27cf9d04341b2b55a631a9c739f30351b7101a9a730d",
+      "exit_code": 0,
+      "recorded_elapsed_seconds": 180.74,
+      "elapsed_field_source": "legacy elapsed_seconds",
+      "rich_terminal_handle_evidence": false,
+      "recorded_common_controls": {
+        "mode": "native",
+        "headless": true,
+        "docked": 1,
+        "input_script": "",
+        "press_length_ms": 1500,
+        "shot_every_frames": 25,
+        "native_audio": true,
+        "native_vp9": true,
+        "live_input": true,
+        "capture_filesystem": true,
+        "capture_gpu_fifo": true,
+        "capture_graphics": true,
+        "audio_wav_only": false
+      },
+      "logs": {
+        "stdout": {
+          "private_path": "private/windows/logs/native-20261013-183257.stdout.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        "stderr": {
+          "private_path": "private/windows/logs/native-20261013-183257.stderr.log",
+          "sha256": "65170f1d4ba4adca4a4cab990b6bbde7facaa3d3872f14b00404d3bd85465fcf",
+          "bytes": 126390
+        },
+        "game_log": {
+          "private_path": "private/windows/logs/native-20261013-183257.game.log",
+          "sha256": "01aac1918263c232383a7dee43f63551d4cfc3fdb92207b4d24039975c2d53d5",
+          "bytes": 137519
+        },
+        "live_input_file": {
+          "private_path": "private/windows/logs/native-20261013-183257.inputs.csv",
+          "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+          "bytes": 2
+        },
+        "rendered_frames": 204,
+        "runtime_frame_hash": "88906aa54d250773",
+        "live_input_has_commands": false,
+        "stderr_contains_warnings": false
+      },
+      "audio": {
+        "analysis": {
+          "private_path": "private/windows/logs/native-20261013-183257.audio.json",
+          "sha256": "9cc337f1c5aa74315ff1f405afa6c95f6f51fd3c700e1c02ea42429bf3d0c804",
+          "bytes": 671
+        },
+        "final_wav": {
+          "private_path": "private/windows/logs/native-20261013-183257.wav",
+          "sha256": "8cf37086c7a0530c0725225dcead548f3424dc4f861bd23e4b868ea76b5ef8e6",
+          "bytes": 34373804
+        },
+        "sample_rate": 48000,
+        "channels": 2,
+        "bits": 16,
+        "pcm_frames": 8593440,
+        "duration_seconds": 179.03,
+        "channel_metrics": [
+          {
+            "nonzero_samples": 0,
+            "peak": 0,
+            "rms": 0.0,
+            "clipped_samples": 0
+          },
+          {
+            "nonzero_samples": 0,
+            "peak": 0,
+            "rms": 0.0,
+            "clipped_samples": 0
+          }
+        ],
+        "pcm_payload_sha256": "fadacd95c9117fc056c891dc8e8f543ec48b286ee5d47665766d02a473fffb7d",
+        "metrics_independently_recomputed": false,
+        "nonzero_samples": 0,
+        "clipped_samples": 0
+      },
+      "visual_result": "loading",
+      "visual_assessment": "Coordinator controlled comparison remained loading with zero PCM.",
+      "limitations": [
+        "Legacy report records exit/elapsed rather than terminal handles, PID-absence and cleanup.",
+        "Legacy report omits requested seconds and RenderDoc binary hash; shared recorded controls are compared."
+      ]
+    },
+    {
+      "run": "epoch-team-20261013-194828",
+      "entries": 14,
+      "evidence": {
+        "private_path": "private/windows/logs/epoch-team-20261013-194828.json",
+        "sha256": "5f34955356eb84c38ad187d7d3ab4575ec88de79c476cd8269828f4c96b28604",
+        "bytes": 14192
+      },
+      "runtime_sha256": "6455fa93bf1378e1edec2334d1bfa52d139d4e7545560f224bcbf8b077e820cd",
+      "module_sha256": "98de63ffcac31d91cdb94d2f147d70741fa320359d195cd7a0ad5bd4e804ff02",
+      "exit_code": 0,
+      "recorded_elapsed_seconds": 181.019,
+      "elapsed_field_source": "process_elapsed_seconds",
+      "rich_terminal_handle_evidence": true,
+      "recorded_common_controls": {
+        "mode": "native",
+        "headless": true,
+        "docked": 1,
+        "input_script": "",
+        "press_length_ms": 1500,
+        "shot_every_frames": 25,
+        "native_audio": true,
+        "native_vp9": true,
+        "live_input": true,
+        "capture_filesystem": true,
+        "capture_gpu_fifo": true,
+        "capture_graphics": true,
+        "audio_wav_only": false
+      },
+      "logs": {
+        "stdout": {
+          "private_path": "private/windows/logs/epoch-team-20261013-194828.stdout.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        "stderr": {
+          "private_path": "private/windows/logs/epoch-team-20261013-194828.stderr.log",
+          "sha256": "2c78df8f28087662a5265f012c52d6ea05e549cca0e6855036eac5e8335e12b9",
+          "bytes": 14184
+        },
+        "game_log": {
+          "private_path": "private/windows/logs/epoch-team-20261013-194828.game.log",
+          "sha256": "bec26536cb777af157b1b4f79a1d11874ee9065e68608daaf16b42b222e95f48",
+          "bytes": 17092
+        },
+        "live_input_file": {
+          "private_path": "private/windows/logs/epoch-team-20261013-194828.inputs.csv",
+          "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+          "bytes": 2
+        },
+        "rendered_frames": 1945,
+        "runtime_frame_hash": "6babcdf5cd534eaa",
+        "live_input_has_commands": false,
+        "stderr_contains_warnings": true
+      },
+      "audio": {
+        "analysis": {
+          "private_path": "private/windows/logs/epoch-team-20261013-194828.audio.json",
+          "sha256": "b2d7d2c304c74495a558afa4d7009f8197302d43a36c10702e8c92ac1c288839",
+          "bytes": 718
+        },
+        "final_wav": {
+          "private_path": "private/windows/logs/epoch-team-20261013-194828.wav",
+          "sha256": "d282beb956efd3e6274c662984b417336d7ce3401a6233f799d6b97d13013e84",
+          "bytes": 33895724
+        },
+        "sample_rate": 48000,
+        "channels": 2,
+        "bits": 16,
+        "pcm_frames": 8473920,
+        "duration_seconds": 176.54,
+        "channel_metrics": [
+          {
+            "nonzero_samples": 6265608,
+            "peak": 13789,
+            "rms": 530.5942421316097,
+            "clipped_samples": 0
+          },
+          {
+            "nonzero_samples": 6262446,
+            "peak": 12346,
+            "rms": 523.997254867267,
+            "clipped_samples": 0
+          }
+        ],
+        "pcm_payload_sha256": "f39d174f63769ff291dce694a85f71198b238bac7656c7f612e3de4def122877",
+        "metrics_independently_recomputed": false,
+        "raw_wav": {
+          "private_path": "private/windows/logs/epoch-team-20261013-194828.raw.wav",
+          "sha256": "438019408d7f21a5f9172530936fbfb61f3327cc675e9ddb1126974e996dcaa0",
+          "bytes": 33895724
+        },
+        "only_riff_data_lengths_finalized": true,
+        "nonzero_samples": 12528054,
+        "clipped_samples": 0
+      },
+      "visual_result": "dialogue",
+      "visual_assessment": "Coordinator inspected captures bound by frozen startup-epoch-team-validation.json.",
+      "limitations": []
+    }
+  ],
+  "recorded_common_controls": {
+    "mode": "native",
+    "headless": true,
+    "docked": 1,
+    "input_script": "",
+    "press_length_ms": 1500,
+    "shot_every_frames": 25,
+    "native_audio": true,
+    "native_vp9": true,
+    "live_input": true,
+    "capture_filesystem": true,
+    "capture_gpu_fifo": true,
+    "capture_graphics": true,
+    "audio_wav_only": false
+  },
+  "coverage": {
+    "candidate_entries": 35,
+    "candidate_original_body_bytes": 4696,
+    "denominator_bytes": 44815680,
+    "candidate_proxy_percent": 0.010478475390756092,
+    "candidate_increment_entries": 21,
+    "candidate_increment_original_body_bytes": 2484,
+    "infrastructure_increment_bytes": 0,
+    "public_entries": 14,
+    "public_original_body_bytes": 2212,
+    "public_metric_increment": 0
+  },
+  "public14_preserved_hashes": {
+    "metadata/windows/1.0.0/exefs-profile.json": "1ebe9992da374230e1e7fe95f9e18e78badf10e26f5cccf31f3e5f51428812ea",
+    "metadata/windows/1.0.0/romfs-container.json": "4519c3d5b1429e9a0fcd3d91b36e05663bbd747afb3fcf0fbfd8ab236ab5b7bf",
+    "metadata/windows/1.0.0/reconstructed-replacements.json": "8dae1c62417722dffb65ff559edcefca6ac8011bdb2601d477859fc6166bf8c6",
+    "metadata/windows/1.0.0/replacements-validation.json": "99687b7e6016ef0e791514225a67a0e60974d83cae9bcd44ed2675130f7d1b99",
+    "metadata/windows/1.0.0/execution-checkpoint.json": "1f789829b097719ab3c59e19403251693995176424debbfd2980a7db365076f7",
+    "metadata/windows/1.0.0/gpu-composition-validation.json": "3184dbf6e33382c0a6caecf2c47c2ca71e20bc9fbe9227be00101770f6c1220b",
+    "metadata/windows/1.0.0/system-archive-0100000000000823.json": "18908fa8c3d35451d3a2f34a816530d5512e3925005dc4a8977b74bf283d4e2c",
+    "metadata/windows/1.0.0/npad-full-key-validation.json": "99450f23c6c60de408623720c00ead532c0673b6288dfd022dedc3f2b32d4946",
+    "metadata/windows/1.0.0/intro-input-validation.json": "765df3717ed0374125d5966937e9a9ba29a86d6eefca29a2e6aa9a3a283685c9",
+    "metadata/windows/1.0.0/native-audio-validation.json": "590c2aa501d2b746527847564e3a1475be80ee2d36254fd56d15c45844756095",
+    "metadata/windows/1.0.0/native-audio-execution.json": "1a738c456bef2f60e3621eb96d57f1debc0bf907828d702050f1aba856589678",
+    "metadata/windows/1.0.0/access-key-bridge-validation.json": "b5e2f54b2c1d60a67aabe4ff0bdbd3831a6f8e82377ee2fd562756d0064d5b33",
+    "metadata/windows/1.0.0/gpu-volume-cache-validation.json": "1ffe0bb68e2636505004e7a5134f34a7adde9484f879f1b2304fa6d46148c350",
+    "metadata/windows/1.0.0/event-context-bridge-validation.json": "8841e768aaf4a7e7a05f898ab777ba9cd9636d80be059ac735d6d2487e128156",
+    "metadata/windows/1.0.0/decompilation-byte-coverage.json": "1caa3586d9b6bfe76c70a1d2995d2dd7ef65e75975c6a8c7562b396036a97b92",
+    "metadata/windows/1.0.0/tutorial-session-validation.json": "ded217ed4d10b75753754b698e6d6ea7bcc6cab1d37fe09dc4cdcc663e0266e0",
+    "metadata/windows/1.0.0/npad-initialization-validation.json": "90eb2bdbe221fd7b0354e56485501c1e514caaf58fe7918b4b3ff42c485698c0",
+    "metadata/windows/1.0.0/bridge-original-index.json": "96aa30621a90fa606c5470e6ad708978cf9ca6338ed7151f13d8e596e9c80f4d",
+    "metadata/windows/1.0.0/bridge-original-default.json": "b8561c658b054e33975c334213f8092454e7ae1c6f881df768b8bf555919feaa",
+    "metadata/windows/1.0.0/flag-table-bridge-validation.json": "915b70cc10611756f614198d366806756bcf0bf85b0a3c61f7f81298aa14cb3e",
+    "metadata/windows/1.0.0/vp9-filtered-movie-session-validation.json": "60e270c91083db12cfd970983a9a67753b7f448334bd6b2b9020ea5ec2e7b79b",
+    "metadata/windows/1.0.0/npad-initialization-adapter-validation.json": "b4ff272db10f7a0b21270678ca8e695c08cf5f5beec250c66e4b239b4d3c5d94",
+    "metadata/windows/1.0.0/npad-initialization-isolated-abi-validation.json": "1128132be4462ada617a3c8fd62dc566abd945a1872b428440a75c3b53092417",
+    "metadata/windows/1.0.0/filtered-tutorial-session-validation.json": "1bcfd378142d39a884ff439f308403dc44ebcc7029acfb47383625fcc58e3f55",
+    "metadata/windows/1.0.0/manual-save-path-candidates.json": "b2917cdbcdf32c42e99bb8ad0ffe280d9951eb50b2e56adcddd5042060e03996",
+    "metadata/windows/1.0.0/npad-initialization-module-validation.json": "18584277fd8796222a0e2adbb0fa466b6605830d776fe6bc42081984ec90e404",
+    "metadata/windows/1.0.0/save-io-access-module-validation.json": "9cd8ef6690f3c180128e5f8c67040757f1e5bc68ceee3e9474f6c48c410759b8",
+    "metadata/windows/1.0.0/player-bank-isolated-abi-validation.json": "923f1f98e7964bf11002580bfeafcc51212ab4b0ffdc34c86777237fd64fe2f3",
+    "metadata/windows/1.0.0/save-io-startup-diagnostic.json": "2a2ce6259653e9adacb5e5983052c152c55f988b7758dd26d12ca4fa57051561",
+    "metadata/windows/1.0.0/windows-range-invocation-isolated-validation.json": "08ae580b9f481c343d5bcb07a22868425f294e3cb02f99693cc90d4693040485",
+    "metadata/windows/1.0.0/startup-dispatch-validation.json": "4204c01330200addc85ac28c7cd4d1dcfb07c0775f78c6bd97c9c6f0ccdc8dbf",
+    "metadata/windows/1.0.0/player-resolution-isolated-abi-validation.json": "3f8710874bf7c6da2fa3a0eaf8e13d334abfa635592ba1756219173a7c7e4135",
+    "metadata/windows/1.0.0/save-io-live-profile.json": "dc5b9fe7478282695f507bf65836c82fe091e33666531386c334343426c669ef",
+    "metadata/windows/1.0.0/player-resolution-bank-candidate-revalidation.json": "8e5dabe87dc3cec5561a79742b2a58434a6ecb9da61c6a60b97c9b56fc001768",
+    "metadata/windows/1.0.0/player-resolution-connected-candidate-validation.json": "cf5893259b4a0e805cd6d3d5d6cd984d157d024a8d9d40df005d0349ee709694",
+    "metadata/windows/1.0.0/startup-timeout-independent-runpin-v1-validation.json": "83f0a0d2764f94c6fd214303f00e82b19f2478eff1afe68486313f6ff60e6a53",
+    "metadata/windows/1.0.0/startup-epoch-team-validation.json": "be7396e1c20dc003d44b68446b0f68665210e23bbc151bce9656f39250e2b0e6",
+    "scripts/report_team_epoch_startup.py": "4e7419326893e2f66c1a19b15c00a41d9a4eb9c4ac2cc2060da0877dd857f271"
+  },
+  "default_module_sha256": "2797747f4e69977388ff27cf9d04341b2b55a631a9c739f30351b7101a9a730d",
+  "default_runtime_sha256": "dfe9256e44081bdeefa30c6b87e18442c0eade390cc919ff1d401be7c96c7f94",
+  "candidate_run_count": 1,
+  "default_promoted": false,
+  "public_coverage_promoted": false,
+  "publication_performed": false,
+  "playable_validated": false,
+  "gameplay_validated": false,
+  "tutorial_complete": false,
+  "save_reload_validated": false,
+  "source_sha256": "bac6d62dac0e14b3bfe1630923f2c7b26d13b5e343e771ad9ac30b251ac2da3d",
+  "limitations": [
+    "Single 180-second startup run; repeated stability and affected gameplay are not validated.",
+    "Provider/runtime/player selection differs across pairs; this comparison does not isolate performance causality.",
+    "Frame count does not establish correctness, speed or perceptual graphical accuracy; backend warnings remain.",
+    "Actual calls/hit counts for all 35 entries and the epoch API during gameplay were not instrumented by this startup.",
+    "Visual dialogue label is explicit AI coordinator/reviewer inspection bound to a lossless private capture.",
+    "Empty live-input files provide no input interaction/gameplay proof.",
+    "Nonzero PCM and zero clipping do not establish perceptual audio correctness.",
+    "ROMFS digest is reused from the earlier preflight after size/mtime check, not freshly hashed for this run.",
+    "Historical build reused 376 hashed donor objects; no clean whole-game or cross-machine reproducibility claim.",
+    "Original SDK/SaveIO model distinctions in module gates and hybrid dependencies remain.",
+    "Save/reload, tutorial/gameplay, complete native reconstruction and the overall goal remain unfinished."
+  ],
+  "verification_runtime": {
+    "python_executable_sha256": "d41bad46673f64e0d02f23797f53f90ccf60f27d6eda8d86dd2d4bbeae5a858c",
+    "python_version": "3.12.14",
+    "pillow_version": "12.3.0",
+    "use": "Offline aggregate verification; not part of the game/runtime build"
+  }
+}

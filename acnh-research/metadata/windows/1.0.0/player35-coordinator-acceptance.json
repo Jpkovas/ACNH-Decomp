@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "status": "accepted-integrated-candidate-startup",
+  "accepted_utc": "2026-10-14T00:10:47.711361+00:00",
+  "coordinator_thread": "01a13734-dae4-73f2-87e4-e4a88be7d1da",
+  "evidence": {
+    "report": "metadata/windows/1.0.0/startup-player35-team-validation.json",
+    "sha256": "58c1ea1ecd6dd381929579018034d908f25b33f0092e54339994f738d4c3c856",
+    "run_report_sha256": "61cd19ff0523f807e8930ed105b9da956c96d1c451a8f0b5446e9fd73ab2f454",
+    "module_sha256": "5829252d9988715a4727ed015f216675b0b0b3ac06c8a639caac65afeb09cd9b",
+    "runtime_sha256": "df489bdd58d0304bd0f924cd9a753ec67d52ca0e28a47562251b2fa695083658",
+    "sha256_scope": "Historical local report bytes before Git line-ending normalization",
+    "canonical_lf_sha256": "677942b6204a78e440d8f0db36dce84a73a8173f46f83c0d9d7f21d2f2194d82"
+  },
+  "acceptance_scope": "35 manually reconstructed complete bodies integrated in the actual SnxModule, with fresh module gates, loader/runtime checks and one normal Windows startup reaching initial dialogue with nonzero PCM. Original dependency/model limits remain explicit.",
+  "integrated_candidate_coverage": {
+    "entries": 35,
+    "original_body_bytes": 4696,
+    "exefs_text_bytes": 44815680,
+    "proxy_percent": 0.010478475390756092,
+    "added_entries": 21,
+    "added_original_body_bytes": 2484
+  },
+  "preserved_default_coverage": {
+    "entries": 14,
+    "original_body_bytes": 2212,
+    "manifest": "metadata/windows/1.0.0/reconstructed-replacements.json"
+  },
+  "default_promoted": false,
+  "whole_game_source_reconstructed": false,
+  "playable_build_validated": false,
+  "tutorial_complete": false,
+  "save_reload_validated": false,
+  "clean_or_cross_machine_build_validated": false,
+  "isolated18_or_audio_included": false,
+  "limitations": [
+    "Single startup, no applied inputs or game save/reload in this run.",
+    "Hybrid original translated/interpreted dependencies remain; automatic translation contributes zero manual coverage.",
+    "Historical build reused376 donor objects; new clean-build workflow and CPU selection are a later unvalidated source revision.",
+    "This accepts a separate candidate metric; preserved default14 evidence and replacement manifest remain historical and unchanged."
+  ],
+  "prior_aggregate_sha256": "b35a17cc47b81d254d9209f2ea042f85593576f163b045c1526f147cbaee166d",
+  "final_aggregate_binding_confirmed_utc": "2026-10-14T00:30:20.490081+00:00",
+  "aggregate_revision_note": "Only current hashes/mtimes of two authorized post-run build files changed; historical run/core/gates and candidate coverage unchanged."
+}
